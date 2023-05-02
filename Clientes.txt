@@ -1,2 +1,4 @@
-2;drgh;7;segsge;0
-1234;Ana Maria;18;r;20
+1;diogo;19;rua das mos;-186
+2;ana;19;;0
+3;ana;13;r;-1
+0;58;0;0;0

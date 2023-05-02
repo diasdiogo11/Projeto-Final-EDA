@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <conio.h>
+#include <time.h>
 #include "structs.h"
 
 
@@ -94,7 +95,7 @@ Clientes* remover_clientes(Clientes* inicio, int code) {
 //! @param NIF_reserva_ 0 se nao tiver reservado ou NIF do cliente que a reservou
 //! @return 
 
-Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char localizacao_[], int custo_, char tipo_[], int reserva_,int NIF_reserva_) { 
+Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char localizacao_[], int custo_, char tipo_[], int reserva_,int NIF_reserva_, time_t horario_reserva) { 
 	Veiculos* Novo = malloc(sizeof(struct registo_veiculos));
 
 	if (Novo != NULL) {
@@ -106,6 +107,7 @@ Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char loc
 		Novo->NIF_reserva = NIF_reserva_;
 		strcpy(Novo->localizacao, localizacao_);
 		strcpy(Novo->tipo, tipo_);
+		Novo->horario_reserva = horario_reserva;
 		Novo->proximo_veiculo = inicio;
 
 		return Novo;
@@ -150,7 +152,7 @@ void criarmatriz(Veiculos* inicio) {
 Veiculos* imprimir_veiculos(Veiculos* inicio) { 
 	while (inicio != NULL) {
 		
-		printf("%d %d %s %d %s\n", inicio->codigo, inicio->bateria, inicio->localizacao, inicio->custo, inicio->tipo);
+		printf("%d %.2f %s %d %s\n", inicio->codigo, inicio->bateria, inicio->localizacao, inicio->custo, inicio->tipo);
 		inicio = inicio->proximo_veiculo;
 	}
 }
@@ -280,18 +282,31 @@ Gestores* remover_gestores(Gestores* inicio, char email[]) {
 //! @param inicio  Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
 //! @param NIF_procurado NIF do utilizador a carregar o saldo
 //! @return 
-int saldo(Clientes* inicio, int NIF_procurado){ 
+int saldo(Clientes* inicio, int NIF_procurado, int valor){ 
 
-	int valor;
 
-	printf("Qual a quantia a adicionar?\n");
-	scanf("%d", &valor);
-	Clientes* current = inicio;
+	Clientes* currentt = inicio;
 
 	
-	for (current; current != NULL; current = current->proximo_cliente) {
-		if (NIF_procurado == current->NIF) {
-			current->saldo = current->saldo + valor;
+	for (currentt; currentt != NULL; currentt = currentt->proximo_cliente) {
+		if (NIF_procurado == currentt->NIF) {
+			currentt->saldo = currentt->saldo + valor;
+			return 1;
+		}
+	
+}
+	return 0;
+
+}
+int PrecoFinal(Clientes* inicio, int NIF_procurado, int valor){ 
+
+
+	Clientes* currentt = inicio;
+
+	
+	for (currentt; currentt != NULL; currentt = currentt->proximo_cliente) {
+		if (NIF_procurado == currentt->NIF) {
+			currentt->saldo = currentt->saldo - valor;
 			return 1;
 		}
 	
@@ -393,8 +408,8 @@ void GuardarVeiculos(Veiculos* inicio)
 	{
 		Veiculos* aux = inicio;
 		for (aux; aux != NULL; aux = aux->proximo_veiculo) {
-			fprintf(fp, "%d;%d;%s;%d;%s;%d;%d\n", aux->codigo, aux->bateria,
-				aux->localizacao, aux->custo, aux->tipo, aux->reserva, aux->NIF_reserva);
+			fprintf(fp, "%d;%d;%s;%d;%s;%d;%d;%ld\n", aux->codigo, aux->bateria,
+				aux->localizacao, aux->custo, aux->tipo, aux->reserva, aux->NIF_reserva,aux->horario_reserva);
 		}
 		fclose(fp);
 
@@ -408,14 +423,15 @@ Veiculos* LerVeiculos() {
 	FILE* fp;
 	int code, bat, cust, reserva, NIF_reserva;
 	char tipo[50], loca[50];
+	time_t horario_reserva;
 	Veiculos* aux = NULL;
 	fp = fopen("Veiculos.txt", "r");
 	if (fp != NULL)
 	{
 		while (!feof(fp))
 		{
-			fscanf(fp, "%d;%d;%[^;];%d;%[^;];%d;%d\n", &code, &bat, loca, &cust, tipo, &reserva, &NIF_reserva);
-			aux = inserir_veiculos(aux, code, bat, loca, cust, tipo, reserva, NIF_reserva);
+			fscanf(fp, "%d;%d;%[^;];%d;%[^;];%d;%d;%ld\n", &code, &bat, loca, &cust, tipo, &reserva, &NIF_reserva, &horario_reserva);
+			aux = inserir_veiculos(aux, code, bat, loca, cust, tipo, reserva, NIF_reserva, horario_reserva);
 		}
 		fclose(fp);
 	}
@@ -453,7 +469,7 @@ Veiculos* LerVeiculos_Binario()
 		Veiculos current;
 		while (fread(&current, sizeof(Veiculos), 1, fp) == 1)
 		{
-			aux = inserir_veiculos(aux, current.codigo, current.bateria, current.localizacao, current.custo, current.tipo, current.reserva, current.NIF_reserva);
+			aux = inserir_veiculos(aux, current.codigo, current.bateria, current.localizacao, current.custo, current.tipo, current.reserva, current.NIF_reserva, current.horario_reserva);
 		}
 		fclose(fp);
 	}
@@ -791,45 +807,47 @@ void AlterarDados(Clientes* inicio, int NIF_procurado) {
 //! @param NIF_reserva NIF do utilizador que vai reservar o veiculo
 //! @param code Codigo do veiculo a reservar
 //! @return 
-int Reservar_Veiculo(Veiculos* inicio,int NIF_reserva, int code) {
-	Veiculos* current = inicio;
-
-
-	for(current; current != NULL; current = current->proximo_veiculo){
-		if (current->codigo == code && current->reserva == 0 && current->NIF_reserva == 0) {
-			current->reserva = 1;
-			current->NIF_reserva = NIF_reserva;
-			return 1;
-					
-				}
-				
-			}
-
-	return 0;
+int Reservar_Veiculo(Veiculos* inicio, int NIF_reserva, int code) { 
+    Veiculos* current = inicio;
+    for (current; current != NULL; current = current->proximo_veiculo) {
+        if (current->codigo == code && current->reserva == 0 && current->NIF_reserva == 0) {
+            current->reserva = 1;
+            current->NIF_reserva = NIF_reserva;
+            current->horario_reserva = time(NULL);
+            return 1;
+        }
+    }
+    return 0;   
 }
 
+
 //! @brief Dado um codigo do veiculo, esta função percorre a lista e verifica se no parametro "NIF_reserva" o valor é o do NIF do utilizador, se sim ele cancela a reserva alterando os dados para 0
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Veiculos
+//! @param inicioo Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
 //! @param NIF_reserva NIF do utilizador que reservou o veiculo e deseja cancelar a reserva
 //! @return 
-int Cancelar_Reserva(Veiculos* inicio, int NIF_reserva) { 
-	int code;
-	
-	printf("Qual o codigo do veiculo\n");
-	scanf("%d", &code);
-	Veiculos* current = inicio;
-	for (current; current != NULL; current = current->proximo_veiculo) {
-		if (current->reserva == 1 && current->codigo == code && current->NIF_reserva == NIF_reserva) {
-			printf("%d %d %s %d %s\n", current->codigo, current->bateria, current->localizacao, current->custo, current->tipo);
-			current->reserva = 0;
-			current->NIF_reserva = 0;
-			return 1;
-		}
-		
-	
-		
-	}
-	return 0;
+int Cancelar_Reserva(Veiculos* inicio, Clientes* inicioo, int NIF_reserva) { 
+    int code;
+    printf("Qual o codigo do veiculo\n");
+    scanf("%d", &code);
+    Veiculos* current = inicio;
+    for (current; current != NULL; current = current->proximo_veiculo) {
+        if (current->reserva == 1 && current->codigo == code && current->NIF_reserva == NIF_reserva) {
+            time_t horario_atual = time(NULL);
+            double tempo_decorrido = difftime(horario_atual, current->horario_reserva);
+			double tempo_decorrido_minutos = tempo_decorrido / 60;
+			double CustoFinal = tempo_decorrido_minutos * current->custo;
+            printf("Tempo decorrido: %.2f segundos ou %.2f minutos\n", tempo_decorrido, tempo_decorrido_minutos);
+            if(PrecoFinal(inicioo, current->NIF_reserva, CustoFinal)){
+                printf("Deu certo cara\n");
+            }
+            current->reserva = 0;
+            current->NIF_reserva = 0;
+			current->horario_reserva = 0;
+            return 1;
+        }
+    }
+    return 0;
 }
 
 
@@ -897,5 +915,27 @@ void AlterarDadosGestores(Gestores* inicio, char email_procurado[]) {
 
 		}
 	}
+
+}
+
+int VerificarNumReservas(Veiculos* inicio, int NIF){
+	int count=1;
+
+	Veiculos* current = inicio;
+
+	for(current; current != NULL; current = current->proximo_veiculo){
+		if(current->NIF_reserva == NIF){
+			count++;
+		}
+	}
+	printf("%d", count);
+
+	if(count <= 2){
+		return 1;
+	}else{
+		return 0;
+	}
+
+
 
 }

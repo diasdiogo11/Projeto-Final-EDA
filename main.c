@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <conio.h>
+#include <time.h>
 #include "structs.h"
 
 
@@ -12,7 +13,9 @@
 void main() {
 
 	char usuario[50], password[50], nome[50], morada[50], localizacao[50], tipo[50],novo_nome[50], nova_morada[50], gestor1[50], email[50], localizacao_pretendida[50];
-	int NIF, idade, opcao, NIF_, opcao1, codigo,opcao2,opcao3,opcao6, bateria, custo, quantia, saldo_inicial = 0, reserva = 0, NIF_reserva = 0, code;
+	int NIF, idade, opcao, NIF_, opcao1, codigo,opcao2,opcao3,opcao6,custo, quantia, saldo_inicial = 0, reserva = 0, NIF_reserva = 0, code, bateria;
+
+
 
 	Clientes* clientes = NULL;
 	Veiculos* veiculos = NULL;
@@ -150,7 +153,7 @@ void main() {
 									scanf("%*c");
 									printf("Tipo:\n");
 									gets(tipo);
-									veiculos = inserir_veiculos(veiculos, codigo, bateria, localizacao, custo, tipo, reserva, NIF_reserva);
+									veiculos = inserir_veiculos(veiculos, codigo, bateria, localizacao, custo, tipo, reserva, NIF_reserva, 0);
 									GuardarVeiculos_Binario(veiculos);
 									GuardarVeiculos(veiculos);
 									clear();
@@ -299,47 +302,43 @@ void main() {
 							scanf("%d", &opcao3);
 							if (opcao3 == 1) {
 								clear();
-								ordenacao_veiculos(veiculos);
+								if(VerificarNumReservas(veiculos, NIF)){
+									printf("Qual o codigo do veiculo\n");
+									scanf("%d", &code);
 								
+									if (Reservar_Veiculo(veiculos, NIF, code)) {
+										clear();
+										printf("Reserva bem sucedida\n");
+										GuardarVeiculos_Binario(veiculos);
+										GuardarVeiculos(veiculos);
+										printf("*--------------------------------------------*\n");
+										printf("|              DADOS ATUALIZADOS             |\n");
+										printf("|                 FACA LOGIN!                |\n");
+										printf("*--------------------------------------------*\n");
+										break;
+									}
+									else {
+										clear();
+										printf("Veiculo indisponivel\n");
 
+									}
 
-								scanf("%*c");
-								printf("Onde deseja encontrar veiculos disponiveis?\n");
-								gets(localizacao_pretendida);
-								LocalizarVeiculos(veiculos, localizacao_pretendida);
-								printf("Qual o codigo do veiculo\n");
-								scanf("%d", &code);
+								}else{
+									printf("Deu errado carita\n");
+								}
 								
-								if (Reservar_Veiculo(veiculos,NIF, code)) {
-									clear();
-									printf("Reserva bem sucedida\n");
-									GuardarVeiculos_Binario(veiculos);
-									GuardarVeiculos(veiculos);
-									printf("*--------------------------------------------*\n");
-									printf("|              DADOS ATUALIZADOS             |\n");
-									printf("|                 FACA LOGIN!                |\n");
-									printf("*--------------------------------------------*\n");
-									break;
-									clear();
-								}
-								else {
-									clear();
-									printf("Veiculo indisponivel\n");
-
-								}
 								
 								
 
 							}
 							else if (opcao3 == 2) {
 								clear();
-								int code;
 
-								printf("Qual o codigo do veiculo\n");
-								scanf("%d", &code);
-								if (Cancelar_Reserva(veiculos,NIF)) {
+								if (Cancelar_Reserva(veiculos,clientes,NIF)) {
 									GuardarVeiculos_Binario(veiculos);
 									GuardarVeiculos(veiculos);
+									GuardarClientes(clientes);
+									GuardarClientes_Binario(clientes);
 									printf("*--------------------------------------------*\n");
 									printf("|              DADOS ATUALIZADOS             |\n");
 									printf("|                 FACA LOGIN!                |\n");
@@ -357,7 +356,10 @@ void main() {
 							}
 							else if (opcao3 == 3) {
 								clear();
-								if (saldo(clientes, NIF)) {
+								int valor;
+								printf("Qual a quantia a adicionar?\n");
+								scanf("%d", &valor);
+								if (saldo(clientes, NIF, valor)) {
 									GuardarClientes_Binario(clientes);
 									GuardarClientes(clientes);
 									clear();
