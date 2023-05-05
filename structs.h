@@ -42,6 +42,14 @@ typedef struct registo_veiculos {
 
 }Veiculos;
 
+typedef struct historico{
+    int idCliente, idMeio;
+    double custoFinal;
+    struct tm inicio;
+    struct tm fim;
+    struct historico *proximoHis;
+}Historico;
+
 
 
 Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_, char morada_[], int saldo); //Inserção de novos clientes
@@ -90,3 +98,6 @@ void AlterarDadosGestores(Gestores* inicio, char email_procurado[]);
 void GuardarGestores(Gestores* inicio);
 int PrecoFinal(Clientes* inicio, int NIF_procurado, int valor);
 int VerificarNumReservas(Veiculos* inicio, int NIF);
+Historico* inserirHis(Historico* inicio, int idc, int idm,double custof,struct tm start, struct tm end);
+void GuardarHistorico(Historico* inicio);
+Historico* LerHistorico();

@@ -10,6 +10,7 @@
 
 
 
+
 void main() {
 
 	char usuario[50], password[50], nome[50], morada[50], localizacao[50], tipo[50],novo_nome[50], nova_morada[50], gestor1[50], email[50], localizacao_pretendida[50];
@@ -20,11 +21,14 @@ void main() {
 	Clientes* clientes = NULL;
 	Veiculos* veiculos = NULL;
 	Gestores* gestores = NULL;
+	Historico* historico = NULL;
 
 	clientes = LerClientes_Binario();
 	veiculos = LerVeiculos_Binario();
 	gestores = LerGestores_Binario();
+	historico = LerHistorico();
 	gestores = inserir_gestores(gestores, "diogo1234", "lesi");
+
 
 
 
@@ -157,7 +161,7 @@ void main() {
 									GuardarVeiculos_Binario(veiculos);
 									GuardarVeiculos(veiculos);
 									clear();
-									printf("Registo efetuado com sucesso!\n");
+									printf("Registo efetuado com sucesso!\n");	
 								}
 								else {
 									clear();
@@ -265,8 +269,7 @@ void main() {
 
 							}
 							else if (opcao2 == 8) {
-								criarmatriz(veiculos);
-								GuardarVeiculos(veiculos);
+								
 							}
 						} while (opcao2 != 0);
 					}
@@ -296,6 +299,7 @@ void main() {
 				
 				if (login_clientes(clientes, usuario, NIF)) {
 					clear();
+					time_t t = time(NULL);
 						printf("Bem vindo %s\n", usuario);
 						do {
 							menu_clientes();
@@ -309,6 +313,8 @@ void main() {
 									if (Reservar_Veiculo(veiculos, NIF, code)) {
 										clear();
 										printf("Reserva bem sucedida\n");
+										historico = inserirHis(historico, NIF, code, 0,*localtime(&t), *localtime(&t));
+										GuardarHistorico(historico);
 										GuardarVeiculos_Binario(veiculos);
 										GuardarVeiculos(veiculos);
 										printf("*--------------------------------------------*\n");
