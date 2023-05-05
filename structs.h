@@ -50,6 +50,19 @@ typedef struct historico{
     struct historico *proximoHis;
 }Historico;
 
+typedef struct Adjacente
+{
+    int vertice;
+    float peso;
+    struct Adjacente* proximoAdja;
+}Adjacente;
+
+typedef struct xVertices{
+    int vertice;
+    Adjacente *adj;
+    struct Vertices* proximoVert;
+}VerticeList;
+
 
 
 Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_, char morada_[], int saldo); //Inserção de novos clientes
