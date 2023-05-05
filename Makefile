@@ -1,7 +1,7 @@
 all: prog
 
-prog: main.o clientes.o gestores.o veiculos.o reservas.o historico.o
-	gcc -g -o prog main.o clientes.o gestores.o veiculos.o reservas.o historico.o
+prog: main.o clientes.o gestores.o veiculos.o reservas.o historico.o grafo.o
+	gcc -g -o prog main.o clientes.o gestores.o veiculos.o reservas.o historico.o grafo.o
 
 main.o: main.c structs.h
 	gcc -g -o main.o main.c -c
@@ -20,6 +20,9 @@ reservas.o: reservas.c structs.h
 
 historico.o: historico.c structs.h
 	gcc -g -o historico.o historico.c -c
+
+grafo.o: grafo.c structs.h
+	gcc -g -o grafo.o grafo.c -c
 
 
 clean:

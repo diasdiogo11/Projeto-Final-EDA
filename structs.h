@@ -53,15 +53,15 @@ typedef struct historico{
 typedef struct Adjacente
 {
     int vertice;
-    float peso;
+    int peso;
     struct Adjacente* proximoAdja;
 }Adjacente;
 
-typedef struct xVertices{
+typedef struct Vertices{
     int vertice;
     Adjacente *adj;
     struct Vertices* proximoVert;
-}VerticeList;
+}Vertice;
 
 
 
@@ -114,3 +114,7 @@ int VerificarNumReservas(Veiculos* inicio, int NIF);
 Historico* inserirHis(Historico* inicio, int idc, int idm,double custof,struct tm start, struct tm end);
 void GuardarHistorico(Historico* inicio);
 Historico* LerHistorico();
+Vertice* adicionarVertice(Vertice* listaVertices, int novoVertice);
+int adicionarAresta(Vertice *v, int inicio, int fim, int peso);
+int existeVertice(Vertice* inicio, int idvertice);
+void listarAdjacentes(Vertice *v, int idvertice);

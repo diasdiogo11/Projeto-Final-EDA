@@ -22,14 +22,13 @@ void main() {
 	Veiculos* veiculos = NULL;
 	Gestores* gestores = NULL;
 	Historico* historico = NULL;
+	Vertice* grafo = NULL;
 
 	clientes = LerClientes_Binario();
 	veiculos = LerVeiculos_Binario();
 	gestores = LerGestores_Binario();
 	historico = LerHistorico();
 	gestores = inserir_gestores(gestores, "diogo1234", "lesi");
-
-
 
 
 
