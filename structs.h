@@ -54,11 +54,13 @@ typedef struct Adjacente
 {
     int vertice;
     int peso;
+	char geocode[50];
     struct Adjacente* proximoAdja;
 }Adjacente;
 
 typedef struct Vertices{
     int vertice;
+	char geocode[50];
     Adjacente *adj;
     struct Vertices* proximoVert;
 }Vertice;
@@ -114,7 +116,7 @@ int VerificarNumReservas(Veiculos* inicio, int NIF);
 Historico* inserirHis(Historico* inicio, int idc, int idm,double custof,struct tm start, struct tm end);
 void GuardarHistorico(Historico* inicio);
 Historico* LerHistorico();
-Vertice* adicionarVertice(Vertice* listaVertices, int novoVertice);
-int adicionarAresta(Vertice *v, int inicio, int fim, int peso);
+Vertice* adicionarVertice(Vertice* listaVertices, int novoVertice, char geocode[]);
+int adicionarAresta(Vertice *v, int inicio, int fim, float peso);
 int existeVertice(Vertice* inicio, int idvertice);
 void listarAdjacentes(Vertice *v, int idvertice);

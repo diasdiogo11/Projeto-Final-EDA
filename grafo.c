@@ -6,11 +6,12 @@
 #include <time.h>
 #include "structs.h"
 
-Vertice* adicionarVertice(Vertice* listaVertices, int novoVertice) {
+Vertice* adicionarVertice(Vertice* listaVertices, int novoVertice, char geocode[]) {
     Vertice* novo = (Vertice*) malloc(sizeof(Vertice));
 
     if(novo != NULL){
         novo->vertice = novoVertice;
+        strcpy(novo->geocode, geocode);
         novo->adj = NULL;
         novo->proximoVert = listaVertices;
     
@@ -22,7 +23,7 @@ Vertice* adicionarVertice(Vertice* listaVertices, int novoVertice) {
     
 }
 
-int adicionarAresta(Vertice *v, int inicio, int fim, int peso){
+int adicionarAresta(Vertice *v, int inicio, int fim, float peso){
 
     if (v == NULL)
         return 0;
@@ -37,7 +38,8 @@ int adicionarAresta(Vertice *v, int inicio, int fim, int peso){
     Adjacente *new = (Adjacente*)malloc(sizeof(Adjacente));
     new->peso = peso;
     new->vertice = fim;
-
+    new->proximoAdja = NULL;
+    
     if(v->adj != NULL){
         Adjacente *aux = v->adj;    
         while(aux->proximoAdja != NULL){
@@ -49,6 +51,11 @@ int adicionarAresta(Vertice *v, int inicio, int fim, int peso){
 
     return 1;
 }
+
+
+
+
+
 
 int existeVertice(Vertice* inicio, int idvertice){
 
@@ -75,7 +82,7 @@ void listarAdjacentes(Vertice *v, int idvertice){
         Adjacente *aux = v->adj;
 
         while(aux != NULL){
-            printf("%d ", aux->vertice);
+            printf("\n%d Peso: %d\n", aux->vertice, aux->peso);
             aux = aux->proximoAdja;
         }
 
@@ -86,3 +93,4 @@ void listarAdjacentes(Vertice *v, int idvertice){
     }
 
 }
+

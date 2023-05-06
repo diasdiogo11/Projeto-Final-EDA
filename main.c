@@ -30,6 +30,16 @@ void main() {
 	historico = LerHistorico();
 	gestores = inserir_gestores(gestores, "diogo1234", "lesi");
 
+grafo = adicionarVertice(grafo,1,"somas.pontas.fração");
+grafo = adicionarVertice(grafo,2,"iaque.afago.fração");
+grafo = adicionarVertice(grafo,3,"puxe.joias.tento");
+grafo = adicionarVertice(grafo,4,"bramir.rolos.potinho");
+adicionarAresta(grafo, 1,2,15);
+adicionarAresta(grafo, 2,3,20);
+adicionarAresta(grafo, 3,4,25);
+
+listarAdjacentes(grafo, 2);
+
 
 
 
