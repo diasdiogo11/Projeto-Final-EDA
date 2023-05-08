@@ -300,12 +300,7 @@ listarCaminhos(grafo, 1,4);
 						printf("Nome de usuario ou senha incorretos.\n");
 					}
 					
-				
-
 					
-					
-				
-				
 			}
 			else {
 				clear();
@@ -319,6 +314,7 @@ listarCaminhos(grafo, 1,4);
 				if (login_clientes(clientes, usuario, NIF)) {
 					clear();
 					time_t t = time(NULL);
+					char localizacao[50];
 						printf("Bem vindo %s\n", usuario);
 						do {
 							menu_clientes();
@@ -326,27 +322,35 @@ listarCaminhos(grafo, 1,4);
 							if (opcao3 == 1) {
 								clear();
 								if(VerificarNumReservas(veiculos, NIF)){
-									printf("Qual o codigo do veiculo\n");
-									scanf("%d", &code);
+									scanf("%*c");
+									printf("Em que zona deseja alugar veiculos?\n");
+									gets(localizacao);
+									if(existelocalizacao(grafo, localizacao)){
+										LocalizarVeiculos(veiculos,localizacao);
+										printf("Qual o codigo do veiculo\n");
+										scanf("%d", &code);
 								
-									if (Reservar_Veiculo(veiculos, NIF, code)) {
-										clear();
-										printf("Reserva bem sucedida\n");
-										historico = inserirHis(historico, NIF, code, 0,*localtime(&t), *localtime(&t));
-										GuardarHistorico(historico);
-										GuardarVeiculos_Binario(veiculos);
-										GuardarVeiculos(veiculos);
-										printf("*--------------------------------------------*\n");
-										printf("|              DADOS ATUALIZADOS             |\n");
-										printf("|                 FACA LOGIN!                |\n");
-										printf("*--------------------------------------------*\n");
-										break;
-									}
-									else {
-										clear();
-										printf("Veiculo indisponivel\n");
+										if (Reservar_Veiculo(veiculos, NIF, code)) {
+											clear();
+											printf("Reserva bem sucedida\n");
+											historico = inserirHis(historico, NIF, code, 0,*localtime(&t), *localtime(&t));
+											GuardarHistorico(historico);
+											GuardarVeiculos_Binario(veiculos);
+											GuardarVeiculos(veiculos);
+											printf("*--------------------------------------------*\n");
+											printf("|              DADOS ATUALIZADOS             |\n");
+											printf("|                 FACA LOGIN!                |\n");
+											printf("*--------------------------------------------*\n");
+											break;
+										}
+										else {
+											clear();
+											printf("Veiculo indisponivel\n");
+
+										}
 
 									}
+									
 
 								}else{
 									printf("Deu errado carita\n");

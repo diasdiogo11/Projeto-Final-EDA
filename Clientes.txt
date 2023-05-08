@@ -1,2 +1,2 @@
+1;diogo;19;Rua das Mos;-13045
 2;2;2;2;-1
-1;diogo;19;Rua das Mos;-339
