@@ -42,7 +42,11 @@ guardarGrafo(grafo);
 
 listarAdjacentes(grafo, 3);
 
-corresponderLocalizacaoaID(grafo, "Santo Tirso");
+int x;
+
+
+x = corresponderLocalizacaoaID(grafo, "Barcelos");
+printf("%d\n", x);
 corresponderIDaLocalizacao(grafo, 3);
 listarCaminhos(grafo, 1,4);
 

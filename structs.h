@@ -120,7 +120,7 @@ Vertice* adicionarVertice(Vertice* listaVertices, int novoVertice, char geocode[
 int adicionarAresta(Vertice *v, int inicio, int fim, float peso);
 int existeVertice(Vertice* inicio, int idvertice);
 void listarAdjacentes(Vertice *v, int idvertice);
-void corresponderLocalizacaoaID(Vertice* inicio, char localizacao[]);
+int corresponderLocalizacaoaID(Vertice* inicio, char localizacao[]);
 void corresponderIDaLocalizacao(Vertice* inicio, int id);
 int existelocalizacao(Vertice* inicio, char localizacao[]);
 void guardarGrafo(Vertice* v);

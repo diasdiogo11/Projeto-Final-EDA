@@ -95,12 +95,12 @@ void listarAdjacentes(Vertice *v, int idvertice){
 }
 
 
-void corresponderLocalizacaoaID(Vertice* inicio, char localizacao[]){
+int corresponderLocalizacaoaID(Vertice* inicio, char localizacao[]){
     Vertice* aux = inicio;
     
     for(aux; aux != NULL; aux = aux->proximoVert){
         if(strcmp(aux->geocode, localizacao) == 0){
-            printf("%d", aux->vertice);
+            return aux->vertice;
         }
     }
 }
