@@ -14,7 +14,7 @@
 void main() {
 
 	char usuario[50], password[50], nome[50], morada[50], localizacao[50], tipo[50],novo_nome[50], nova_morada[50], gestor1[50], email[50], localizacao_pretendida[50];
-	int NIF, idade, opcao, NIF_, opcao1, codigo,opcao2,opcao3,opcao6,custo, quantia, saldo_inicial = 0, reserva = 0, NIF_reserva = 0, code, bateria;
+	int NIF, idade, opcao, NIF_, opcao1, codigo,opcao2,opcao3,opcao6,custo, quantia, saldo_inicial = 0, reserva = 0, NIF_reserva = 0, code, bateria, auxvertice;
 
 
 
@@ -30,17 +30,21 @@ void main() {
 	historico = LerHistorico();
 	gestores = inserir_gestores(gestores, "diogo1234", "lesi");
 
-grafo = adicionarVertice(grafo,1,"somas.pontas.fração");
-grafo = adicionarVertice(grafo,2,"iaque.afago.fração");
-grafo = adicionarVertice(grafo,3,"puxe.joias.tento");
-grafo = adicionarVertice(grafo,4,"bramir.rolos.potinho");
+grafo = adicionarVertice(grafo,1,"Porto");
+grafo = adicionarVertice(grafo,2,"Santo Tirso");
+grafo = adicionarVertice(grafo,3,"Barcelos");
+grafo = adicionarVertice(grafo,4,"Braga");
 adicionarAresta(grafo, 1,2,15);
 adicionarAresta(grafo, 2,3,20);
 adicionarAresta(grafo, 3,4,25);
+adicionarAresta(grafo, 1,4,100);
+guardarGrafo(grafo);
 
-listarAdjacentes(grafo, 2);
+listarAdjacentes(grafo, 3);
 
-
+corresponderLocalizacaoaID(grafo, "Santo Tirso");
+corresponderIDaLocalizacao(grafo, 3);
+listarCaminhos(grafo, 1,4);
 
 
 	do {
@@ -161,16 +165,22 @@ listarAdjacentes(grafo, 2);
 									scanf("%*c");
 									printf("Localizacao:\n");
 									gets(localizacao);
-									printf("Custo:\n");
-									scanf("%d", &custo);
-									scanf("%*c");
-									printf("Tipo:\n");
-									gets(tipo);
-									veiculos = inserir_veiculos(veiculos, codigo, bateria, localizacao, custo, tipo, reserva, NIF_reserva, 0);
-									GuardarVeiculos_Binario(veiculos);
-									GuardarVeiculos(veiculos);
-									clear();
-									printf("Registo efetuado com sucesso!\n");	
+									if(existelocalizacao(grafo, localizacao)){
+										printf("Custo:\n");
+										scanf("%d", &custo);
+										scanf("%*c");
+										printf("Tipo:\n");
+										gets(tipo);
+										veiculos = inserir_veiculos(veiculos, codigo, bateria, localizacao, custo, tipo, reserva, NIF_reserva, 0);
+										GuardarVeiculos_Binario(veiculos);
+										GuardarVeiculos(veiculos);
+										clear();
+										printf("Registo efetuado com sucesso!\n");
+
+									}else{
+										printf("A localizacao inserida nao se encontra no sistema\n");
+									}
+										
 								}
 								else {
 									clear();

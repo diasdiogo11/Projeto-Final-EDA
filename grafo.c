@@ -94,3 +94,118 @@ void listarAdjacentes(Vertice *v, int idvertice){
 
 }
 
+
+void corresponderLocalizacaoaID(Vertice* inicio, char localizacao[]){
+    Vertice* aux = inicio;
+    
+    for(aux; aux != NULL; aux = aux->proximoVert){
+        if(strcmp(aux->geocode, localizacao) == 0){
+            printf("%d", aux->vertice);
+        }
+    }
+}
+
+void corresponderIDaLocalizacao(Vertice* inicio, int id){
+    Vertice* aux = inicio;
+    
+    for(aux; aux != NULL; aux = aux->proximoVert){
+        if(aux->vertice == id){
+            printf("%s", aux->geocode);
+        }
+    }
+}
+
+int existelocalizacao(Vertice* inicio, char localizacao[]){
+    Vertice* aux = inicio;
+
+    for(aux; aux != NULL; aux = aux->proximoVert){
+        if(strcmp(aux->geocode, localizacao) == 0){
+            return 1;
+        }
+    }
+    return 0;
+
+
+}
+
+void guardarGrafo(Vertice* v){
+    FILE* fp;
+    Vertice *head = v;
+    Adjacente *aux;
+    fp = fopen("grafos.txt","w");
+
+    if (fp!=NULL){      
+
+        while(v != NULL){  
+            fprintf(fp,"%d;%s;\n", v->vertice, v->geocode);
+            v = v->proximoVert;
+        }
+        fprintf(fp,"\n");
+        for(v = head; v != NULL ;v = v->proximoVert){
+            fprintf(fp,"%d-",v->vertice);
+            for(aux = v->adj; aux != NULL; aux = aux->proximoAdja){
+                fprintf(fp,"%d(%d);",aux->vertice, aux->peso);
+            }
+            fprintf(fp,"\n");
+        }
+        fclose(fp);
+
+        printf("Grafo guardado com sucesso\n");
+    }else
+        printf("Erro ao abrir ficheiro Grafo\n");
+}
+
+int numVertices(Vertice  *v){
+    int i = 0;
+
+    if (v == NULL)
+        return i;
+    
+    while(v != NULL){
+        i++;
+        v = v->proximoVert;
+    }
+
+    return i;
+}
+// Determinar se vértice 'id' já foi visitado
+int visitado(int sequencia[],int pos, int id){
+  int i;
+  for(i=0;i<pos;i++) if (sequencia[i]==id) return(1);
+  return(0);
+}
+
+// Listar os caminhos existentes entre dois vértices passados
+// por parâmetro
+void listarCaminhosAux(Vertice *v, int origem, int destino, int sequencia[], int posicao, int pesoTotal){
+    int i;
+    Vertice *head = v;
+    Adjacente *aux;  \
+    sequencia[posicao] = origem;
+    if (origem==destino) {
+        for(i=0;i<posicao;i++) printf("%d->",sequencia[i]); // escrita de um caminho
+        printf("%d (%d)\n",destino,pesoTotal);
+    }
+    else {
+        while(v->vertice != origem && v != NULL)
+            v = v->proximoVert;
+        aux = v->adj; 
+        while (aux != NULL){
+        if (!visitado(sequencia,posicao,aux->vertice)) 
+            listarCaminhosAux(head,aux->vertice,destino,sequencia,posicao+1,
+            pesoTotal+aux->peso);
+        aux = aux->proximoAdja;
+    }
+    }
+}
+
+void listarCaminhos(Vertice *v, int origem, int destino){
+  int sequencia[numVertices(v)];
+  listarCaminhosAux(v,origem,destino,sequencia,0,0);
+}
+
+
+
+
+
+
