@@ -16,7 +16,7 @@
 //! @param morada_ Morada do Cliente a ser inserido
 //! @param saldo Saldo do Cliente a ser inserido
 //! @return 
-Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_,char morada_[], int saldo) { 
+Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_,char morada_[], int saldo, char localizacao[]) { 
 	
 	
 		Clientes* Novo = malloc(sizeof(struct registo_clientes));
@@ -26,6 +26,7 @@ Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_,c
 			Novo->saldo = saldo;
 			strcpy(Novo->nome, nome_);
 			strcpy(Novo->morada, morada_);
+			strcpy(Novo->localizacao,localizacao);
 			Novo->proximo_cliente = inicio;
 			return Novo;
 		}
@@ -40,7 +41,7 @@ Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_,c
 Clientes* imprimir_clientes(Clientes* inicio) { 
 
 	while (inicio != NULL) {
-		printf("%d %s %d %s %d\n",inicio->NIF, inicio->nome, inicio->idade, inicio->morada, inicio->saldo);
+		printf("%d %s %d %s %d %s\n",inicio->NIF, inicio->nome, inicio->idade, inicio->morada, inicio->saldo, inicio->localizacao);
 		inicio = inicio->proximo_cliente;
 	}
 }
@@ -149,7 +150,7 @@ void GuardarClientes(Clientes* inicio)
 	{
 		Clientes* aux = inicio;
 		for (aux; aux != NULL; aux = aux->proximo_cliente) {
-			fprintf(fp, "%d;%s;%d;%s;%d\n", aux->NIF, aux->nome,aux->idade, aux->morada, aux->saldo);
+			fprintf(fp, "%d;%s;%d;%s;%s;%d\n", aux->NIF, aux->nome,aux->idade, aux->morada, aux->localizacao,aux->saldo);
 		}
 		fclose(fp);
 		
@@ -162,15 +163,15 @@ void GuardarClientes(Clientes* inicio)
 Clientes* LerClientes() {
 	FILE* fp;
 	int NIF, idade, saldo;
-	char nome[50], morada[50];
+	char nome[50], morada[50],localizacao[50];
 	Clientes* aux = NULL;
 	fp = fopen("Clientes.txt", "r");
 	if (fp != NULL)
 	{
 		while (!feof(fp))
 		{
-			fscanf(fp, "%d;%[^;];%d;%[^;];%d\n", &NIF, nome, &idade, morada, &saldo);
-			aux = inserir_cliente(aux, NIF, nome, idade, morada, saldo);
+			fscanf(fp, "%d;%[^;];%d;%[^;];%[^;];%d\n", &NIF, nome, &idade, morada, localizacao,&saldo);
+			aux = inserir_cliente(aux, NIF, nome, idade, morada, saldo,localizacao);
 		}
 		fclose(fp);
 	}
@@ -207,7 +208,7 @@ Clientes* LerClientes_Binario()
 		Clientes current;
 		while (fread(&current, sizeof(Clientes), 1, fp) == 1)
 		{
-			aux = inserir_cliente(aux, current.NIF, current.nome, current.idade, current.morada, current.saldo);
+			aux = inserir_cliente(aux, current.NIF, current.nome, current.idade, current.morada, current.saldo,current.localizacao);
 		}
 		fclose(fp);
 	}

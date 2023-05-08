@@ -13,7 +13,7 @@
 
 void main() {
 
-	char usuario[50], password[50], nome[50], morada[50], localizacao[50], tipo[50],novo_nome[50], nova_morada[50], gestor1[50], email[50], localizacao_pretendida[50];
+	char usuario[50], password[50], nome[50], morada[50], localizacao[50], tipo[50],novo_nome[50], nova_morada[50], gestor1[50], email[50], localizacao_pretendida[50], cidadeCliente[50];
 	int NIF, idade, opcao, NIF_, opcao1, codigo,opcao2,opcao3,opcao6,custo, quantia, saldo_inicial = 0, reserva = 0, NIF_reserva = 0, code, bateria, auxvertice;
 
 
@@ -64,9 +64,12 @@ listarCaminhos(grafo, 1,4);
 				printf("Idade:\n");
 				scanf("%d", &idade);
 				scanf("%*c");
+				printf("Cidade\n");
+				gets(cidadeCliente);
+				scanf("%*c");
 				printf("Morada:\n");
 				gets(morada);
-				clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial);
+				clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial,cidadeCliente);
 				GuardarClientes_Binario(clientes);
 				GuardarClientes(clientes);
 				clear();
@@ -116,10 +119,12 @@ listarCaminhos(grafo, 1,4);
 									gets(nome);
 									printf("Idade:\n");
 									scanf("%d", &idade);
+									printf("Cidade\n");
+									gets(cidadeCliente);
 									scanf("%*c");
 									printf("Morada:\n");
 									gets(morada);
-									clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial);
+									clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial,cidadeCliente);
 									GuardarClientes_Binario(clientes);
 									GuardarClientes(clientes);
 									clear();

@@ -13,7 +13,7 @@ typedef struct registo_clientes {
 	int idade;
 	int NIF;
 	int saldo;
-	char morada[50];
+	char morada[50], localizacao[50];
 	char nome[50];
 	char password[50];
 	struct registo_clientes* proximo_cliente;
@@ -67,7 +67,7 @@ typedef struct Vertices{
 
 
 
-Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_, char morada_[], int saldo); //Inserção de novos clientes
+Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_,char morada_[], int saldo, char localizacao[]); //Inserção de novos clientes
 Clientes* imprimir_clientes(Clientes* inicio); //Imprime os clientes registados
 Clientes* remover_clientes(Clientes* inicio, int code); //Remove um cliente através do seu NIF
 Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char localizacao_[], int custo_, char tipo_[], int reserva_, int NIF_reserva_, time_t horario_reserva); // Inserção de novos veiculos
