@@ -278,3 +278,15 @@ void AlterarDados(Clientes* inicio, int NIF_procurado) {
 	
 
 }
+
+char* verGeocode(Clientes* inicio, int NIF){
+
+	Clientes* aux = inicio;
+
+	for(aux; aux != NULL; aux = aux->proximo_cliente){
+		if(aux->NIF == NIF){
+			return aux->localizacao;
+		}
+	}
+	
+}

@@ -105,14 +105,16 @@ int corresponderLocalizacaoaID(Vertice* inicio, char localizacao[]){
     }
 }
 
-void corresponderIDaLocalizacao(Vertice* inicio, int id){
+char* corresponderIDaLocalizacao(Vertice* inicio, int id){
     Vertice* aux = inicio;
+
     
     for(aux; aux != NULL; aux = aux->proximoVert){
         if(aux->vertice == id){
-            printf("%s", aux->geocode);
+           return aux->geocode;
         }
     }
+    
 }
 
 int existelocalizacao(Vertice* inicio, char localizacao[]){

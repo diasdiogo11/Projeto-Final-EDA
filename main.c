@@ -34,9 +34,9 @@ grafo = adicionarVertice(grafo,1,"Porto");
 grafo = adicionarVertice(grafo,2,"Santo Tirso");
 grafo = adicionarVertice(grafo,3,"Barcelos");
 grafo = adicionarVertice(grafo,4,"Braga");
-adicionarAresta(grafo, 1,2,15);
-adicionarAresta(grafo, 2,3,20);
-adicionarAresta(grafo, 3,4,25);
+adicionarAresta(grafo, 1,3,15);
+adicionarAresta(grafo, 3,4,20);
+adicionarAresta(grafo, 4,2,25);
 adicionarAresta(grafo, 1,4,100);
 guardarGrafo(grafo);
 
@@ -45,10 +45,13 @@ listarAdjacentes(grafo, 3);
 int x;
 
 
-x = corresponderLocalizacaoaID(grafo, "Barcelos");
+
+
+char* teste = verGeocode(clientes, 10);
+printf("%s", teste);
+x = corresponderLocalizacaoaID(grafo, teste);
 printf("%d\n", x);
-corresponderIDaLocalizacao(grafo, 3);
-listarCaminhos(grafo, 1,4);
+listarCaminhos(grafo, 1 ,x);
 
 
 	do {

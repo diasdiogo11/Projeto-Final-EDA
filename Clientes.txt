@@ -1,3 +1,5 @@
+11;Joao Ales;45;Rua das Nabi‡as;Porto;0
 3;3;3;3;3;0
 1;1;1;;1;0
 2;2;2;2;2;0
+10;Diogo Dias;19;Rua das M¢s;Santo Tirso;0
