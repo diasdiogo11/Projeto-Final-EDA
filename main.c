@@ -5,6 +5,7 @@
 #include <math.h>
 #include <conio.h>
 #include <time.h>
+#include <limits.h>
 #include "structs.h"
 
 
@@ -30,29 +31,36 @@ void main() {
 	historico = LerHistorico();
 	gestores = inserir_gestores(gestores, "diogo1234", "lesi");
 
+	//alvo.queimar.amenos -> Parque de Geao
+	//ligar.chuvosos.moleza -> Skate Park Santo Tirso
+	//puxe.ficou.esvaziamento -> Unidade Hospitalar de Santo Tirso
+	//popa.lucros.araras -> Estadio Abel Alves Figueiredo
+	//babados.puro.cruzou -> Parque Dona Maria II
+	//volta.percebo.desenhei -> Mosteiro de Sao Bento
+	//vermos.censo.quem -> Escola Secundária de Tomaz Pelayo
+	//órgão.unha.suprir -> Pavilhao Desportivo Municipal
+	//árvore.queres.frota -> Biblioteca Municipal de Santo Tirso
+	//chamem.senão.pavoa -> Parque do Matadouro
+
 grafo = adicionarVertice(grafo,1,"Porto");
-grafo = adicionarVertice(grafo,2,"Santo Tirso");
-grafo = adicionarVertice(grafo,3,"Barcelos");
-grafo = adicionarVertice(grafo,4,"Braga");
-adicionarAresta(grafo, 1,3,15);
-adicionarAresta(grafo, 3,4,20);
-adicionarAresta(grafo, 4,2,25);
-adicionarAresta(grafo, 1,4,100);
+grafo = adicionarVertice(grafo,2,"ligar.chuvosos.moleza");
+grafo = adicionarVertice(grafo,3,"puxe.ficou.esvaziamento");
+grafo = adicionarVertice(grafo,4,"popa.lucros.araras");
+grafo = adicionarVertice(grafo,5,"babados.puro.cruzou");
+grafo = adicionarVertice(grafo,6,"volta.percebo.desenhei");
+grafo = adicionarVertice(grafo,7,"vermos.censo.quem");
+grafo = adicionarVertice(grafo,8,"órgão.unha.suprir");
+grafo = adicionarVertice(grafo,9,"Santo Tirso");
+grafo = adicionarVertice(grafo,10,"Santo Tirsooo");
+adicionarAresta(grafo, 1,9,150);
+adicionarAresta(grafo, 1,2,820);
+adicionarAresta(grafo, 2,3,435);
+adicionarAresta(grafo, 3,9,100);
 guardarGrafo(grafo);
 
+
+
 listarAdjacentes(grafo, 3);
-
-int x;
-
-
-
-
-char* teste = verGeocode(clientes, 10);
-printf("%s", teste);
-x = corresponderLocalizacaoaID(grafo, teste);
-printf("%d\n", x);
-listarCaminhos(grafo, 1 ,x);
-
 
 	do {
 		menu_principal();
@@ -339,11 +347,20 @@ listarCaminhos(grafo, 1 ,x);
 									gets(localizacao);
 									if(existelocalizacao(grafo, localizacao)){
 										LocalizarVeiculos(veiculos,localizacao);
-										printf("Qual o codigo do veiculo\n");
+										printf("Qual o codigo do veiculo a reservar\n");
 										scanf("%d", &code);
-								
-										if (Reservar_Veiculo(veiculos, NIF, code)) {
+											if (Reservar_Veiculo(veiculos, NIF, code)) {
 											clear();
+											char* teste1 = verGeocode(clientes, NIF);
+											printf("%s", teste1);
+											int teste = corresponderLocalizacaoaID(grafo, localizacao);
+											printf("%d", teste);
+											int teste2 = corresponderLocalizacaoaID(grafo, teste1);
+											printf("%d", teste2);
+											listarCaminhos(grafo, teste2, teste);
+											atualizaMorada(clientes,NIF,localizacao);
+											GuardarClientes(clientes);
+											GuardarClientes_Binario(clientes);
 											printf("Reserva bem sucedida\n");
 											historico = inserirHis(historico, NIF, code, 0,*localtime(&t), *localtime(&t));
 											GuardarHistorico(historico);
@@ -361,6 +378,8 @@ listarCaminhos(grafo, 1 ,x);
 
 										}
 
+									}else{
+										printf("%s, nao esta inserido/a no nosso sistema\n", localizacao);
 									}
 									
 

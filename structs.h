@@ -66,6 +66,12 @@ typedef struct Vertices{
 }Vertice;
 
 
+typedef struct Caminho {
+    int vertice;
+    float distancia;
+    struct Caminho *antecessor;
+} Caminho;
+
 
 Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_,char morada_[], int saldo, char localizacao[]); //Inserção de novos clientes
 Clientes* imprimir_clientes(Clientes* inicio); //Imprime os clientes registados
@@ -80,7 +86,7 @@ Veiculos* imprimir_reservas(Veiculos* inicio, int NIF);
 Gestores* remover_gestores(Gestores* inicio, char email[]);
 int saldo(Clientes* inicio, int NIF_procurado, int valor);
 int login_gestores(Gestores* inicio, char* username, char* password);
-int login_clientes(Clientes* inicio, char* username, int* code);
+int login_clientes(Clientes* inicio, char* username, int code);
 void ordenacao_veiculos(Veiculos* inicio);
 void ordenacao_clientes(Clientes* inicio);
 void GuardarVeiculos(Veiculos* inicio);
@@ -129,3 +135,9 @@ int visitado(int sequencia[],int pos, int id);
 void listarCaminhosAux(Vertice *v, int origem, int destino, int sequencia[], int posicao, int pesoTotal);
 void listarCaminhos(Vertice *v, int origem, int destino);
 char* verGeocode(Clientes* inicio, int NIF);
+int atualizaMorada(Clientes* inicio, int NIF, char novoGeocode[]);
+void inicializarCaminho(Caminho **caminho, int origem);
+void adicionarCaminho(Caminho **caminho, int vertice, float distancia, Caminho *antecessor);
+void liberarCaminhos(Caminho **caminhos, int numVertices);
+Caminho *encontrarMenorCaminho(Caminho **caminhos, int numVertices, int *visitados);
+void dijkstra(Vertice *grafo, int origem, int destino);

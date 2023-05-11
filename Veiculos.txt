@@ -1,4 +1,5 @@
-15;100;Porto;5;Bicicleta;0;0;0
+15;100;Porto;5;Bicicleta;1;10;1683797810
 2;2;h;2;k;0;0;0
 1;1;j;1;j;0;0;0
-7;7;Santo Tirso;5;p;0;0;0
+7;7;Santo Tirso;5;p;1;11;1683849154
+87;10000000;Porto;4525;Troti;0;0;0

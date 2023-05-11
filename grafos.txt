@@ -1,9 +1,21 @@
-4;Braga;
-3;Barcelos;
-2;Santo Tirso;
+10;Santo Tirsooo;
+9;Santo Tirso;
+8;órgão.unha.suprir;
+7;vermos.censo.quem;
+6;volta.percebo.desenhei;
+5;babados.puro.cruzou;
+4;popa.lucros.araras;
+3;puxe.ficou.esvaziamento;
+2;ligar.chuvosos.moleza;
 1;Porto;
 
-4-2(25);
-3-4(20);
-2-
-1-3(15);4(100);
+10-
+9-
+8-
+7-
+6-
+5-
+4-
+3-9(100);
+2-3(435);
+1-9(150);2(820);

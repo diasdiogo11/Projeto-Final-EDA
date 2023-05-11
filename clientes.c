@@ -110,7 +110,7 @@ int saldo(Clientes* inicio, int NIF_procurado, int valor){
 //! @param username Username do cliente a verificar se existe no sistema
 //! @param code Codigo do cliente a verificar se existe no sistema
 //! @return 
-int login_clientes(Clientes* inicio, char* username, int* code) { 
+int login_clientes(Clientes* inicio, char* username, int code) { 
 	Clientes* current = inicio;
 	for (current; current != NULL; current = current->proximo_cliente) {
 		if (strcmp(current->nome, username) == 0 && code == current->NIF) {
@@ -208,7 +208,7 @@ Clientes* LerClientes_Binario()
 		Clientes current;
 		while (fread(&current, sizeof(Clientes), 1, fp) == 1)
 		{
-			aux = inserir_cliente(aux, current.NIF, current.nome, current.idade, current.morada, current.saldo,current.localizacao);
+			aux = inserir_cliente(aux, current.NIF, current.nome, current.idade, current.morada, current.saldo, current.localizacao);
 		}
 		fclose(fp);
 	}
@@ -289,4 +289,21 @@ char* verGeocode(Clientes* inicio, int NIF){
 		}
 	}
 	
+}
+
+int atualizaMorada(Clientes* inicio, int NIF, char novoGeocode[]){
+
+	Clientes* aux = inicio;
+
+	for(aux; aux != NULL; aux = aux->proximo_cliente){
+		if(aux->NIF == NIF){
+			strcpy(aux->localizacao, novoGeocode);
+			return 1;
+
+		}
+
+	}
+	return 0;
+	
+
 }
