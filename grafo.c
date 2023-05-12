@@ -6,12 +6,17 @@
 #include <time.h>
 #include "structs.h"
 
+#define INFINITO 1000000
+
 Vertice* adicionarVertice(Vertice* listaVertices, int novoVertice, char geocode[]) {
     Vertice* novo = (Vertice*) malloc(sizeof(Vertice));
 
     if(novo != NULL){
         novo->vertice = novoVertice;
         strcpy(novo->geocode, geocode);
+        novo->distancia = INFINITO;
+        novo->visitado = 0;
+        novo->anterior = -1;
         novo->adj = NULL;
         novo->proximoVert = listaVertices;
     
@@ -51,11 +56,6 @@ int adicionarAresta(Vertice *v, int inicio, int fim, float peso){
 
     return 1;
 }
-
-
-
-
-
 
 int existeVertice(Vertice* inicio, int idvertice){
 
@@ -205,9 +205,3 @@ void listarCaminhos(Vertice *v, int origem, int destino){
   int sequencia[numVertices(v)];
   listarCaminhosAux(v,origem,destino,sequencia,0,0);
 }
-
-
-
-
-
-

@@ -16,6 +16,7 @@ typedef struct registo_clientes {
 	char morada[50], localizacao[50];
 	char nome[50];
 	char password[50];
+	char nickname[50];
 	struct registo_clientes* proximo_cliente;
 
 }Clientes;
@@ -63,17 +64,14 @@ typedef struct Vertices{
 	char geocode[50];
     Adjacente *adj;
     struct Vertices* proximoVert;
+	int distancia;
+    int visitado;
+    int anterior;
 }Vertice;
 
 
-typedef struct Caminho {
-    int vertice;
-    float distancia;
-    struct Caminho *antecessor;
-} Caminho;
 
-
-Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_,char morada_[], int saldo, char localizacao[]); //Inserção de novos clientes
+Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_,char morada_[], int saldo, char localizacao[], char nickname[], char password[]); //Inserção de novos clientes
 Clientes* imprimir_clientes(Clientes* inicio); //Imprime os clientes registados
 Clientes* remover_clientes(Clientes* inicio, int code); //Remove um cliente através do seu NIF
 Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char localizacao_[], int custo_, char tipo_[], int reserva_, int NIF_reserva_, time_t horario_reserva); // Inserção de novos veiculos
@@ -86,7 +84,7 @@ Veiculos* imprimir_reservas(Veiculos* inicio, int NIF);
 Gestores* remover_gestores(Gestores* inicio, char email[]);
 int saldo(Clientes* inicio, int NIF_procurado, int valor);
 int login_gestores(Gestores* inicio, char* username, char* password);
-int login_clientes(Clientes* inicio, char* username, int code);
+int login_clientes(Clientes* inicio, char* nickname, char* password, int NIF);
 void ordenacao_veiculos(Veiculos* inicio);
 void ordenacao_clientes(Clientes* inicio);
 void GuardarVeiculos(Veiculos* inicio);
@@ -112,7 +110,7 @@ int verificar_registo_clientes(Clientes* inicio, int NIF);
 int verificar_registo_veiculos(Veiculos* inicio, int codigo);
 int verificar_registo_gestores(Gestores* inicio, char email[]);
 void AlterarDados(Clientes* inicio, int NIF_procurado);
-int Cancelar_Reserva(Veiculos* inicio, Clientes* inicioo, int NIF_reserva);
+int Cancelar_Reserva(Veiculos* inicio, Clientes* inicioo, int NIF_reserva, int code);
 void clear();
 Veiculos* LocalizarVeiculos(Veiculos* inicio,char localizacao_pretendida[]);
 void AlterarDadosGestores(Gestores* inicio, char email_procurado[]);
@@ -136,8 +134,4 @@ void listarCaminhosAux(Vertice *v, int origem, int destino, int sequencia[], int
 void listarCaminhos(Vertice *v, int origem, int destino);
 char* verGeocode(Clientes* inicio, int NIF);
 int atualizaMorada(Clientes* inicio, int NIF, char novoGeocode[]);
-void inicializarCaminho(Caminho **caminho, int origem);
-void adicionarCaminho(Caminho **caminho, int vertice, float distancia, Caminho *antecessor);
-void liberarCaminhos(Caminho **caminhos, int numVertices);
-Caminho *encontrarMenorCaminho(Caminho **caminhos, int numVertices, int *visitados);
-void dijkstra(Vertice *grafo, int origem, int destino);
+

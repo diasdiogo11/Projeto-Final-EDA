@@ -14,7 +14,7 @@
 
 void main() {
 
-	char usuario[50], password[50], nome[50], morada[50], localizacao[50], tipo[50],novo_nome[50], nova_morada[50], gestor1[50], email[50], localizacao_pretendida[50], cidadeCliente[50];
+	char usuario[50], password[50], nome[50], morada[50], localizacao[50], tipo[50],novo_nome[50], nova_morada[50], gestor1[50], email[50], localizacao_pretendida[50], cidadeCliente[50], nickname[50];
 	int NIF, idade, opcao, NIF_, opcao1, codigo,opcao2,opcao3,opcao6,custo, quantia, saldo_inicial = 0, reserva = 0, NIF_reserva = 0, code, bateria, auxvertice;
 
 
@@ -52,11 +52,12 @@ grafo = adicionarVertice(grafo,7,"vermos.censo.quem");
 grafo = adicionarVertice(grafo,8,"órgão.unha.suprir");
 grafo = adicionarVertice(grafo,9,"Santo Tirso");
 grafo = adicionarVertice(grafo,10,"Santo Tirsooo");
-adicionarAresta(grafo, 1,9,150);
+adicionarAresta(grafo, 2,9,150);
 adicionarAresta(grafo, 1,2,820);
 adicionarAresta(grafo, 2,3,435);
 adicionarAresta(grafo, 3,9,100);
 guardarGrafo(grafo);
+
 
 
 
@@ -74,21 +75,30 @@ listarAdjacentes(grafo, 3);
 			scanf("%d", &NIF);
 			if (!verificar_registo_clientes(clientes, NIF)) {
 				scanf("%*c");
-				printf("Nome:\n");
+				printf("Nome(First and last):\n");
 				gets(nome);
+				printf("Nickname:\n");
+				gets(nickname);
+				printf("Password:\n");
+				gets(password);
 				printf("Idade:\n");
 				scanf("%d", &idade);
 				scanf("%*c");
-				printf("Cidade\n");
-				gets(cidadeCliente);
-				scanf("%*c");
 				printf("Morada:\n");
 				gets(morada);
-				clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial,cidadeCliente);
-				GuardarClientes_Binario(clientes);
-				GuardarClientes(clientes);
-				clear();
-				printf("Registo efetuado com sucesso!\n");
+				printf("Cidade\n");
+				gets(cidadeCliente);
+				if(existelocalizacao(grafo, cidadeCliente)){
+					clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial,cidadeCliente, nickname, password);
+					GuardarClientes_Binario(clientes);
+					GuardarClientes(clientes);
+					clear();
+					printf("Registo efetuado com sucesso!\n");
+				}else{
+					clear();
+					printf("%s nao se encontra no nosso sistema\n", cidadeCliente);
+				}
+				
 				
 			}
 			else {
@@ -122,28 +132,37 @@ listarAdjacentes(grafo, 3);
 						do {
 							menu_gestores();
 							scanf("%d", &opcao2);
-
-
-							if (opcao2 == 1) {
+								if (opcao2 == 1) {
 								clear();
 								printf("NIF:\n");
 								scanf("%d", &NIF);
 								if (!verificar_registo_clientes(clientes, NIF)) {
 									scanf("%*c");
-									printf("Nome:\n");
+									printf("Nome(First and last):\n");
 									gets(nome);
+									printf("Nickname:\n");
+									gets(nickname);
+									printf("Password:\n");
+									gets(password);
 									printf("Idade:\n");
 									scanf("%d", &idade);
-									printf("Cidade\n");
-									gets(cidadeCliente);
 									scanf("%*c");
 									printf("Morada:\n");
 									gets(morada);
-									clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial,cidadeCliente);
-									GuardarClientes_Binario(clientes);
-									GuardarClientes(clientes);
-									clear();
-									printf("Registo efetuado com sucesso!\n");
+									printf("Cidade\n");
+									gets(cidadeCliente);;
+									if(existelocalizacao(grafo, cidadeCliente)){
+										clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial,cidadeCliente, nickname, password);
+										GuardarClientes_Binario(clientes);
+										GuardarClientes(clientes);
+										clear();
+										printf("Registo efetuado com sucesso!\n");
+										
+									}else{
+										clear();
+										printf("%s nao se encontra no nosso sistema\n", cidadeCliente);
+									}
+									
 								}
 								else {
 									clear();
@@ -325,13 +344,15 @@ listarAdjacentes(grafo, 3);
 			else {
 				clear();
 				cabecalho_cliente();
+				scanf("%*c");
+				printf("Nickname:\n");
+				gets(usuario);
+				printf("Password:\n");
+				gets(password);
 				printf("NIF:\n");
 				scanf("%d", &NIF);
-				scanf("%*c");
-				printf("Nome:\n");
-				gets(usuario);
 				
-				if (login_clientes(clientes, usuario, NIF)) {
+				if (login_clientes(clientes, usuario, password,NIF)) {
 					clear();
 					time_t t = time(NULL);
 					char localizacao[50];
@@ -352,11 +373,8 @@ listarAdjacentes(grafo, 3);
 											if (Reservar_Veiculo(veiculos, NIF, code)) {
 											clear();
 											char* teste1 = verGeocode(clientes, NIF);
-											printf("%s", teste1);
 											int teste = corresponderLocalizacaoaID(grafo, localizacao);
-											printf("%d", teste);
 											int teste2 = corresponderLocalizacaoaID(grafo, teste1);
-											printf("%d", teste2);
 											listarCaminhos(grafo, teste2, teste);
 											atualizaMorada(clientes,NIF,localizacao);
 											GuardarClientes(clientes);
@@ -375,7 +393,6 @@ listarAdjacentes(grafo, 3);
 										else {
 											clear();
 											printf("Veiculo indisponivel\n");
-
 										}
 
 									}else{
@@ -393,8 +410,10 @@ listarAdjacentes(grafo, 3);
 							}
 							else if (opcao3 == 2) {
 								clear();
+								printf("Qual o codigo do veiculo\n");
+   							 	scanf("%d", &code);
 
-								if (Cancelar_Reserva(veiculos,clientes,NIF)) {
+								if (Cancelar_Reserva(veiculos,clientes,NIF,code)) {
 									GuardarVeiculos_Binario(veiculos);
 									GuardarVeiculos(veiculos);
 									GuardarClientes(clientes);

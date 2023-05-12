@@ -44,15 +44,16 @@ int PrecoFinal(Clientes* inicio, int NIF_procurado, int valor){
 //! @param NIF_reserva NIF do utilizador que vai reservar o veiculo
 //! @param code Codigo do veiculo a reservar
 //! @return 
-int Reservar_Veiculo(Veiculos* inicio, int NIF_reserva, int code) { 
+int Reservar_Veiculo(Veiculos* inicio,int NIF_reserva, int code) { 
     Veiculos* current = inicio;
     for (current; current != NULL; current = current->proximo_veiculo) {
-        if (current->codigo == code && current->reserva == 0 && current->NIF_reserva == 0) {
+            if (current->codigo == code && current->reserva == 0 && current->NIF_reserva == 0) {
             current->reserva = 1;
             current->NIF_reserva = NIF_reserva;
             current->horario_reserva = time(NULL);
             return 1;
         }
+        
     }
     return 0;   
 }
@@ -63,10 +64,7 @@ int Reservar_Veiculo(Veiculos* inicio, int NIF_reserva, int code) {
 //! @param inicioo Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
 //! @param NIF_reserva NIF do utilizador que reservou o veiculo e deseja cancelar a reserva
 //! @return 
-int Cancelar_Reserva(Veiculos* inicio, Clientes* inicioo, int NIF_reserva) { 
-    int code;
-    printf("Qual o codigo do veiculo\n");
-    scanf("%d", &code);
+int Cancelar_Reserva(Veiculos* inicio, Clientes* inicioo, int NIF_reserva, int code) { 
     Veiculos* current = inicio;
     for (current; current != NULL; current = current->proximo_veiculo) {
         if (current->reserva == 1 && current->codigo == code && current->NIF_reserva == NIF_reserva) {

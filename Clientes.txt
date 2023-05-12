@@ -1,5 +1,8 @@
-11;Joao Ales;45;Rua das Nabi‡as;Santo Tirso;0
-3;3;3;3;3;0
-1;1;1;;1;0
-2;2;2;2;2;0
-10;Diogo Dias;19;Rua das M¢s;Santo Tirso;-18934
+1;Ana Maria;25;Rua do Peso;Santo Tirso;0;ana;ana1234
+123;Joao;87;Rua ads Mos;Santo Tirso;0;€9µ;
+0;;0;rto;ao Ales;1867513856;;µ
+0;;0;;;51;;
+0;;0;;;0;;
+11875840;;0;
+;;19;;
+2004;Diogo Dias;19;Rua das Mos;Santo Tirso;-3;aushh;aushh1234
