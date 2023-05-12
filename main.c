@@ -52,10 +52,10 @@ grafo = adicionarVertice(grafo,7,"vermos.censo.quem");
 grafo = adicionarVertice(grafo,8,"órgão.unha.suprir");
 grafo = adicionarVertice(grafo,9,"Santo Tirso");
 grafo = adicionarVertice(grafo,10,"Santo Tirsooo");
-adicionarAresta(grafo, 2,9,150);
-adicionarAresta(grafo, 1,2,820);
-adicionarAresta(grafo, 2,3,435);
-adicionarAresta(grafo, 3,9,100);
+adicionarAresta(grafo, 9,8,150);
+adicionarAresta(grafo, 8,7,820);
+adicionarAresta(grafo, 9,1,435);
+adicionarAresta(grafo, 7,1,100);
 guardarGrafo(grafo);
 
 
@@ -355,6 +355,7 @@ listarAdjacentes(grafo, 3);
 				if (login_clientes(clientes, usuario, password,NIF)) {
 					clear();
 					time_t t = time(NULL);
+					int escolha;
 					char localizacao[50];
 						printf("Bem vindo %s\n", usuario);
 						do {
@@ -370,12 +371,16 @@ listarAdjacentes(grafo, 3);
 										LocalizarVeiculos(veiculos,localizacao);
 										printf("Qual o codigo do veiculo a reservar\n");
 										scanf("%d", &code);
+										char* teste1 = verGeocode(clientes, NIF);
+										int teste = corresponderLocalizacaoaID(grafo, localizacao);
+										int teste2 = corresponderLocalizacaoaID(grafo, teste1);
+										printf("Caminhos ate ao destino\n");
+										listarCaminhos(grafo, teste2, teste);
+										printf("Deseja proseguir com a reserva?(1-Sim/ >1-Nao)\n");
+										scanf("%d", &escolha);
+										if(escolha == 1){
 											if (Reservar_Veiculo(veiculos, NIF, code)) {
 											clear();
-											char* teste1 = verGeocode(clientes, NIF);
-											int teste = corresponderLocalizacaoaID(grafo, localizacao);
-											int teste2 = corresponderLocalizacaoaID(grafo, teste1);
-											listarCaminhos(grafo, teste2, teste);
 											atualizaMorada(clientes,NIF,localizacao);
 											GuardarClientes(clientes);
 											GuardarClientes_Binario(clientes);
@@ -395,6 +400,10 @@ listarAdjacentes(grafo, 3);
 											printf("Veiculo indisponivel\n");
 										}
 
+										}else{
+											printf("Voltando para o menu...\n");
+										}
+											
 									}else{
 										printf("%s, nao esta inserido/a no nosso sistema\n", localizacao);
 									}
