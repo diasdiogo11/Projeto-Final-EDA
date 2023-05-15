@@ -6,17 +6,15 @@
 #include <time.h>
 #include "structs.h"
 
-#define INFINITO 1000000
 
-Vertice* adicionarVertice(Vertice* listaVertices, int novoVertice, char geocode[]) {
+Vertice* adicionarVertice(Vertice* listaVertices, int novoVertice, char geocode[], char local[], char cidade[]) {
     Vertice* novo = (Vertice*) malloc(sizeof(Vertice));
 
     if(novo != NULL){
         novo->vertice = novoVertice;
         strcpy(novo->geocode, geocode);
-        novo->distancia = INFINITO;
-        novo->visitado = 0;
-        novo->anterior = -1;
+        strcpy(novo->cidade, cidade);
+        strcpy(novo->local, local);
         novo->adj = NULL;
         novo->proximoVert = listaVertices;
     
@@ -99,7 +97,7 @@ int corresponderLocalizacaoaID(Vertice* inicio, char localizacao[]){
     Vertice* aux = inicio;
     
     for(aux; aux != NULL; aux = aux->proximoVert){
-        if(strcmp(aux->geocode, localizacao) == 0){
+        if(strcmp(aux->local, localizacao) == 0){
             return aux->vertice;
         }
     }
@@ -111,7 +109,7 @@ char* corresponderIDaLocalizacao(Vertice* inicio, int id){
     
     for(aux; aux != NULL; aux = aux->proximoVert){
         if(aux->vertice == id){
-           return aux->geocode;
+           return aux->local;
         }
     }
     
@@ -121,7 +119,7 @@ int existelocalizacao(Vertice* inicio, char localizacao[]){
     Vertice* aux = inicio;
 
     for(aux; aux != NULL; aux = aux->proximoVert){
-        if(strcmp(aux->geocode, localizacao) == 0){
+        if(strcmp(aux->cidade, localizacao) == 0){
             return 1;
         }
     }
@@ -139,7 +137,7 @@ void guardarGrafo(Vertice* v){
     if (fp!=NULL){      
 
         while(v != NULL){  
-            fprintf(fp,"%d;%s;\n", v->vertice, v->geocode);
+            fprintf(fp,"%d;%s;%s;\n", v->vertice, v->geocode,v->cidade);
             v = v->proximoVert;
         }
         fprintf(fp,"\n");
@@ -170,22 +168,20 @@ int numVertices(Vertice  *v){
 
     return i;
 }
-// Determinar se vértice 'id' já foi visitado
+
 int visitado(int sequencia[],int pos, int id){
   int i;
   for(i=0;i<pos;i++) if (sequencia[i]==id) return(1);
   return(0);
 }
 
-// Listar os caminhos existentes entre dois vértices passados
-// por parâmetro
 void listarCaminhosAux(Vertice *v, int origem, int destino, int sequencia[], int posicao, int pesoTotal){
     int i;
     Vertice *head = v;
     Adjacente *aux;  \
     sequencia[posicao] = origem;
     if (origem==destino) {
-        for(i=0;i<posicao;i++) printf("%d->",sequencia[i]); // escrita de um caminho
+        for(i=0;i<posicao;i++) printf("%d->",sequencia[i]);
         printf("%d (%d)\n",destino,pesoTotal);
     }
     else {
@@ -196,6 +192,7 @@ void listarCaminhosAux(Vertice *v, int origem, int destino, int sequencia[], int
         if (!visitado(sequencia,posicao,aux->vertice)) 
             listarCaminhosAux(head,aux->vertice,destino,sequencia,posicao+1,
             pesoTotal+aux->peso);
+
         aux = aux->proximoAdja;
     }
     }
@@ -204,4 +201,9 @@ void listarCaminhosAux(Vertice *v, int origem, int destino, int sequencia[], int
 void listarCaminhos(Vertice *v, int origem, int destino){
   int sequencia[numVertices(v)];
   listarCaminhosAux(v,origem,destino,sequencia,0,0);
+
+
 }
+
+
+

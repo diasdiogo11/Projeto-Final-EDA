@@ -234,3 +234,15 @@ Veiculos* LocalizarVeiculos(Veiculos* inicio, char localizacao_pretendida[]) {
 	
 
 }
+
+char* verLocalizacao(Veiculos* inicio, int code){
+	Veiculos* aux= inicio;
+
+	for(aux; aux != NULL; aux = aux->proximo_veiculo){
+		if(aux->codigo == code){
+			return aux->localizacao;
+		}
+	}
+	return 0;
+}
+

@@ -1,16 +1,16 @@
-10;Santo Tirsooo;
-9;Santo Tirso;
-8;órgão.unha.suprir;
-7;vermos.censo.quem;
-6;volta.percebo.desenhei;
-5;babados.puro.cruzou;
-4;popa.lucros.araras;
-3;puxe.ficou.esvaziamento;
-2;ligar.chuvosos.moleza;
-1;Porto;
+10;chamem.senão.pavoa;Santo Tirso;
+9;árvore.queres.frota;Santo Tirso;
+8;órgão.unha.suprir;Santo Tirso;
+7;vermos.censo.quem;Santo Tirso;
+6;volta.percebo.desenhei;Santo Tirso;
+5;babados.puro.cruzou;Santo Tirso;
+4;popa.lucros.araras;Santo Tirso;
+3;puxe.ficou.esvaziamento;Santo Tirso;
+2;ligar.chuvosos.moleza;Santo Tirso;
+1;alvo.queimar.amenos;Santo Tirso;
 
 10-
-9-8(150);1(435);
+9-8(150);1(445);
 8-7(820);
 7-1(100);
 6-

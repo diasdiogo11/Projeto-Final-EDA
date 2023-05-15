@@ -152,7 +152,7 @@ void GuardarClientes(Clientes* inicio)
 	{
 		Clientes* aux = inicio;
 		for (aux; aux != NULL; aux = aux->proximo_cliente) {
-			fprintf(fp, "%d;%s;%d;%s;%s;%d;%s;%s\n", aux->NIF, aux->nome,aux->idade, aux->morada, aux->localizacao,aux->saldo, aux->nickname, aux->password);
+			fprintf(fp, "%d;%s;%d;%s;%s;%s;%s;%d\n", aux->NIF, aux->nome,aux->idade, aux->morada, aux->localizacao,aux->nickname, aux->password,aux->saldo);
 		}
 		fclose(fp);
 		
@@ -172,7 +172,7 @@ Clientes* LerClientes() {
 	{
 		while (!feof(fp))
 		{
-			fscanf(fp, "%d;%[^;];%d;%[^;];%[^;];%d;%[^;];%s\n", &NIF, nome, &idade, morada, localizacao,&saldo, nickname,password);
+			fscanf(fp, "%d;%[^;];%d;%[^;];%[^;];%[^;];%s;%d\n", &NIF, nome, &idade, morada, localizacao,nickname,password,&saldo);
 			aux = inserir_cliente(aux, NIF, nome, idade, morada, saldo,localizacao, nickname,password);
 		}
 		fclose(fp);
@@ -308,4 +308,15 @@ int atualizaMorada(Clientes* inicio, int NIF, char novoGeocode[]){
 	return 0;
 	
 
+}
+
+int verificarNickname(Clientes* inicio, char nickname[]){
+	Clientes* aux = inicio;
+
+	for(aux; aux != NULL ; aux = aux->proximo_cliente){
+		if(strcmp(aux->nickname, nickname) == 0){
+			return 1;
+		}
+	}
+	return 0;
 }
