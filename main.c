@@ -59,7 +59,7 @@ adicionarAresta(grafo, 7,1,100);
 guardarGrafo(grafo);
 
 listarCaminhos(grafo, 9, 1);
-
+listarCaminhosLimite(grafo,9,1,500);
 
 
 
@@ -232,9 +232,9 @@ listarAdjacentes(grafo, 3);
 								clear();
 								veiculos = imprimir_veiculos(veiculos);
 								printf("Codigo do veiculo a remover do sistema\n");
-								scanf("%d", &codigo);
-								if (verificar_registo_veiculos(veiculos, codigo)) {
-									veiculos = remover_veiculos(veiculos, codigo);
+								scanf("%d", &code);
+								if (verificar_registo_veiculos(veiculos, code)) {
+									veiculos = remover_veiculos(veiculos, code);
 									GuardarVeiculos_Binario(veiculos);
 									GuardarVeiculos(veiculos);
 									printf("Veiculo removido com sucesso\n");

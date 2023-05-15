@@ -135,4 +135,5 @@ char* verLocalizacao(Veiculos* inicio, int code);
 int verificarNickname(Clientes* inicio, char nickname[]);
 void imprimirHistorico(Historico* inicio);
 int gerarCode(Veiculos* inicio);
-
+void listarCaminhosLimite(Vertice *v, int origem, int destino, int limite);
+void listarCaminhosAuxLimite(Vertice *v, int origem, int destino, int sequencia[], int posicao, int pesoTotal, int limite);

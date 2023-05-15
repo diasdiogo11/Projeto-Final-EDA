@@ -193,4 +193,36 @@ void listarCaminhos(Vertice *v, int origem, int destino){
 }
 
 
+void listarCaminhosAuxLimite(Vertice *v, int origem, int destino, int sequencia[], int posicao, int pesoTotal, int limite) {
+    int i;
+    Vertice *head = v;
+    Adjacente *aux;
+    sequencia[posicao] = origem;
+    if (origem == destino) {
+        if (pesoTotal <= limite) {
+            for (i = 0; i < posicao; i++) {
+                printf("%d->", sequencia[i]);
+            }
+            printf("%d (%d)\n", destino, pesoTotal);
+        }
+    } else {
+        while (v->vertice != origem && v != NULL) {
+            v = v->proximoVert;
+        }
+        aux = v->adj;
+        while (aux != NULL) {
+            if (!visitado(sequencia, posicao, aux->vertice)) {
+                listarCaminhosAuxLimite(head, aux->vertice, destino, sequencia, posicao + 1, pesoTotal + aux->peso, limite);
+            }
+            aux = aux->proximoAdja;
+        }
+    }
+}
+
+void listarCaminhosLimite(Vertice *v, int origem, int destino, int limite) {
+    int sequencia[numVertices(v)];
+    listarCaminhosAuxLimite(v, origem, destino, sequencia, 0, 0, limite);
+}
+
+
 
