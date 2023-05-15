@@ -1,13 +1,13 @@
-10;chamem.senão.pavoa;Santo Tirso;
-9;árvore.queres.frota;Santo Tirso;
-8;órgão.unha.suprir;Santo Tirso;
-7;vermos.censo.quem;Santo Tirso;
-6;volta.percebo.desenhei;Santo Tirso;
-5;babados.puro.cruzou;Santo Tirso;
-4;popa.lucros.araras;Santo Tirso;
-3;puxe.ficou.esvaziamento;Santo Tirso;
-2;ligar.chuvosos.moleza;Santo Tirso;
-1;alvo.queimar.amenos;Santo Tirso;
+10;chamem.senão.pavoa;Parque do Matadouro;
+9;árvore.queres.frota;Biblioteca Municipal de Santo Tirso;
+8;órgão.unha.suprir;Pavilhao Desportivo Municipal;
+7;vermos.censo.quem;Escola Secundária de Tomaz Pelayo;
+6;volta.percebo.desenhei;Mosteiro de Sao Bento;
+5;babados.puro.cruzou;Parque Dona Maria II;
+4;popa.lucros.araras;Estadio Abel Alves Figueiredo;
+3;puxe.ficou.esvaziamento;Unidade Hospitalar de Santo Tirso;
+2;ligar.chuvosos.moleza;Skate Park Santo Tirso;
+1;alvo.queimar.amenos;Parque de Geao;
 
 10-
 9-8(150);1(445);

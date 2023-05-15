@@ -7,13 +7,12 @@
 #include "structs.h"
 
 
-Vertice* adicionarVertice(Vertice* listaVertices, int novoVertice, char geocode[], char local[], char cidade[]) {
+Vertice* adicionarVertice(Vertice* listaVertices, int novoVertice, char geocode[], char local[]) {
     Vertice* novo = (Vertice*) malloc(sizeof(Vertice));
 
     if(novo != NULL){
         novo->vertice = novoVertice;
         strcpy(novo->geocode, geocode);
-        strcpy(novo->cidade, cidade);
         strcpy(novo->local, local);
         novo->adj = NULL;
         novo->proximoVert = listaVertices;
@@ -115,18 +114,6 @@ char* corresponderIDaLocalizacao(Vertice* inicio, int id){
     
 }
 
-int existelocalizacao(Vertice* inicio, char localizacao[]){
-    Vertice* aux = inicio;
-
-    for(aux; aux != NULL; aux = aux->proximoVert){
-        if(strcmp(aux->cidade, localizacao) == 0){
-            return 1;
-        }
-    }
-    return 0;
-
-
-}
 
 void guardarGrafo(Vertice* v){
     FILE* fp;
@@ -137,7 +124,7 @@ void guardarGrafo(Vertice* v){
     if (fp!=NULL){      
 
         while(v != NULL){  
-            fprintf(fp,"%d;%s;%s;\n", v->vertice, v->geocode,v->cidade);
+            fprintf(fp,"%d;%s;%s;\n", v->vertice, v->geocode,v->local);
             v = v->proximoVert;
         }
         fprintf(fp,"\n");

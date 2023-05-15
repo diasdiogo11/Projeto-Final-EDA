@@ -26,7 +26,7 @@ void main() {
 	Vertice* grafo = NULL;
 
 	clientes = LerClientes_Binario();
-	veiculos = LerVeiculos_Binario();
+	veiculos = LerVeiculos();
 	gestores = LerGestores_Binario();
 	historico = LerHistorico();
 	gestores = inserir_gestores(gestores, "diogo1234", "lesi");
@@ -42,16 +42,16 @@ void main() {
 	//árvore.queres.frota -> Biblioteca Municipal de Santo Tirso
 	//chamem.senão.pavoa -> Parque do Matadouro
 
-grafo = adicionarVertice(grafo,1,"alvo.queimar.amenos", "Parque de Geao","Santo Tirso");
-grafo = adicionarVertice(grafo,2,"ligar.chuvosos.moleza", "Skate Park Santo Tirso","Santo Tirso");
-grafo = adicionarVertice(grafo,3,"puxe.ficou.esvaziamento", "Unidade Hospitalar de Santo Tirso","Santo Tirso");
-grafo = adicionarVertice(grafo,4,"popa.lucros.araras", "Estadio Abel Alves Figueiredo","Santo Tirso");
-grafo = adicionarVertice(grafo,5,"babados.puro.cruzou","Parque Dona Maria II","Santo Tirso");
-grafo = adicionarVertice(grafo,6,"volta.percebo.desenhei","Mosteiro de Sao Bento","Santo Tirso");
-grafo = adicionarVertice(grafo,7,"vermos.censo.quem","Escola Secundária de Tomaz Pelayo","Santo Tirso");
-grafo = adicionarVertice(grafo,8,"órgão.unha.suprir","Pavilhao Desportivo Municipal","Santo Tirso");
-grafo = adicionarVertice(grafo,9,"árvore.queres.frota","Biblioteca Municipal de Santo Tirso","Santo Tirso");
-grafo = adicionarVertice(grafo,10,"chamem.senão.pavoa","Parque do Matadouro","Santo Tirso");
+grafo = adicionarVertice(grafo,1,"alvo.queimar.amenos", "Parque de Geao");
+grafo = adicionarVertice(grafo,2,"ligar.chuvosos.moleza", "Skate Park Santo Tirso");
+grafo = adicionarVertice(grafo,3,"puxe.ficou.esvaziamento", "Unidade Hospitalar de Santo Tirso");
+grafo = adicionarVertice(grafo,4,"popa.lucros.araras", "Estadio Abel Alves Figueiredo");
+grafo = adicionarVertice(grafo,5,"babados.puro.cruzou","Parque Dona Maria II");
+grafo = adicionarVertice(grafo,6,"volta.percebo.desenhei","Mosteiro de Sao Bento");
+grafo = adicionarVertice(grafo,7,"vermos.censo.quem","Escola Secundária de Tomaz Pelayo");
+grafo = adicionarVertice(grafo,8,"órgão.unha.suprir","Pavilhao Desportivo Municipal");
+grafo = adicionarVertice(grafo,9,"árvore.queres.frota","Biblioteca Municipal de Santo Tirso");
+grafo = adicionarVertice(grafo,10,"chamem.senão.pavoa","Parque do Matadouro");
 adicionarAresta(grafo, 9,8,150);
 adicionarAresta(grafo, 8,7,820);
 adicionarAresta(grafo, 9,1,445);
@@ -91,16 +91,12 @@ listarAdjacentes(grafo, 3);
 					gets(morada);
 					printf("Cidade\n");
 					gets(cidadeCliente);
-					if(existelocalizacao(grafo, cidadeCliente)){
-						clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial,cidadeCliente, nickname, password);
-						GuardarClientes_Binario(clientes);
-						GuardarClientes(clientes);
-						clear();
-						printf("Registo efetuado com sucesso!\n");
-					}else{
-						clear();
-						printf("%s nao se encontra no nosso sistema\n", cidadeCliente);
-					}
+					clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial,cidadeCliente, nickname, password);
+					GuardarClientes_Binario(clientes);
+					GuardarClientes(clientes);
+					clear();
+					printf("Registo efetuado com sucesso!\n");
+					
 
 				}else{
 					printf("Este nickname, ja se encontra registado\n");
@@ -160,17 +156,13 @@ listarAdjacentes(grafo, 3);
 										gets(morada);
 										printf("Cidade\n");
 										gets(cidadeCliente);;
-										if(existelocalizacao(grafo, cidadeCliente)){
-											clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial,cidadeCliente, nickname, password);
-											GuardarClientes_Binario(clientes);
-											GuardarClientes(clientes);
-											clear();
-											printf("Registo efetuado com sucesso!\n");
+										clientes = inserir_cliente(clientes, NIF, nome, idade, morada, saldo_inicial,cidadeCliente, nickname, password);
+										GuardarClientes_Binario(clientes);
+										GuardarClientes(clientes);
+										clear();
+										printf("Registo efetuado com sucesso!\n");
 										
-										}else{
-											clear();
-											printf("%s nao se encontra no nosso sistema\n", cidadeCliente);
-										}
+									
 
 										}else{
 											printf("Este nickname, ja se encontra registado\n");
@@ -210,29 +202,25 @@ listarAdjacentes(grafo, 3);
 							}
 							else if (opcao2 == 4) {
 								clear();
-								printf("Codigo:\n");
-								scanf("%d", &codigo);
+								int codigo = gerarCode(veiculos);
 								if (!verificar_registo_veiculos(veiculos, codigo)) {
 									printf("Bateria:\n");
 									scanf("%d", &bateria);
 									scanf("%*c");
 									printf("Localizacao:\n");
 									gets(localizacao);
-									if(existelocalizacao(grafo, localizacao)){
-										printf("Custo:\n");
-										scanf("%d", &custo);
-										scanf("%*c");
-										printf("Tipo:\n");
-										gets(tipo);
-										veiculos = inserir_veiculos(veiculos, codigo, bateria, localizacao, custo, tipo, reserva, NIF_reserva, 0);
-										GuardarVeiculos_Binario(veiculos);
-										GuardarVeiculos(veiculos);
-										clear();
-										printf("Registo efetuado com sucesso!\n");
+									printf("Custo:\n");
+									scanf("%d", &custo);
+									scanf("%*c");
+									printf("Tipo:\n");
+									gets(tipo);
+									veiculos = inserir_veiculos(veiculos, codigo, bateria, localizacao, custo, tipo, reserva, NIF_reserva, 0);
+									GuardarVeiculos_Binario(veiculos);
+									GuardarVeiculos(veiculos);
+									clear();
+									printf("Registo efetuado com sucesso!\n");
 
-									}else{
-										printf("A localizacao inserida nao se encontra no sistema\n");
-									}
+									
 										
 								}
 								else {
@@ -341,7 +329,7 @@ listarAdjacentes(grafo, 3);
 
 							}
 							else if (opcao2 == 8) {
-								
+								imprimirHistorico(historico);
 							}
 						} while (opcao2 != 0);
 					}
@@ -381,45 +369,42 @@ listarAdjacentes(grafo, 3);
 									scanf("%*c");
 									printf("Em que zona deseja alugar veiculos?\n");
 									gets(localizacao);
-									if(existelocalizacao(grafo, localizacao)){
-										LocalizarVeiculos(veiculos,localizacao);
-										printf("Qual o codigo do veiculo a reservar\n");
-										scanf("%d", &code);
-										char* teste1 = verGeocode(clientes, NIF);
-										int teste = corresponderLocalizacaoaID(grafo, localizacao);
-										int teste2 = corresponderLocalizacaoaID(grafo, teste1);
-										printf("Caminhos ate ao destino\n");
-										listarCaminhos(grafo, teste2, teste);
-										printf("Deseja proseguir com a reserva?(1-Sim/ >1-Nao)\n");
-										scanf("%d", &escolha);
-										if(escolha == 1){
-											if (Reservar_Veiculo(veiculos, NIF, code)) {
-											clear();
-											GuardarClientes(clientes);
-											GuardarClientes_Binario(clientes);
-											printf("Reserva bem sucedida\n");
-											historico = inserirHis(historico, NIF, code, 0,*localtime(&t), *localtime(&t));
-											GuardarHistorico(historico);
-											GuardarVeiculos_Binario(veiculos);
-											GuardarVeiculos(veiculos);
-											printf("*--------------------------------------------*\n");
-											printf("|              DADOS ATUALIZADOS             |\n");
-											printf("|                 FACA LOGIN!                |\n");
-											printf("*--------------------------------------------*\n");
-											break;
-										}
-										else {
-											clear();
-											printf("Veiculo indisponivel\n");
-										}
+									LocalizarVeiculos(veiculos,localizacao);
+									printf("Qual o codigo do veiculo a reservar\n");
+									scanf("%d", &code);
+									char* teste1 = verGeocode(clientes, NIF);
+									int teste = corresponderLocalizacaoaID(grafo, localizacao);
+									int teste2 = corresponderLocalizacaoaID(grafo, teste1);
+									printf("Caminhos ate ao destino\n");
+									listarCaminhos(grafo, teste2, teste);
+									printf("Deseja proseguir com a reserva?(1-Sim/ >1-Nao)\n");
+									scanf("%d", &escolha);
+									if(escolha == 1){
+										if (Reservar_Veiculo(veiculos, NIF, code)) {
+										clear();
+										GuardarClientes(clientes);
+										GuardarClientes_Binario(clientes);
+										printf("Reserva bem sucedida\n");
+										historico = inserirHis(historico, NIF, code, 0,*localtime(&t), *localtime(&t));
+										GuardarHistorico(historico);
+										GuardarVeiculos_Binario(veiculos);
+										GuardarVeiculos(veiculos);
+										printf("*--------------------------------------------*\n");
+										printf("|              DADOS ATUALIZADOS             |\n");
+										printf("|                 FACA LOGIN!                |\n");
+										printf("*--------------------------------------------*\n");
+										break;
+									}
+									else {
+										clear();
+										printf("Veiculo indisponivel\n");
+									}
 
 										}else{
 											printf("Voltando para o menu...\n");
 										}
 											
-									}else{
-										printf("%s, nao esta inserido/a no nosso sistema\n", localizacao);
-									}
+									
 									
 
 								}else{

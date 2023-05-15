@@ -246,3 +246,15 @@ char* verLocalizacao(Veiculos* inicio, int code){
 	return 0;
 }
 
+int gerarCode(Veiculos* inicio){
+
+	Veiculos* aux = inicio;
+	int count = 1;
+
+	for(aux; aux != NULL; aux = aux->proximo_veiculo){
+		count++;
+		
+	}
+	return count;
+}
+

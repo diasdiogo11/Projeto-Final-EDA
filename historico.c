@@ -70,3 +70,15 @@ Historico* LerHistorico() {
 	return(aux);
 }
 
+void imprimirHistorico(Historico* inicio){
+
+	Historico* aux = inicio;
+
+	for(aux; aux != NULL; aux = aux->proximoHis){
+		printf("NIF CLIENTE -> %d\nCODIGO VEICULO -> %d\nCUSTO FINAL -> %d\nDATA INICIAL -> %d/%d/%d\nDATA FINAL -> %d/%d/%d\n",aux->idCliente, aux->idMeio, aux->custoFinal,
+                aux->inicio.tm_year+1900, aux->inicio.tm_mon+1, aux->inicio.tm_mday,
+                aux->fim.tm_year+1900, aux->fim.tm_mon+1, aux->fim.tm_mday);
+		printf("\n");
+	}
+}
+
