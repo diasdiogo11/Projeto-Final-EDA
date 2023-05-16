@@ -115,11 +115,11 @@ char* corresponderIDaLocalizacao(Vertice* inicio, int id){
 }
 
 
-void guardarGrafo(Vertice* v){
+void guardarVertices(Vertice* v){
     FILE* fp;
     Vertice *head = v;
     Adjacente *aux;
-    fp = fopen("grafos.txt","w");
+    fp = fopen("Vertices.txt","w");
 
     if (fp!=NULL){      
 
@@ -127,19 +127,28 @@ void guardarGrafo(Vertice* v){
             fprintf(fp,"%d;%s;%s;\n", v->vertice, v->geocode,v->local);
             v = v->proximoVert;
         }
-        fprintf(fp,"\n");
-        for(v = head; v != NULL ;v = v->proximoVert){
-            fprintf(fp,"%d-",v->vertice);
+        fclose(fp);
+
+}
+}
+
+
+void guardarArestas(Vertice* v){
+    FILE* fp;
+    Vertice* head = v;
+    Adjacente* aux;
+    fp = fopen("Arestas.txt", "w");
+
+
+    for(v = head; v != NULL ;v = v->proximoVert){
+            fprintf(fp,"%d;",v->vertice);
             for(aux = v->adj; aux != NULL; aux = aux->proximoAdja){
-                fprintf(fp,"%d(%d);",aux->vertice, aux->peso);
+                fprintf(fp,"%d;%.2f;",aux->vertice, aux->peso);
             }
             fprintf(fp,"\n");
         }
         fclose(fp);
-
-        printf("Grafo guardado com sucesso\n");
-    }else
-        printf("Erro ao abrir ficheiro Grafo\n");
+    
 }
 
 int numVertices(Vertice  *v){

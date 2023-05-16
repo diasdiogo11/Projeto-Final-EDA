@@ -52,18 +52,16 @@ grafo = adicionarVertice(grafo,7,"vermos.censo.quem","Escola Secundária de Toma
 grafo = adicionarVertice(grafo,8,"órgão.unha.suprir","Pavilhao Desportivo Municipal");
 grafo = adicionarVertice(grafo,9,"árvore.queres.frota","Biblioteca Municipal de Santo Tirso");
 grafo = adicionarVertice(grafo,10,"chamem.senão.pavoa","Parque do Matadouro");
+guardarVertices(grafo);
 adicionarAresta(grafo, 9,8,150);
 adicionarAresta(grafo, 8,7,820);
 adicionarAresta(grafo, 9,1,445);
 adicionarAresta(grafo, 7,1,100);
-guardarGrafo(grafo);
-
-listarCaminhos(grafo, 9, 1);
-listarCaminhosLimite(grafo,9,1,500);
+adicionarAresta(grafo, 9,2,100);
+guardarArestas(grafo);
 
 
 
-listarAdjacentes(grafo, 3);
 
 	do {
 		menu_principal();

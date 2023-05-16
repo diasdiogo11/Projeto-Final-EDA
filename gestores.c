@@ -254,6 +254,14 @@ void cabecalho_cliente() {
 	printf("*------------------------------------*\n");
 }
 
+void menuReservas(){
+	printf("*---------------- DEFINICOES ----------------*\n");
+	printf("| Pesquisar Veiculos                         |\n");
+	printf("|                                            |\n");
+	printf("*--------------------------------------------*\n");
+
+}
+
 
 //! @brief Esta função percorre a lista ligada gestores e verifica se o email do gestor já se encontra lá
 //! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes

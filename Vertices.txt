@@ -8,14 +8,3 @@
 3;puxe.ficou.esvaziamento;Unidade Hospitalar de Santo Tirso;
 2;ligar.chuvosos.moleza;Skate Park Santo Tirso;
 1;alvo.queimar.amenos;Parque de Geao;
-
-10-
-9-8(150);1(445);
-8-7(820);
-7-1(100);
-6-
-5-
-4-
-3-
-2-
-1-
