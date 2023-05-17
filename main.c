@@ -53,12 +53,37 @@ grafo = adicionarVertice(grafo,8,"órgão.unha.suprir","Pavilhao Desportivo Muni
 grafo = adicionarVertice(grafo,9,"árvore.queres.frota","Biblioteca Municipal de Santo Tirso");
 grafo = adicionarVertice(grafo,10,"chamem.senão.pavoa","Parque do Matadouro");
 guardarVertices(grafo);
-adicionarAresta(grafo, 9,8,150);
-adicionarAresta(grafo, 8,7,820);
-adicionarAresta(grafo, 9,1,445);
-adicionarAresta(grafo, 7,1,100);
-adicionarAresta(grafo, 9,2,100);
+adicionarAresta(grafo, 1,2,45);
+adicionarAresta(grafo, 1,3,1000);
+adicionarAresta(grafo, 1,8,1900);
+adicionarAresta(grafo, 2,8,1900);
+adicionarAresta(grafo, 2,5,2000);
+adicionarAresta(grafo, 2,4,950);
+adicionarAresta(grafo, 2,10,2500);
+adicionarAresta(grafo, 3,1,1000);
+adicionarAresta(grafo, 3,4,93);
+adicionarAresta(grafo, 3,5,1000);
+adicionarAresta(grafo, 3,7,650);
+adicionarAresta(grafo, 4,2,950);
+adicionarAresta(grafo, 4,3,93);
+adicionarAresta(grafo, 5,2,2000);
+adicionarAresta(grafo, 5,3,1000);
+adicionarAresta(grafo, 5,6,1300);
 guardarArestas(grafo);
+
+
+
+int i = 1;
+for(i;i < 10;i++){
+	listarCaminhosLimite(veiculos,grafo, 1,i,15000);
+
+}
+
+
+
+
+
+
 
 
 

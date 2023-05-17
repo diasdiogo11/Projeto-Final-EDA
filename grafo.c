@@ -202,9 +202,10 @@ void listarCaminhos(Vertice *v, int origem, int destino){
 }
 
 
-void listarCaminhosAuxLimite(Vertice *v, int origem, int destino, int sequencia[], int posicao, int pesoTotal, int limite) {
+void listarCaminhosAuxLimite(Veiculos* vi,Vertice *v, int origem, int destino, int sequencia[], int posicao, int pesoTotal, int limite) {
     int i;
     Vertice *head = v;
+    Veiculos* teste1 = vi;
     Adjacente *aux;
     sequencia[posicao] = origem;
     if (origem == destino) {
@@ -212,7 +213,11 @@ void listarCaminhosAuxLimite(Vertice *v, int origem, int destino, int sequencia[
             for (i = 0; i < posicao; i++) {
                 printf("%d->", sequencia[i]);
             }
+            char* teste1 = corresponderIDaLocalizacao(v, destino);
             printf("%d (%d)\n", destino, pesoTotal);
+            teste(vi, teste1);
+        }else{
+            printf("ERROOOOO\n");
         }
     } else {
         while (v->vertice != origem && v != NULL) {
@@ -221,17 +226,25 @@ void listarCaminhosAuxLimite(Vertice *v, int origem, int destino, int sequencia[
         aux = v->adj;
         while (aux != NULL) {
             if (!visitado(sequencia, posicao, aux->vertice)) {
-                listarCaminhosAuxLimite(head, aux->vertice, destino, sequencia, posicao + 1, pesoTotal + aux->peso, limite);
+                listarCaminhosAuxLimite(teste1,head, aux->vertice, destino, sequencia, posicao + 1, pesoTotal + aux->peso, limite);
             }
             aux = aux->proximoAdja;
         }
     }
 }
 
-void listarCaminhosLimite(Vertice *v, int origem, int destino, int limite) {
+void listarCaminhosLimite(Veiculos* vi,Vertice *v, int origem, int destino, int limite) {
     int sequencia[numVertices(v)];
-    listarCaminhosAuxLimite(v, origem, destino, sequencia, 0, 0, limite);
+    listarCaminhosAuxLimite(vi,v, origem, destino, sequencia, 0, 0, limite);
 }
 
 
+void teste(Veiculos* i, char loca[]){
 
+    for(i; i != NULL; i = i->proximo_veiculo){
+        if(strcmp(i->localizacao,loca)== 0){
+            printf("BATERIA %d\nLOCALIZACAO %s\nCUSTO P/MIN %d\nTIPO %s\n",i->bateria, i->localizacao, i->custo, i->tipo);
+            printf("----------------------------------------------------\n");
+        }
+    }
+}
