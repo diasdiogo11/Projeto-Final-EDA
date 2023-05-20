@@ -97,8 +97,8 @@ int VerificarNumReservas(Veiculos* inicio, int NIF){
 	}
 
 
-	if(count <= 2){
-		return 1;
+	if(count <= 1){
+		return 2;
 	}else{
 		return 0;
 	}

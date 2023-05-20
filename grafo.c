@@ -5,7 +5,9 @@
 #include <conio.h>
 #include <time.h>
 #include "structs.h"
+#include <limits.h>
 
+#define INFINITO INT_MAX
 
 Vertice* adicionarVertice(Vertice* listaVertices, int novoVertice, char geocode[], char local[]) {
     Vertice* novo = (Vertice*) malloc(sizeof(Vertice));
@@ -115,6 +117,7 @@ char* corresponderIDaLocalizacao(Vertice* inicio, int id){
 }
 
 
+
 void guardarVertices(Vertice* v){
     FILE* fp;
     Vertice *head = v;
@@ -152,7 +155,7 @@ void guardarArestas(Vertice* v){
 }
 
 int numVertices(Vertice  *v){
-    int i = 0;
+    int i = 1;
 
     if (v == NULL)
         return i;
@@ -167,7 +170,11 @@ int numVertices(Vertice  *v){
 
 int visitado(int sequencia[],int pos, int id){
   int i;
-  for(i=0;i<pos;i++) if (sequencia[i]==id) return(1);
+  for(i=0;i<pos;i++) {
+    if (sequencia[i]==id){
+        return(1);
+    } 
+  }
   return(0);
 }
 
@@ -202,22 +209,22 @@ void listarCaminhos(Vertice *v, int origem, int destino){
 }
 
 
-void listarCaminhosAuxLimite(Veiculos* vi,Vertice *v, int origem, int destino, int sequencia[], int posicao, int pesoTotal, int limite) {
+void listarCaminhosAuxLimite(Veiculos* vi, Vertice* v, int origem, int destino, int sequencia[], int posicao, int pesoTotal, int limite, char tipo[]) {
     int i;
-    Vertice *head = v;
+    Vertice* head = v;
     Veiculos* teste1 = vi;
-    Adjacente *aux;
+    Adjacente* aux;
     sequencia[posicao] = origem;
+
     if (origem == destino) {
         if (pesoTotal <= limite) {
             for (i = 0; i < posicao; i++) {
-                printf("%d->", sequencia[i]);
+                char* localizacao = corresponderIDaLocalizacao(head, sequencia[i]);
+                printf("%s->", localizacao);
             }
-            char* teste1 = corresponderIDaLocalizacao(v, destino);
-            printf("%d (%d)\n", destino, pesoTotal);
-            teste(vi, teste1);
-        }else{
-            printf("ERROOOOO\n");
+            char* destinoNome = corresponderIDaLocalizacao(head, destino);
+            printf("%s %d METROS\n", destinoNome, pesoTotal);
+            teste(vi, destinoNome, tipo);
         }
     } else {
         while (v->vertice != origem && v != NULL) {
@@ -226,25 +233,112 @@ void listarCaminhosAuxLimite(Veiculos* vi,Vertice *v, int origem, int destino, i
         aux = v->adj;
         while (aux != NULL) {
             if (!visitado(sequencia, posicao, aux->vertice)) {
-                listarCaminhosAuxLimite(teste1,head, aux->vertice, destino, sequencia, posicao + 1, pesoTotal + aux->peso, limite);
+                listarCaminhosAuxLimite(teste1, head, aux->vertice, destino, sequencia, posicao + 1, pesoTotal + aux->peso, limite, tipo);
             }
             aux = aux->proximoAdja;
         }
     }
 }
 
-void listarCaminhosLimite(Veiculos* vi,Vertice *v, int origem, int destino, int limite) {
+void listarCaminhosLimite(Veiculos* vi, Vertice* v, int origem, int destino, int limite, char tipo[]) {
     int sequencia[numVertices(v)];
-    listarCaminhosAuxLimite(vi,v, origem, destino, sequencia, 0, 0, limite);
+    listarCaminhosAuxLimite(vi, v, origem, destino, sequencia, 0, 0, limite, tipo);
 }
 
+void teste(Veiculos* i, char loca[], char tipo[]) {
+    int encontrado = 0;
 
-void teste(Veiculos* i, char loca[]){
-
-    for(i; i != NULL; i = i->proximo_veiculo){
-        if(strcmp(i->localizacao,loca)== 0){
-            printf("BATERIA %d\nLOCALIZACAO %s\nCUSTO P/MIN %d\nTIPO %s\n",i->bateria, i->localizacao, i->custo, i->tipo);
-            printf("----------------------------------------------------\n");
+    for (i; i != NULL; i = i->proximo_veiculo) {
+        if (strcmp(i->localizacao, loca) == 0 && strcmp(i->tipo, tipo) == 0) {
+            printf("CODIGO %d\nBATERIA %d\nLOCALIZACAO %s\nCUSTO P/MIN %d\nTIPO %s\n", i->codigo,i->bateria, i->localizacao, i->custo, i->tipo);
+            printf("-------------------------------------------------------------------------\n");
+            encontrado = 1;
         }
     }
+
+    if (!encontrado) {
+        printf("Nao existe nenhum/a %s em %s\n", tipo, loca);
+        printf("-------------------------------------------------------------------------\n");
+    }
 }
+
+int obterMenorDistancia(int distancias[], int visitado[], int numVertices) {
+    int min = INFINITO;
+    int indiceMin = -1;
+
+    for (int i = 0; i < numVertices; i++) {
+        if (visitado[i] == 0 && distancias[i] <= min) {
+            min = distancias[i];
+            indiceMin = i;
+        }
+    }
+
+    return indiceMin;
+}
+
+void imprimirCaminho(int caminho[], int verticeAtual) {
+    if (caminho[verticeAtual] == -1) {
+        printf("%d ", verticeAtual);
+        return;
+    }
+
+    imprimirCaminho(caminho, caminho[verticeAtual]);
+    printf("%d ", verticeAtual);
+}
+
+void imprimirCaminhoMaisCurto(int caminho[], int distancias[], int inicio, int fim) {
+    printf("Caminho mais curto entre %d e %d: ", inicio, fim);
+    imprimirCaminho(caminho, fim);
+    printf("\nDistancia total: %d\n", distancias[fim]);
+}
+
+void encontrarCaminhoMaisCurto(Vertice* listaVertices, int numVertices, int inicio, int fim) {
+    int distancias[numVertices];
+    int visitado[numVertices];
+    int caminho[numVertices];
+
+    if ((existeVertice(listaVertices, inicio) != 1) || (existeVertice(listaVertices, fim) != 1)){
+        printf("Vertice nao encontrado\n");
+        return 0;
+
+    }
+
+
+    for (int i = 0; i < numVertices; i++) {
+        distancias[i] = INFINITO;
+        visitado[i] = 0;
+        caminho[i] = -1;
+    }
+
+    distancias[inicio] = 0;
+
+    for (int i = 0; i < numVertices - 1; i++) {
+        int verticeAtual = obterMenorDistancia(distancias, visitado, numVertices);
+        visitado[verticeAtual] = 1;
+
+        Vertice* v = listaVertices;
+        while (v != NULL) {
+            if (v->vertice == verticeAtual) {
+                Adjacente* adj = v->adj;
+                while (adj != NULL) {
+                    int verticeAdjacente = adj->vertice;
+                    int pesoAresta = adj->peso;
+
+                    if (!visitado[verticeAdjacente] && distancias[verticeAtual] != INFINITO &&
+                        distancias[verticeAtual] + pesoAresta < distancias[verticeAdjacente]) {
+                        distancias[verticeAdjacente] = distancias[verticeAtual] + pesoAresta;
+                        caminho[verticeAdjacente] = verticeAtual;
+                    }
+
+                    adj = adj->proximoAdja;
+                }
+                break;
+            }
+            v = v->proximoVert;
+        }
+    }
+
+    imprimirCaminhoMaisCurto(caminho, distancias, inicio, fim);
+}
+
+

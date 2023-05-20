@@ -226,13 +226,11 @@ Veiculos* LocalizarVeiculos(Veiculos* inicio, char localizacao_pretendida[]) {
 			if ((strcmp(inicio->localizacao, localizacao_pretendida) == 0) && inicio->reserva == 0 && inicio->NIF_reserva == 0) {
 				printf("%d %d %s %d %s\n", inicio->codigo, inicio->bateria, inicio->localizacao, inicio->custo, inicio->tipo);
 				
-			}else{
-				printf("Nao existem veiculos disponiveis nesta localizacao\n");
-			}
 			
 		}
 	
 
+}
 }
 
 char* verLocalizacao(Veiculos* inicio, int code){

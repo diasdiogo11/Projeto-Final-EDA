@@ -69,24 +69,10 @@ adicionarAresta(grafo, 4,3,93);
 adicionarAresta(grafo, 5,2,2000);
 adicionarAresta(grafo, 5,3,1000);
 adicionarAresta(grafo, 5,6,1300);
-guardarArestas(grafo);
 
+int teste1234 = numVertices(grafo);
 
-
-int i = 1;
-for(i;i < 10;i++){
-	listarCaminhosLimite(veiculos,grafo, 1,i,15000);
-
-}
-
-
-
-
-
-
-
-
-
+encontrarCaminhoMaisCurto(grafo, teste1234, 1,6);
 
 	do {
 		menu_principal();
@@ -380,8 +366,8 @@ for(i;i < 10;i++){
 				if (login_clientes(clientes, usuario, password,NIF)) {
 					clear();
 					time_t t = time(NULL);
-					int escolha;
-					char localizacao[50];
+					int escolha, dist;
+					char localizacao[50], tipo[50];
 						printf("Bem vindo %s\n", usuario);
 						do {
 							menu_clientes();
@@ -389,17 +375,33 @@ for(i;i < 10;i++){
 							if (opcao3 == 1) {
 								clear();
 								if(VerificarNumReservas(veiculos, NIF)){
-									scanf("%*c");
-									printf("Em que zona deseja alugar veiculos?\n");
-									gets(localizacao);
-									LocalizarVeiculos(veiculos,localizacao);
+									menuReservas();
+									printf("OPCAO:\n");
+									scanf("%d", &escolha);
+									if(escolha == 1){
+										scanf("%*c");
+										printf("Onde deseja reservar Veiculos?\n");
+										gets(localizacao);
+										LocalizarVeiculos(veiculos,localizacao);
+
+									}else if(escolha == 2){
+										printf("Digite a distancia em que deseja encontrar um veiculo\n");
+										scanf("%d", &dist);
+										scanf("%*c");
+										printf("Que tipo de veiculo pretende reservar?\n");
+										gets(tipo);
+										clear();
+										int i = 1;
+										for(i;i < 10;i++){
+											listarCaminhosLimite(veiculos,grafo, 1,i,dist,tipo);
+
+										}
+									}
 									printf("Qual o codigo do veiculo a reservar\n");
 									scanf("%d", &code);
 									char* teste1 = verGeocode(clientes, NIF);
 									int teste = corresponderLocalizacaoaID(grafo, localizacao);
 									int teste2 = corresponderLocalizacaoaID(grafo, teste1);
-									printf("Caminhos ate ao destino\n");
-									listarCaminhos(grafo, teste2, teste);
 									printf("Deseja proseguir com a reserva?(1-Sim/ >1-Nao)\n");
 									scanf("%d", &escolha);
 									if(escolha == 1){
@@ -440,6 +442,7 @@ for(i;i < 10;i++){
 							}
 							else if (opcao3 == 2) {
 								clear();
+								imprimir_reservas(veiculos, NIF);
 								printf("Qual o codigo do veiculo\n");
    							 	scanf("%d", &code);
 								char* geocode = verLocalizacao(veiculos, code);

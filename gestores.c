@@ -256,8 +256,8 @@ void cabecalho_cliente() {
 
 void menuReservas(){
 	printf("*---------------- DEFINICOES ----------------*\n");
-	printf("| Pesquisar Veiculos                         |\n");
-	printf("|                                            |\n");
+	printf("| 1.Pesquisar Veiculos Por Localizacao        |\n");
+	printf("| 2.Pesquisar Veiculos Num Raio               |\n");
 	printf("*--------------------------------------------*\n");
 
 }
