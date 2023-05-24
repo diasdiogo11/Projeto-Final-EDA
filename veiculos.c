@@ -90,7 +90,8 @@ void ordenacao_veiculos(Veiculos* inicio) {
 
 	Veiculos* pi = inicio;
 	Veiculos* pj = NULL;
-	int aux, aux1, aux2;
+	int aux1, aux2;
+	int aux;
 	char loca[50], tipo[50];
 
 
@@ -141,7 +142,8 @@ void GuardarVeiculos(Veiculos* inicio)
 //! @return 
 Veiculos* LerVeiculos() { 
 	FILE* fp;
-	int code, bat, cust, reserva, NIF_reserva;
+	int code,cust, reserva, NIF_reserva;
+	int bat;
 	char tipo[50], loca[50];
 	time_t horario_reserva;
 	Veiculos* aux = NULL;
@@ -266,6 +268,9 @@ int retiraBateria(Veiculos* inicio, double tempoReserva, int code){
 	for(aux; aux != NULL; aux = aux->proximo_veiculo){
 		if(aux->codigo == code){
 			aux->bateria = aux->bateria - bateriaaRemover;
+			return aux->bateria;
 		}
 	}
 }
+
+

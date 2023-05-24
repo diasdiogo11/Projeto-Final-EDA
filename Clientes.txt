@@ -1,2 +1,2 @@
-2;kikanovo;19;Rua da Serra;Parque de Geao;kikanovo;kika1234;-3
-1;Diogo Dias;19;Rua das Mos;Parque Dona Maria II;diogo;diogo;-10883
+1;Diogo Dias;19;Rua das Mos;Mosteiro de Sao Bento;diogo;diogo;-11056
+2;kikanovo;19;Rua da Serra;Parque de Geao;kikanovo;kika1234;-517

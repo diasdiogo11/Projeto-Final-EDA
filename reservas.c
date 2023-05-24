@@ -72,10 +72,10 @@ int Cancelar_Reserva(Veiculos* inicio, Historico* inicio1, Clientes* inicio2, in
             double tempo_decorrido = difftime(horario_atual, current->horario_reserva);
 			double tempo_decorrido_minutos = tempo_decorrido / 60;
 			double CustoFinal = tempo_decorrido_minutos * current->custo;
-			inicio1 = inserirHis(inicio1, NIF_reserva, code,CustoFinal,tempo_decorrido_minutos);
+			int bateriaFinal = retiraBateria(inicio, tempo_decorrido_minutos, code);
+			inicio1 = inserirHis(inicio1, NIF_reserva, code,CustoFinal,tempo_decorrido_minutos,bateriaFinal);
 			GuardarHistorico(inicio1);
             printf("Tempo decorrido: %.2f segundos ou %.2f minutos\n", tempo_decorrido, tempo_decorrido_minutos);
-			retiraBateria(inicio, tempo_decorrido_minutos, code);
             if(PrecoFinal(inicio2, current->NIF_reserva, CustoFinal)){
                 printf("Deu certo cara\n");
             }
