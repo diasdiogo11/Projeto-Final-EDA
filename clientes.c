@@ -243,7 +243,7 @@ int verificar_registo_clientes(Clientes* inicio, int NIF) {
 void AlterarDados(Clientes* inicio, int NIF_procurado) {
 
 	int opcao;
-	char novo_nome[50], nova_morada[50];
+	char novoNickname[50], nova_morada[50], novaPassword[50];
 	Clientes* current = inicio;
 
 	menu_definicoes();
@@ -253,11 +253,11 @@ void AlterarDados(Clientes* inicio, int NIF_procurado) {
 
 	if (opcao == 1) {
 		scanf("%*c");
-		printf("Digite o novo nome de usuario\n");
-		gets(novo_nome);
+		printf("Digite o novo nickname\n");
+		gets(novoNickname);
 		for (current; current != NULL; current = current->proximo_cliente) {
 			if (NIF_procurado == current->NIF) {
-				strcpy(current->nome, novo_nome);
+				strcpy(current->nickname, novoNickname);
 				clear();
 				printf("Dados atualizados com sucesso\n");
 			}
@@ -265,6 +265,17 @@ void AlterarDados(Clientes* inicio, int NIF_procurado) {
 		}
 	}
 	else if (opcao == 2) {
+		scanf("%*c");
+		printf("Digite a sua nova password\n");
+		gets(novaPassword);
+		for (current; current != NULL; current = current->proximo_cliente) {
+			if (NIF_procurado == current->NIF) {
+				strcpy(current->password, novaPassword);
+				clear();
+			}
+			
+		}
+	}else if(opcao == 3){
 		scanf("%*c");
 		printf("Digite a sua nova morada\n");
 		gets(nova_morada);
@@ -275,6 +286,7 @@ void AlterarDados(Clientes* inicio, int NIF_procurado) {
 			}
 			
 		}
+
 	}
 	
 	

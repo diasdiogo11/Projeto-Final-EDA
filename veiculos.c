@@ -256,3 +256,16 @@ int gerarCode(Veiculos* inicio){
 	return count;
 }
 
+
+int retiraBateria(Veiculos* inicio, double tempoReserva, int code){
+
+	Veiculos* aux = inicio;
+
+	double bateriaaRemover = tempoReserva * 0.50;
+
+	for(aux; aux != NULL; aux = aux->proximo_veiculo){
+		if(aux->codigo == code){
+			aux->bateria = aux->bateria - bateriaaRemover;
+		}
+	}
+}

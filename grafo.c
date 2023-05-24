@@ -257,7 +257,7 @@ void teste(Veiculos* i, char loca[], char tipo[]) {
     }
 
     if (!encontrado) {
-        printf("Nao existe nenhum/a %s em %s\n", tipo, loca);
+        printf("Nao existe nenhum/a %s em %s\n",tipo, loca);
         printf("-------------------------------------------------------------------------\n");
     }
 }
@@ -292,18 +292,15 @@ void imprimirCaminhoMaisCurto(int caminho[], int distancias[], int inicio, int f
     printf("\nDistancia total: %d\n", distancias[fim]);
 }
 
-void encontrarCaminhoMaisCurto(Vertice* listaVertices, int numVertices, int inicio, int fim) {
+void encontrarCaminhoMaisCurto(Vertice* listaVertices, Veiculos* teste15, int numVertices, int inicio, int fim, int limite, char tipo[]) {
     int distancias[numVertices];
     int visitado[numVertices];
     int caminho[numVertices];
 
     if ((existeVertice(listaVertices, inicio) != 1) || (existeVertice(listaVertices, fim) != 1)){
         printf("Vertice nao encontrado\n");
-        return 0;
 
     }
-
-
     for (int i = 0; i < numVertices; i++) {
         distancias[i] = INFINITO;
         visitado[i] = 0;
@@ -338,7 +335,16 @@ void encontrarCaminhoMaisCurto(Vertice* listaVertices, int numVertices, int inic
         }
     }
 
-    imprimirCaminhoMaisCurto(caminho, distancias, inicio, fim);
+if (distancias[fim] <= limite) {
+        imprimirCaminhoMaisCurto(caminho, distancias, inicio, fim);
+        char* eu = corresponderIDaLocalizacao(listaVertices, fim);
+        teste(teste15, eu, tipo);
+
+}
+
+
+
+
 }
 
 

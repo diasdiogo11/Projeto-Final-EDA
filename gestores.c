@@ -199,7 +199,8 @@ void menu_gestores() {
 	printf("| 4.INSERIR VEICULO                             |\n");
 	printf("| 5.REMOVER VEICULO                             |\n");
 	printf("| 6.LISTAR VEICULOS                             |\n");
-	printf("| 7.GESTOR MASTER (ACESSO RESTRITO)             |\n");
+	printf("| 7.HISTORICO RESERVAS                          |\n");
+	printf("| 8.GESTOR MASTER (ACESSO RESTRITO)             |\n");
 	printf("| 0.EXIT                                        |\n");
 	printf("*-----------------------------------------------*\n");
 	
@@ -235,8 +236,9 @@ void menu_definicoes() {
 
 	
 	printf("*---------------- DEFINICOES ----------------*\n");
-	printf("| 1.ALTERAR NOME DE USUARIO                  |\n");
-	printf("| 2.ALTERAR MORADA                           |\n");
+	printf("| 1.ALTERAR NICKNAME                         |\n");
+	printf("| 2.ALTERAR PASSWORD                         |\n");
+	printf("| 3.ALTERAR MORADA                           |\n");
 	printf("| 0.VOLTAR MENU CLIENTES                     |\n");
 	printf("*--------------------------------------------*\n");
 

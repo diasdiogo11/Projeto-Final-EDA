@@ -6,7 +6,7 @@
 #include <time.h>
 #include "structs.h"
 
-Historico* inserirHis(Historico* inicio, int idc, int idm, double custof,struct tm start, struct tm end) { 
+Historico* inserirHis(Historico* inicio, int idc, int idm, double custof, double tempoReserva, double bateria) { 
 	
 
 		Historico* Novo = malloc(sizeof(struct historico));
@@ -14,8 +14,8 @@ Historico* inserirHis(Historico* inicio, int idc, int idm, double custof,struct 
 			Novo->idCliente = idc;
 			Novo->idMeio = idm;
 			Novo->custoFinal = custof;
-            Novo->inicio = start;
-            Novo->fim = end;
+			Novo->tempoReserva = tempoReserva;
+			Novo->bateria = bateria;
 			Novo->proximoHis = inicio;
 			return Novo;
 		}
@@ -34,9 +34,7 @@ void GuardarHistorico(Historico* inicio)
 	{
 		Historico* hist = inicio;
 		for (hist; hist != NULL; hist = hist->proximoHis) {
-			fprintf(fp,"%d %d %.2f %02d/%02d/%02d %02d/%02d/%02d\n",hist->idCliente, hist->idMeio, hist->custoFinal,
-                hist->inicio.tm_year+1900, hist->inicio.tm_mon+1, hist->inicio.tm_mday,
-                hist->fim.tm_year+1900, hist->fim.tm_mon+1, hist->fim.tm_mday);
+			fprintf(fp,"%d %d %.2f %.2f %.2f\n",hist->idCliente, hist->idMeio, hist->custoFinal, hist->tempoReserva, hist->bateria);
 		}
 		fclose(fp);
 		
@@ -48,22 +46,15 @@ void GuardarHistorico(Historico* inicio)
 Historico* LerHistorico() {
 	FILE* fp;
 	int idc, idm;
-	double custof;
-	struct tm start, end;
+	double custof, tempoReserva,bateria;
 	Historico* aux = NULL;
 	fp = fopen("Historico.txt", "r");
 	if (fp != NULL)
 	{
 		while (!feof(fp))
 		{
-			fscanf(fp, "%d %d %lf %d/%d/%d %d/%d/%d\n", &idc, &idm, &custof, 
-                &start.tm_year, &start.tm_mon, &start.tm_mday,
-                &end.tm_year, &end.tm_mon, &end.tm_mday);
-                start.tm_year -= 1900;
-                end.tm_year -= 1900;
-                start.tm_mon -= 1;
-                end.tm_mon -= 1;
-			    aux = inserirHis(aux,idc, idm, custof, start, end);
+			fscanf(fp, "%d %d %lf %lf\n", &idc, &idm, &custof, &tempoReserva, &bateria);
+			    aux = inserirHis(aux,idc, idm, custof, tempoReserva, bateria);
 		}
 		fclose(fp);
 	}
@@ -75,10 +66,21 @@ void imprimirHistorico(Historico* inicio){
 	Historico* aux = inicio;
 
 	for(aux; aux != NULL; aux = aux->proximoHis){
-		printf("NIF CLIENTE -> %d\nCODIGO VEICULO -> %d\nCUSTO FINAL -> %d\nDATA INICIAL -> %d/%d/%d\nDATA FINAL -> %d/%d/%d\n",aux->idCliente, aux->idMeio, aux->custoFinal,
-                aux->inicio.tm_year+1900, aux->inicio.tm_mon+1, aux->inicio.tm_mday,
-                aux->fim.tm_year+1900, aux->fim.tm_mon+1, aux->fim.tm_mday);
+		printf("NIF CLIENTE -> %d\nCODIGO VEICULO -> %d\nTEMPO DE RESERVA -> %.2f MINUTOS\nCUSTO FINAL -> %.2f EUROS\nBATERIA FINAL -> %.2f",aux->idCliente, aux->idMeio, aux->tempoReserva,aux->custoFinal, aux->bateria);
 		printf("\n");
 	}
+}
+
+int estatisticas(Historico* inicio){
+
+	Historico* aux = inicio;
+	double receitaTotal;
+
+	for(aux; aux != NULL; aux = aux->proximoHis){
+		receitaTotal = receitaTotal + aux->custoFinal;
+	}
+
+	return receitaTotal;
+
 }
 

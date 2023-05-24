@@ -70,10 +70,6 @@ adicionarAresta(grafo, 5,2,2000);
 adicionarAresta(grafo, 5,3,1000);
 adicionarAresta(grafo, 5,6,1300);
 
-int teste1234 = numVertices(grafo);
-
-encontrarCaminhoMaisCurto(grafo, teste1234, 1,6);
-
 	do {
 		menu_principal();
 		printf("OPCAO:\n");
@@ -206,8 +202,6 @@ encontrarCaminhoMaisCurto(grafo, teste1234, 1,6);
 								clear();
 								ordenacao_clientes(clientes);
 								imprimir_clientes(clientes);
-
-
 							}
 							else if (opcao2 == 4) {
 								clear();
@@ -227,10 +221,7 @@ encontrarCaminhoMaisCurto(grafo, teste1234, 1,6);
 									GuardarVeiculos_Binario(veiculos);
 									GuardarVeiculos(veiculos);
 									clear();
-									printf("Registo efetuado com sucesso!\n");
-
-									
-										
+									printf("Registo efetuado com sucesso!\n");		
 								}
 								else {
 									clear();
@@ -239,7 +230,7 @@ encontrarCaminhoMaisCurto(grafo, teste1234, 1,6);
 							}
 							else if (opcao2 == 5) {
 								clear();
-								veiculos = imprimir_veiculos(veiculos);
+								//veiculos = imprimir_veiculos(veiculos);
 								printf("Codigo do veiculo a remover do sistema\n");
 								scanf("%d", &code);
 								if (verificar_registo_veiculos(veiculos, code)) {
@@ -258,8 +249,10 @@ encontrarCaminhoMaisCurto(grafo, teste1234, 1,6);
 								clear();
 								ordenacao_veiculos(veiculos);
 								imprimir_veiculos(veiculos);
+							}else if(opcao2 == 7){
+								imprimirHistorico(historico);
 							}
-							else if (opcao2 == 7) {
+							else if (opcao2 == 8) {
 								clear();
 								if (strcmp(usuario, "diogo1234") == 0) {
 									menu_mastergestor();
@@ -352,7 +345,7 @@ encontrarCaminhoMaisCurto(grafo, teste1234, 1,6);
 					
 					
 			}
-			else {
+			else if(opcao1 == 2) {
 				clear();
 				cabecalho_cliente();
 				scanf("%*c");
@@ -410,8 +403,6 @@ encontrarCaminhoMaisCurto(grafo, teste1234, 1,6);
 										GuardarClientes(clientes);
 										GuardarClientes_Binario(clientes);
 										printf("Reserva bem sucedida\n");
-										historico = inserirHis(historico, NIF, code, 0,*localtime(&t), *localtime(&t));
-										GuardarHistorico(historico);
 										GuardarVeiculos_Binario(veiculos);
 										GuardarVeiculos(veiculos);
 										printf("*--------------------------------------------*\n");
@@ -447,7 +438,7 @@ encontrarCaminhoMaisCurto(grafo, teste1234, 1,6);
    							 	scanf("%d", &code);
 								char* geocode = verLocalizacao(veiculos, code);
 
-								if (Cancelar_Reserva(veiculos,clientes,NIF,code)) {
+								if (Cancelar_Reserva(veiculos,historico,clientes,NIF,code)) {
 									atualizaMorada(clientes,NIF,geocode);
 									GuardarVeiculos_Binario(veiculos);
 									GuardarVeiculos(veiculos);
@@ -519,6 +510,9 @@ encontrarCaminhoMaisCurto(grafo, teste1234, 1,6);
 				
 				
 
+			}else{
+				clear();
+				printf("Digite uma opcao valida\n");
 			}
 
 		}
@@ -526,6 +520,9 @@ encontrarCaminhoMaisCurto(grafo, teste1234, 1,6);
 			clear();
 			printf("Obrigado pela sua visita...\n");
 
+		}else{
+			clear();
+			printf("Digite uma opcao valida\n");
 		}
 
 

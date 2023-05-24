@@ -64,7 +64,7 @@ int Reservar_Veiculo(Veiculos* inicio,int NIF_reserva, int code) {
 //! @param inicioo Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
 //! @param NIF_reserva NIF do utilizador que reservou o veiculo e deseja cancelar a reserva
 //! @return 
-int Cancelar_Reserva(Veiculos* inicio, Clientes* inicioo, int NIF_reserva, int code) { 
+int Cancelar_Reserva(Veiculos* inicio, Historico* inicio1, Clientes* inicio2, int NIF_reserva, int code) { 
     Veiculos* current = inicio;
     for (current; current != NULL; current = current->proximo_veiculo) {
         if (current->reserva == 1 && current->codigo == code && current->NIF_reserva == NIF_reserva) {
@@ -72,8 +72,11 @@ int Cancelar_Reserva(Veiculos* inicio, Clientes* inicioo, int NIF_reserva, int c
             double tempo_decorrido = difftime(horario_atual, current->horario_reserva);
 			double tempo_decorrido_minutos = tempo_decorrido / 60;
 			double CustoFinal = tempo_decorrido_minutos * current->custo;
+			inicio1 = inserirHis(inicio1, NIF_reserva, code,CustoFinal,tempo_decorrido_minutos);
+			GuardarHistorico(inicio1);
             printf("Tempo decorrido: %.2f segundos ou %.2f minutos\n", tempo_decorrido, tempo_decorrido_minutos);
-            if(PrecoFinal(inicioo, current->NIF_reserva, CustoFinal)){
+			retiraBateria(inicio, tempo_decorrido_minutos, code);
+            if(PrecoFinal(inicio2, current->NIF_reserva, CustoFinal)){
                 printf("Deu certo cara\n");
             }
             current->reserva = 0;

@@ -45,9 +45,7 @@ typedef struct registo_veiculos {
 
 typedef struct historico{
     int idCliente, idMeio;
-    double custoFinal;
-    struct tm inicio;
-    struct tm fim;
+    double custoFinal,tempoReserva,bateria;
     struct historico *proximoHis;
 }Historico;
 
@@ -108,14 +106,14 @@ int verificar_registo_clientes(Clientes* inicio, int NIF);
 int verificar_registo_veiculos(Veiculos* inicio, int codigo);
 int verificar_registo_gestores(Gestores* inicio, char email[]);
 void AlterarDados(Clientes* inicio, int NIF_procurado);
-int Cancelar_Reserva(Veiculos* inicio, Clientes* inicioo, int NIF_reserva, int code);
+int Cancelar_Reserva(Veiculos* inicio, Historico* inicio1, Clientes* inicio2, int NIF_reserva, int code);
 void clear();
 Veiculos* LocalizarVeiculos(Veiculos* inicio,char localizacao_pretendida[]);
 void AlterarDadosGestores(Gestores* inicio, char email_procurado[]);
 void GuardarGestores(Gestores* inicio);
 int PrecoFinal(Clientes* inicio, int NIF_procurado, int valor);
 int VerificarNumReservas(Veiculos* inicio, int NIF);
-Historico* inserirHis(Historico* inicio, int idc, int idm,double custof,struct tm start, struct tm end);
+Historico* inserirHis(Historico* inicio, int idc, int idm, double custof, double tempoReserva, double bateria);
 void GuardarHistorico(Historico* inicio);
 Historico* LerHistorico();
 Vertice* adicionarVertice(Vertice* listaVertices, int novoVertice, char geocode[], char local[]);
@@ -143,4 +141,6 @@ void menuReservas();
 int obterMenorDistancia(int distancias[], int visitado[], int numVertices);
 void imprimirCaminho(int caminho[], int verticeAtual);
 void imprimirCaminhoMaisCurto(int caminho[], int distancias[], int inicio, int fim);
-void encontrarCaminhoMaisCurto(Vertice* listaVertices, int numVertices, int inicio, int fim);
+void encontrarCaminhoMaisCurto(Vertice* listaVertices, Veiculos* teste15, int numVertices, int inicio, int fim, int limite, char tipo[]);
+int estatisticas(Historico* inicio);
+int retiraBateria(Veiculos* inicio, double tempoReserva, int code);
