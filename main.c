@@ -7,6 +7,7 @@
 #include <time.h>
 #include <limits.h>
 #include "structs.h"
+#include "help.h"
 
 
 
@@ -397,7 +398,9 @@ adicionarAresta(grafo, 5,6,1300);
 										int i = 1;
 										for(i;i < numvertices;i++){
 											encontrarCaminhoMaisCurto(grafo, veiculos, 10, idVertice, i, dist, tipo);
+											
 										}
+										
 										}else if(escolha == 2){
 										scanf("%*c");
 										printf("Que tipo de veiculo pretende reservar?\n");
@@ -458,7 +461,7 @@ adicionarAresta(grafo, 5,6,1300);
 							}
 							else if (opcao3 == 2) {
 								clear();
-								imprimir_reservas(veiculos, NIF);
+								if(imprimir_reservas(veiculos, NIF));
 								printf("Qual o codigo do veiculo\n");
    							 	scanf("%d", &code);
 								char* geocode = verLocalizacao(veiculos, code);

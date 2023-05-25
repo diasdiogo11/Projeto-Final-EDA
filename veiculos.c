@@ -5,6 +5,7 @@
 #include <conio.h>
 #include <time.h>
 #include "structs.h"
+#include "help.h"
 
 //! @brief Função que cria uma lista ligada para os veiculos
 //! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes

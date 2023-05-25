@@ -5,6 +5,7 @@
 #include <conio.h>
 #include <time.h>
 #include "structs.h"
+#include "help.h"
 #include <limits.h>
 
 #define INFINITO INT_MAX
@@ -343,7 +344,6 @@ if (distancias[fim] <= limite) {
         imprimirCaminhoMaisCurto(listaVertices,caminho, distancias, inicio, fim);
         char* eu = corresponderIDaLocalizacao(listaVertices, fim);
         teste(teste15, eu, tipo);
-
 }
 
 }

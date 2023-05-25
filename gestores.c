@@ -5,6 +5,7 @@
 #include <conio.h>
 #include <time.h>
 #include "structs.h"
+#include "help.h"
 
 
 

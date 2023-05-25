@@ -3,7 +3,7 @@
 7;13;Escola Secund�ria de Tomaz Pelayo;5;Bicicleta;0;0;0
 6;77;Mosteiro de Sao Bento;4;Trotinete;0;0;0
 5;0;Parque Dona Maria II;6;Trotinete;0;0;0
-4;53;Estadio Abel Alves Figueiredo;7;Bicicleta;0;0;0
+4;52;Estadio Abel Alves Figueiredo;7;Bicicleta;0;0;0
 3;82;Unidade Hospitalar de Santo Tirso;2;Board;0;0;0
 2;75;Skate Park Santo Tirso;4;Trotinete;1;1234;1684778918
 1;37;Parque de Geao;5;Bicicleta;0;0;0

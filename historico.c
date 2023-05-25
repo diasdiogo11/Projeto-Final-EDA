@@ -5,6 +5,7 @@
 #include <conio.h>
 #include <time.h>
 #include "structs.h"
+#include "help.h"
 
 Historico* inserirHis(Historico* inicio, int idc, int idm, double custof, double tempoReserva, int bateria, char tipo[]) { 
 	

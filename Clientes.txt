@@ -1,2 +1,2 @@
 2;kikanovo;19;Rua da Serra;Parque de Geao;kikanovo;kika1234;-517
-1;Diogo Dias;19;Rua das Mos;Parque Dona Maria II;diogo;diogo;-11140
+1;Diogo Dias;19;Rua das Mos;Estadio Abel Alves Figueiredo;diogo;diogo;857

@@ -5,6 +5,7 @@
 #include <conio.h>
 #include <time.h>
 #include "structs.h"
+#include "help.h"
 
 //! @brief Função que dado um NIF, imprime as reservas atuais de um utilizador
 //! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
@@ -78,7 +79,6 @@ int Cancelar_Reserva(Veiculos* inicio, Historico* inicio1, Clientes* inicio2, in
 			GuardarHistorico(inicio1);
             printf("Tempo decorrido: %.2f segundos ou %.2f minutos\n", tempo_decorrido, tempo_decorrido_minutos);
             if(PrecoFinal(inicio2, current->NIF_reserva, CustoFinal)){
-                printf("Deu certo cara\n");
             }
             current->reserva = 0;
             current->NIF_reserva = 0;
