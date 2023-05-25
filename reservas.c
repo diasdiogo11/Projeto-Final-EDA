@@ -10,16 +10,16 @@
 //! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
 //! @param NIF NIF do cliente que desejamos ver as reservas ativas
 //! @return 
-Veiculos* imprimir_reservas(Veiculos* inicio, int NIF) { 
+int imprimir_reservas(Veiculos* inicio, int NIF) { 
 
 	Veiculos* current = inicio;
 
 	for(current; current != NULL; current= current->proximo_veiculo) {
 		if (current->NIF_reserva == NIF) {
-			printf("%d %d %s %d %s\n", current->codigo, current->bateria, current->localizacao, current->custo, current->tipo);
+			return 1;
 		}
 	}
-	
+	return 0;
 }
 
 int PrecoFinal(Clientes* inicio, int NIF_procurado, int valor){ 
@@ -47,7 +47,7 @@ int PrecoFinal(Clientes* inicio, int NIF_procurado, int valor){
 int Reservar_Veiculo(Veiculos* inicio,int NIF_reserva, int code) { 
     Veiculos* current = inicio;
     for (current; current != NULL; current = current->proximo_veiculo) {
-            if (current->codigo == code && current->reserva == 0 && current->NIF_reserva == 0) {
+            if (current->codigo == code && current->reserva == 0 && current->NIF_reserva == 0 && current->bateria > 0) {
             current->reserva = 1;
             current->NIF_reserva = NIF_reserva;
             current->horario_reserva = time(NULL);
@@ -73,7 +73,8 @@ int Cancelar_Reserva(Veiculos* inicio, Historico* inicio1, Clientes* inicio2, in
 			double tempo_decorrido_minutos = tempo_decorrido / 60;
 			double CustoFinal = tempo_decorrido_minutos * current->custo;
 			int bateriaFinal = retiraBateria(inicio, tempo_decorrido_minutos, code);
-			inicio1 = inserirHis(inicio1, NIF_reserva, code,CustoFinal,tempo_decorrido_minutos,bateriaFinal);
+			char* tipo = verTipo(inicio, code);
+			inicio1 = inserirHis(inicio1, NIF_reserva, code,CustoFinal,tempo_decorrido_minutos,bateriaFinal, tipo);
 			GuardarHistorico(inicio1);
             printf("Tempo decorrido: %.2f segundos ou %.2f minutos\n", tempo_decorrido, tempo_decorrido_minutos);
             if(PrecoFinal(inicio2, current->NIF_reserva, CustoFinal)){

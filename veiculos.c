@@ -273,4 +273,15 @@ int retiraBateria(Veiculos* inicio, double tempoReserva, int code){
 	}
 }
 
+char* verTipo(Veiculos* inicio, int code){
+
+	Veiculos* aux = inicio;
+
+	for(aux; aux != NULL; aux = aux->proximo_veiculo){
+		if(aux->codigo == code){
+			return aux->tipo;
+		}
+	}
+}
+
 

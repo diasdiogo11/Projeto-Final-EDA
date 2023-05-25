@@ -46,6 +46,7 @@ typedef struct registo_veiculos {
 typedef struct historico{
     int idCliente, idMeio, bateria;
     double custoFinal,tempoReserva;
+	char tipo[50];
     struct historico *proximoHis;
 }Historico;
 
@@ -76,7 +77,7 @@ Veiculos* remover_veiculos(Veiculos* inicio, int code);
 Gestores* inserir_gestores(Gestores* inicio, char email_[], char password_[]); //Inserção dos gestores
 int Reservar_Veiculo(Veiculos* inicio,int NIF_reserva, int code);
 void Historico_reservas(Veiculos* inicio);
-Veiculos* imprimir_reservas(Veiculos* inicio, int NIF);
+int imprimir_reservas(Veiculos* inicio, int NIF);
 Gestores* remover_gestores(Gestores* inicio, char email[]);
 int saldo(Clientes* inicio, int NIF_procurado, int valor);
 int login_gestores(Gestores* inicio, char* username, char* password);
@@ -113,7 +114,6 @@ void AlterarDadosGestores(Gestores* inicio, char email_procurado[]);
 void GuardarGestores(Gestores* inicio);
 int PrecoFinal(Clientes* inicio, int NIF_procurado, int valor);
 int VerificarNumReservas(Veiculos* inicio, int NIF);
-Historico* inserirHis(Historico* inicio, int idc, int idm, double custof, double tempoReserva, int bateria);
 void GuardarHistorico(Historico* inicio);
 Historico* LerHistorico();
 Vertice* adicionarVertice(Vertice* listaVertices, int novoVertice, char geocode[], char local[]);
@@ -136,11 +136,13 @@ void imprimirHistorico(Historico* inicio);
 int gerarCode(Veiculos* inicio);
 void listarCaminhosAuxLimite(Veiculos* vi,Vertice *v, int origem, int destino, int sequencia[], int posicao, int pesoTotal, int limite, char tipo[]);
 void listarCaminhosLimite(Veiculos* vi,Vertice *v, int origem, int destino, int limite, char tipo[]);
-void teste(Veiculos* i, char loca[], char tipo[]);
+void teste(Veiculos* i, char loca[], char tipos[]);
 void menuReservas();
 int obterMenorDistancia(int distancias[], int visitado[], int numVertices);
-void imprimirCaminho(int caminho[], int verticeAtual);
-void imprimirCaminhoMaisCurto(int caminho[], int distancias[], int inicio, int fim);
+void imprimirCaminho(Vertice* listaVertices, int caminho[], int verticeAtual);
+void imprimirCaminhoMaisCurto(Vertice* listaVertices,int caminho[], int distancias[], int inicio, int fim);
 void encontrarCaminhoMaisCurto(Vertice* listaVertices, Veiculos* teste15, int numVertices, int inicio, int fim, int limite, char tipo[]);
 int estatisticas(Historico* inicio);
 int retiraBateria(Veiculos* inicio, double tempoReserva, int code);
+Historico* inserirHis(Historico* inicio, int idc, int idm, double custof, double tempoReserva, int bateria, char tipo[]);
+char* verTipo(Veiculos* inicio, int code);

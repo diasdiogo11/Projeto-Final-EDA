@@ -378,16 +378,41 @@ adicionarAresta(grafo, 5,6,1300);
 										LocalizarVeiculos(veiculos,localizacao);
 
 									}else if(escolha == 2){
+										char* loca = verGeocode(clientes, NIF);
+										int idVertice = corresponderLocalizacaoaID(grafo, loca);
+										int numvertices = numVertices(grafo);
+										clear();
 										printf("Digite a distancia em que deseja encontrar um veiculo\n");
 										scanf("%d", &dist);
+										printf("Deseja reservar algum veiculo em especifico? (1-Sim/2-Nao)\n");
+										scanf("%d", &escolha);
+										if(escolha == 1){
 										scanf("%*c");
 										printf("Que tipo de veiculo pretende reservar?\n");
 										gets(tipo);
 										clear();
+										printf("****************************************************\n");
+										printf("Voce encontra-se aqui -> %d %s\n", idVertice, loca);
+										printf("******************************************************\n");
 										int i = 1;
-										for(i;i < 10;i++){
-											listarCaminhosLimite(veiculos,grafo, 1,i,dist,tipo);
+										for(i;i < numvertices;i++){
+											encontrarCaminhoMaisCurto(grafo, veiculos, 10, idVertice, i, dist, tipo);
+										}
+										}else if(escolha == 2){
+										scanf("%*c");
+										printf("Que tipo de veiculo pretende reservar?\n");
+										gets(tipo);
+										clear();
+										printf("****************************************************\n");
+										printf("Voce encontra-se aqui -> %d %s\n", idVertice, loca);
+										printf("******************************************************\n");
+										int i = 1;
+										for(i;i < numvertices;i++){
+											encontrarCaminhoMaisCurto(grafo, veiculos, 10, idVertice, i, dist, tipo);
+										}
 
+										}else{
+											printf("Digite uma opcao valida\n");
 										}
 									}
 									printf("Qual o codigo do veiculo a reservar\n");
@@ -493,7 +518,9 @@ adicionarAresta(grafo, 5,6,1300);
 								
 							}
 							else if (opcao3 == 5) {
-								veiculos = imprimir_reservas(veiculos, NIF);
+								if(imprimir_reservas(veiculos, NIF)){
+									printf("%d %d %s %d %s\n", veiculos->codigo, veiculos->bateria, veiculos->localizacao, veiculos->custo, veiculos->tipo);
+								};
 
 
 							}

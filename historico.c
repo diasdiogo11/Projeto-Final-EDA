@@ -6,7 +6,7 @@
 #include <time.h>
 #include "structs.h"
 
-Historico* inserirHis(Historico* inicio, int idc, int idm, double custof, double tempoReserva, int bateria) { 
+Historico* inserirHis(Historico* inicio, int idc, int idm, double custof, double tempoReserva, int bateria, char tipo[]) { 
 	
 
 		Historico* Novo = malloc(sizeof(struct historico));
@@ -17,6 +17,7 @@ Historico* inserirHis(Historico* inicio, int idc, int idm, double custof, double
 			Novo->tempoReserva = tempoReserva;
 			Novo->bateria = bateria;
 			Novo->proximoHis = inicio;
+			strcpy(Novo->tipo, tipo);
 			return Novo;
 		}
 		else {
@@ -34,7 +35,7 @@ void GuardarHistorico(Historico* inicio)
 	{
 		Historico* hist = inicio;
 		for (hist; hist != NULL; hist = hist->proximoHis) {
-			fprintf(fp,"%d %d %.2f %.2f %d\n",hist->idCliente, hist->idMeio, hist->custoFinal, hist->tempoReserva, hist->bateria);
+			fprintf(fp,"%d %d %.2f %.2f %d %s\n",hist->idCliente, hist->idMeio, hist->custoFinal, hist->tempoReserva, hist->bateria, hist->tipo);
 		}
 		fclose(fp);
 		
@@ -47,14 +48,15 @@ Historico* LerHistorico() {
 	FILE* fp;
 	int idc, idm, bateria;
 	double custof, tempoReserva;
+	char tipo[50];
 	Historico* aux = NULL;
 	fp = fopen("Historico.txt", "r");
 	if (fp != NULL)
 	{
 		while (!feof(fp))
 		{
-			fscanf(fp, "%d %d %lf %lf %d\n", &idc, &idm, &custof, &tempoReserva, &bateria);
-			    aux = inserirHis(aux,idc, idm, custof, tempoReserva, bateria);
+			fscanf(fp, "%d %d %lf %lf %d %s\n", &idc, &idm, &custof, &tempoReserva, &bateria, tipo);
+			    aux = inserirHis(aux,idc, idm, custof, tempoReserva, bateria, tipo);
 		}
 		fclose(fp);
 	}
@@ -65,8 +67,9 @@ void imprimirHistorico(Historico* inicio){
 
 	Historico* aux = inicio;
 
+
 	for(aux; aux != NULL; aux = aux->proximoHis){
-		printf("NIF CLIENTE -> %d\nCODIGO VEICULO -> %d\nTEMPO DE RESERVA -> %.2f MINUTOS\nCUSTO FINAL -> %.2f EUROS\nBATERIA FINAL -> %d",aux->idCliente, aux->idMeio, aux->tempoReserva,aux->custoFinal, aux->bateria);
+		printf("NIF CLIENTE -> %d\nCODIGO VEICULO -> %d\nTIPO -> %s\nTEMPO DE RESERVA -> %.2f MINUTOS\nCUSTO FINAL -> %.2f EUROS\nBATERIA FINAL -> %d\n",aux->idCliente, aux->idMeio,aux->tipo,aux->tempoReserva,aux->custoFinal, aux->bateria);
 		printf("\n");
 	}
 }
