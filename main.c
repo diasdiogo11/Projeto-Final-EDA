@@ -498,6 +498,7 @@ adicionarAresta(grafo, 5,6,1300);
 											}
 										
 									}
+									printf("--------------------------------------------------------------------------------------------------------------------------\n");
 									printf("Deseja reservar algum veiculo?\n");
 									scanf("%d", &escolha);
 									if(escolha == 1){

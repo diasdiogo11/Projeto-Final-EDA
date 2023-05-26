@@ -249,19 +249,29 @@ void listarCaminhosLimite(Veiculos* vi, Vertice* v, int origem, int destino, int
 void teste(Veiculos* i, char loca[], char tipo[]) {
     int encontrado = 0;
 
-    for (i; i != NULL; i = i->proximo_veiculo) {
+    while (i != NULL) {
         if (strcmp(i->localizacao, loca) == 0 && strcmp(i->tipo, tipo) == 0) {
-            printf("-------------------------------------------------------------------------------------------------------------------\n");
-            printf("CODIGO %d\nBATERIA %d %%\nLOCALIZACAO %s\nCUSTO P/MIN %d\nTIPO %s\n", i->codigo,i->bateria, i->localizacao, i->custo, i->tipo);
-            printf("-------------------------------------------------------------------------------------------------------------------\n");
             encontrado = 1;
+            break;
         }
+        i = i->proximo_veiculo;
     }
 
-    if (!encontrado) {
-        printf("Localizacao dentro do raio pretendido, porem, nao existe nenhum/a %s em %s\n",tipo, loca);
-        printf("-------------------------------------------------------------------------------------------------------------------\n");
+    if (encontrado) {
+        printf("-------------------------------------------------------------------------------------------------------------------------------\n");
+        printf(" CODIGO                      BATERIA                     LOCALIZACAO                     CUSTO P/MIN                 TIPO        \n");
+        printf("-------------------------------------------------------------------------------------------------------------------------------\n");
+
+        for (i; i != NULL; i = i->proximo_veiculo) {
+            if (strcmp(i->localizacao, loca) == 0 && strcmp(i->tipo, tipo) == 0) {
+                printf("   %d                          %d %%                   %s                     %d                   %s\n", i->codigo,i->bateria, i->localizacao, i->custo, i->tipo);
+            }
+        }
+    } else {
+        printf("Localizacao dentro do raio pretendido, porem, nao existe nenhum/a %s em %s\n", tipo, loca);
     }
+
+    printf("-------------------------------------------------------------------------------------------------------------------------------\n");
 }
 
 int obterMenorDistancia(int distancias[], int visitado[], int numVertices) {
@@ -292,7 +302,7 @@ void imprimirCaminho(Vertice* listaVertices, int caminho[], int verticeAtual) {
 void imprimirCaminhoMaisCurto(Vertice* listaVertices,int caminho[], int distancias[], int inicio, int fim) {
     char* verticeInicio = corresponderIDaLocalizacao(listaVertices, inicio);
     char* verticeFim = corresponderIDaLocalizacao(listaVertices, fim);
-    printf("Caminho mais curto entre %d(%s) e %d(%s):\n ", inicio,verticeInicio,fim,verticeFim);
+    printf("Caminho mais curto entre %d(%s) e %d(%s):\n", inicio,verticeInicio,fim,verticeFim);
     imprimirCaminho(listaVertices,caminho, fim);
     printf("\nDistancia total: %d METROS\n", distancias[fim]);
 }
