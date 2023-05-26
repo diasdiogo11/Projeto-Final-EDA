@@ -1,2 +1,2 @@
-2;kikanovo;19;Rua da Serra;Parque de Geao;kikanovo;kika1234;-517
-1;Diogo Dias;19;Rua das Mos;Estadio Abel Alves Figueiredo;diogo;diogo;857
+2;kikanovo;19;Rua da Serra;Estadio Abel Alves Figueiredo;kikanovo;kika1234;-521
+1;Diogo Dias;19;Rua das Mos;Escola Secund�ria de Tomaz Pelayo;diogo;diogo;840

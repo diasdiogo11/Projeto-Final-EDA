@@ -70,9 +70,21 @@ void imprimirHistorico(Historico* inicio){
 
 
 	for(aux; aux != NULL; aux = aux->proximoHis){
-		printf("NIF CLIENTE -> %d\nCODIGO VEICULO -> %d\nTIPO -> %s\nTEMPO DE RESERVA -> %.2f MINUTOS\nCUSTO FINAL -> %.2f EUROS\nBATERIA FINAL -> %d\n",aux->idCliente, aux->idMeio,aux->tipo,aux->tempoReserva,aux->custoFinal, aux->bateria);
-		printf("\n");
+		printf("  %d                  %d                      %.2f MIN                 %.2f EUROS                  %d %%                      %s\n",aux->idCliente, aux->idMeio,aux->tempoReserva,aux->custoFinal, aux->bateria, aux->tipo);
 	}
+}
+
+void imprimirHistoricoCliente(Historico* inicio,int NIF){
+
+	Historico* aux = inicio;
+
+			for(aux; aux != NULL; aux = aux->proximoHis){
+				if(aux->idCliente == NIF){
+					printf("  %d                  %d                      %.2f MIN                 %.2f EUROS                  %d %%                      %s\n",aux->idCliente, aux->idMeio,aux->tempoReserva,aux->custoFinal, aux->bateria, aux->tipo);
+				}
+			
+	}
+	
 }
 
 int estatisticas(Historico* inicio){
@@ -87,5 +99,7 @@ int estatisticas(Historico* inicio){
 	return receitaTotal;
 
 }
+
+
 
 

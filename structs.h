@@ -123,6 +123,7 @@ int atualizaMorada(Clientes* inicio, int NIF, char novoGeocode[]);
 char* verLocalizacao(Veiculos* inicio, int code);
 int verificarNickname(Clientes* inicio, char nickname[]);
 void imprimirHistorico(Historico* inicio);
+void imprimirHistoricoCliente(Historico* inicio,int NIF);
 int gerarCode(Veiculos* inicio);
 void listarCaminhosAuxLimite(Veiculos* vi,Vertice *v, int origem, int destino, int sequencia[], int posicao, int pesoTotal, int limite, char tipo[]);
 void listarCaminhosLimite(Veiculos* vi,Vertice *v, int origem, int destino, int limite, char tipo[]);
