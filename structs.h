@@ -17,6 +17,7 @@ typedef struct registo_clientes {
 	char nome[50];
 	char password[50];
 	char nickname[50];
+	char localizacaoAtual[50];
 	struct registo_clientes* proximo_cliente;
 
 }Clientes;
@@ -68,7 +69,7 @@ typedef struct Vertices{
 
 
 
-Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_,char morada_[], int saldo, char localizacao[], char nickname[], char password[]); //Inserção de novos clientes
+Clientes* inserir_cliente(Clientes* inicio, int NIF_, char nome_[], int idade_,char morada_[], int saldo, char localizacao[], char nickname[], char password[], char locaAtual[]); //Inserção de novos clientes
 Clientes* imprimir_clientes(Clientes* inicio); //Imprime os clientes registados
 Clientes* remover_clientes(Clientes* inicio, int code); //Remove um cliente através do seu NIF
 Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char localizacao_[], int custo_, char tipo_[], int reserva_, int NIF_reserva_, time_t horario_reserva); // Inserção de novos veiculos
@@ -118,7 +119,7 @@ int numVertices(Vertice  *v);
 int visitado(int sequencia[],int pos, int id);
 void listarCaminhosAux(Vertice *v, int origem, int destino, int sequencia[], int posicao, int pesoTotal);
 void listarCaminhos(Vertice *v, int origem, int destino);
-char* verGeocode(Clientes* inicio, int NIF);
+char* verlocaAtual(Clientes* inicio, int NIF);
 int atualizaMorada(Clientes* inicio, int NIF, char novoGeocode[]);
 char* verLocalizacao(Veiculos* inicio, int code);
 int verificarNickname(Clientes* inicio, char nickname[]);
@@ -136,3 +137,4 @@ int estatisticas(Historico* inicio);
 int retiraBateria(Veiculos* inicio, double tempoReserva, int code);
 Historico* inserirHis(Historico* inicio, int idc, int idm, double custof, double tempoReserva, int bateria, char tipo[]);
 char* verTipo(Veiculos* inicio, int code);
+int atualizaLocalizacao(Veiculos* inicio,int code,char novaLocalizacao[]);

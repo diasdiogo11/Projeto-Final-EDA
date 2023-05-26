@@ -286,3 +286,19 @@ char* verTipo(Veiculos* inicio, int code){
 }
 
 
+int atualizaLocalizacao(Veiculos* inicio,int code,char novaLocalizacao[]){
+
+	Veiculos* aux = inicio;
+
+	for(aux; aux != NULL; aux = aux->proximo_veiculo){
+		if(aux->codigo == code){
+			strcpy(aux->localizacao, novaLocalizacao);
+			return 1;
+
+		}
+
+	}
+	return 0;
+}
+
+

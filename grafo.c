@@ -302,7 +302,7 @@ void encontrarCaminhoMaisCurto(Vertice* listaVertices, Veiculos* teste15, int nu
     int visitado[numVertices];
     int caminho[numVertices];
 
-    if ((existeVertice(listaVertices, inicio) != 1) || (existeVertice(listaVertices, fim) != 1)){
+   if ((existeVertice(listaVertices, inicio) != 1) || (existeVertice(listaVertices, fim) != 1)){
         printf("Vertice nao encontrado\n");
 
     }
