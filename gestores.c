@@ -10,11 +10,19 @@
 
 
 
-//! @brief Função que cria uma lista ligada para os gestores
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
-//! @param email_  Email do Gestor a ser inserido
-//! @param password_ Password do Gestor a ser inserido
-//! @return 
+ 
+/**
+ * This function inserts a new node with email and password information into a linked list of managers.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Gestores (managers)
+ * @param email_ a string containing the email of the new manager being added to the linked list.
+ * @param password_ A string variable that represents the password of a Gestor (manager) in a system.
+ * 
+ * @return a pointer to a struct of type Gestores. If memory allocation is successful, it returns a
+ * pointer to the newly created struct with the email and password values copied into it, and the next
+ * pointer pointing to the previous head of the linked list. If memory allocation fails, it returns the
+ * original head of the linked list.
+ */
 Gestores* inserir_gestores(Gestores* inicio, char email_[], char password_[]) {  
 	Gestores* Novo = malloc(sizeof(struct registo_gestores));
 
@@ -31,9 +39,13 @@ Gestores* inserir_gestores(Gestores* inicio, char email_[], char password_[]) {
 	}
 
 }
-//! @brief Função que imprime os dados inseridos na lista ligada para os gestores anteriormente criada
-//! @param inicio  Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
-//! @return 
+ 
+/**
+ * The function prints the email and password of each Gestor in a linked list.
+ * 
+ * @param inicio The parameter "inicio" is a pointer to the first node of a linked list of "Gestores"
+ * (managers).
+ */
 Gestores* imprimir_gestores(Gestores* inicio) { 
 
 	while (inicio != NULL) {
@@ -41,10 +53,16 @@ Gestores* imprimir_gestores(Gestores* inicio) {
 		inicio = inicio->proximo_gestor;
 	}
 }
-//! @brief Dado uma lista ligada, esta função permite remover um determinado elemento da lista, dado o seu código
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
-//! @param email Email do gestor a remover
-//! @return 
+
+/**
+ * The function removes a node from a linked list of managers based on their email address.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Gestores (managers)
+ * @param email The email of the Gestor (manager) that needs to be removed from the linked list.
+ * 
+ * @return a pointer to the updated linked list of "Gestores" after removing the node with the
+ * specified email address.
+ */
 Gestores* remover_gestores(Gestores* inicio, char email[]) { 
 
 
@@ -80,11 +98,17 @@ Gestores* remover_gestores(Gestores* inicio, char email[]) {
 }
 
 
-//! @brief Esta função percorre a lista ligada de gestores, verificando se o username e a password digitadas pelo utilizador encontram-se na lista, se sim o login dá certo
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
-//! @param username Username do gestor a verificar se existe no sistema
-//! @param password  Password do gestor a verificar se existe no sistema
-//! @return 
+
+/**
+ * The function checks if a given username and password match those of a Gestor in a linked list.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Gestores (managers)
+ * @param username A string representing the email address of a Gestor (manager) trying to log in.
+ * @param password The password that the user is trying to use to log in.
+ * 
+ * @return an integer value. If the username and password match with any of the gestores in the linked
+ * list, it returns 1. Otherwise, it returns 0.
+ */
 int login_gestores(Gestores* inicio, char* username, char* password) {
 	Gestores* current = inicio;
 	for (current; current != NULL; current = current->proximo_gestor) {
@@ -99,8 +123,12 @@ int login_gestores(Gestores* inicio, char* username, char* password) {
 
 
 
-//! @brief Esta função guarda os dados presentes na lista ligada num ficheiro binário, com o nome "Gestores"
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+
+/**
+ * The function saves a linked list of Gestores structs into a binary file named "Gestores.bin".
+ * 
+ * @param inicio a pointer to the first node of a linked list of Gestores (managers).
+ */
 void GuardarGestores_Binario(Gestores* inicio) 
 {
 	FILE* fp;
@@ -116,6 +144,12 @@ void GuardarGestores_Binario(Gestores* inicio)
 		fclose(fp);
 	}
 }
+/**
+ * The function saves a linked list of Gestores to a text file.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Gestores (managers) containing their
+ * email and password information.
+ */
 void GuardarGestores(Gestores* inicio) 
 {
 	FILE* fp;
@@ -132,8 +166,13 @@ void GuardarGestores(Gestores* inicio)
 	}
 
 }
-//! @brief Posteriormente, esta função lê os dados inseridos no ficheiro binário "Gestores", inserindo-os na lista ligada novamente
-//! @return 
+
+/**
+ * This function reads binary data from a file and creates a linked list of Gestores structures.
+ * 
+ * @return The function `LerGestores_Binario()` returns a pointer to a linked list of `Gestores`
+ * structures.
+ */
 Gestores* LerGestores_Binario() 
 {
 	FILE* fp;
@@ -156,7 +195,10 @@ Gestores* LerGestores_Binario()
 }
 
 
-//! @brief cabeçalho do menu principal
+
+/**
+ * The function displays a menu with options for registering, logging in, or exiting.
+ */
 void menu_principal() { 
 	int opcao;
 	printf("*---------------- MENU PRINCIPAL ----------------*\n");
@@ -167,7 +209,10 @@ void menu_principal() {
 	
 
 }
-//! @brief Cabeçalho menu de resgisto
+
+/**
+ * The function "cabecalho_registar" prints a header for a registration section.
+ */
 void cabecalho_registar() { 
 	
 	printf("*------------------------------------*\n");
@@ -176,7 +221,10 @@ void cabecalho_registar() {
 
 
 }
-//! @brief Cabeçalho do menu de login
+
+/**
+ * The function displays a menu for selecting between administrator and client login options.
+ */
 void menu_login() { 
 
 
@@ -189,7 +237,10 @@ void menu_login() {
 		
 	
 }
-//! @brief Cabeçalho do menu de gestores
+
+/**
+ * The function displays a menu for managing clients, vehicles, reservations, and locations.
+ */
 void menu_gestores() { 
 
 	
@@ -202,11 +253,16 @@ void menu_gestores() {
 	printf("| 6.LISTAR VEICULOS                             |\n");
 	printf("| 7.HISTORICO RESERVAS                          |\n");
 	printf("| 8.GESTOR MASTER (ACESSO RESTRITO)             |\n");
+	printf("| 9.ADICIONAR LOCALIZACAO                       |\n");
+	printf("| 10.ADICIONAR LIGACACAO                        |\n");
 	printf("| 0.EXIT                                        |\n");
 	printf("*-----------------------------------------------*\n");
 	
 }
-//! @brief Cabeçalho do menu do gestor "Master"
+
+/**
+ * The function displays a menu for managing gestors with options to add, remove, or alter their data.
+ */
 void menu_mastergestor() { 
 	printf("*---------------- MENU GESTORES ----------------*\n");
 	printf("| 1.ADICIONAR GESTOR                            |\n");
@@ -218,12 +274,15 @@ void menu_mastergestor() {
 
 
 }
-//! @brief Cabeçalho do menu de clientes
+
+/**
+ * The function displays a menu for managing clients in a car rental system.
+ */
 void menu_clientes() { 
 	
 	printf("*---------------- MENU CLIENTES ----------------*\n");
 	printf("| 1.RESERVAR VEICULO                            |\n");
-	printf("| 2.CANCELAR RESERVA                            |\n");
+	printf("| 2.TERMINAR RESERVA                            |\n");
 	printf("| 3.CARREGAR SALDO                              |\n");
 	printf("| 4.DEFINICOES                                  |\n");
 	printf("| 5.RESERVAS ATIVAS                             |\n");
@@ -232,7 +291,11 @@ void menu_clientes() {
 	
 	
 }
-//! @brief Cabeçalho do menu de definições do clientes
+
+/**
+ * The function "menu_definicoes" displays a menu with options to alter the user's nickname, password,
+ * and address, or return to the main menu for clients.
+ */
 void menu_definicoes() { 
 
 	
@@ -244,19 +307,28 @@ void menu_definicoes() {
 	printf("*--------------------------------------------*\n");
 
 }
-//! @brief Cabeçalho Admin
+
+/**
+ * The function prints a header for an administrator section.
+ */
 void cabecalho_admin() { 
 	printf("*------------------------------------*\n");
 	printf("|            ADMINISTRADOR           |\n");
 	printf("*------------------------------------*\n");
 }
-//! @brief Cabeçalho clientes
+
+/**
+ * The function "cabecalho_cliente()" prints a header for the client section.
+ */
 void cabecalho_cliente() { 
 	printf("*------------------------------------*\n");
 	printf("|               CLIENTE              |\n");
 	printf("*------------------------------------*\n");
 }
 
+/**
+ * The function "menuReservas" displays a menu with two options for searching vehicles by location.
+ */
 void menuReservas(){
 	printf("*---------------- DEFINICOES ----------------*\n");
 	printf("| 1.Pesquisar Veiculos Por Localizacao        |\n");
@@ -266,10 +338,17 @@ void menuReservas(){
 }
 
 
-//! @brief Esta função percorre a lista ligada gestores e verifica se o email do gestor já se encontra lá
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
-//! @param email Email a verificar se existe no sistema
-//! @return 
+
+/**
+ * The function checks if a given email exists in a linked list of Gestores.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Gestores (managers)
+ * @param email A string representing the email address to be searched for in the linked list of
+ * Gestores.
+ * 
+ * @return an integer value. It returns 1 if the email passed as a parameter is found in the linked
+ * list of Gestores, and 0 if it is not found.
+ */
 int verificar_registo_gestores(Gestores* inicio, char email[]) { 
 
 
@@ -289,15 +368,24 @@ int verificar_registo_gestores(Gestores* inicio, char email[]) {
 
 
 
-//! @brief Função que limpa tudo o que está antes no terminal
+
+/**
+ * The function clears the console screen in C programming language.
+ */
 void clear() { 
 
 	system("@cls || clear");
 }
 
-//! @brief Esta função permite alterar os dados de um gestor, substituindo na lista ligada os novos dados nos parametros escolhidos pelo utilizador
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
-//! @param email_procurado Email do gestor a alterar dados
+
+/**
+ * The function allows for the alteration of email and password parameters for a specific Gestor in a
+ * linked list.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Gestores (managers)
+ * @param email_procurado a string representing the email address of the Gestor (manager) whose data
+ * needs to be altered.
+ */
 void AlterarDadosGestores(Gestores* inicio, char email_procurado[]) {
 	int opcao;
 	char novoemail[50], novapassword[50];

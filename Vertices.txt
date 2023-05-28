@@ -1,10 +1,10 @@
-10;chamem.senão.pavoa;Parque do Matadouro;
-9;árvore.queres.frota;Biblioteca Municipal de Santo Tirso;
-8;órgão.unha.suprir;Pavilhao Desportivo Municipal;
-7;vermos.censo.quem;Escola Secundária de Tomaz Pelayo;
-6;volta.percebo.desenhei;Mosteiro de Sao Bento;
-5;babados.puro.cruzou;Parque Dona Maria II;
-4;popa.lucros.araras;Estadio Abel Alves Figueiredo;
-3;puxe.ficou.esvaziamento;Unidade Hospitalar de Santo Tirso;
-2;ligar.chuvosos.moleza;Skate Park Santo Tirso;
-1;alvo.queimar.amenos;Parque de Geao;
+10;chamem.senao.pavoa;Parque do Matadouro
+9;arvore.queres.frota;Biblioteca Municipal de Santo Tirso
+8;orgao.unha.suprir;Pavilhao Desportivo Municipal
+7;vermos.censo.quem;Escola Secund�ria de Tomaz Pelayo
+6;volta.percebo.desenhei;Mosteiro de Sao Bento
+5;babados.puro.cruzou;Parque Dona Maria II
+4;popa.lucros.araras;Estadio Abel Alves Figueiredo
+3;puxe.ficou.esvaziamento;Unidade Hospitalar de Santo Tirso
+2;ligar.chuvosos.moleza;Skate Park Santo Tirso
+1;alvo.queimar.amenos;Parque de Geao

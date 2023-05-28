@@ -26,50 +26,33 @@ void main() {
 	Historico* historico = NULL;
 	Vertice* grafo = NULL;
 
+
 	clientes = LerClientes_Binario();
 	veiculos = LerVeiculos();
 	gestores = LerGestores_Binario();
 	historico = LerHistorico();
+	grafo = lerVertices();
+	grafo = lerVerticesBin();
 	gestores = inserir_gestores(gestores, "diogo1234", "lesi");
 
-	//alvo.queimar.amenos -> Parque de Geao
-	//ligar.chuvosos.moleza -> Skate Park Santo Tirso
-	//puxe.ficou.esvaziamento -> Unidade Hospitalar de Santo Tirso
-	//popa.lucros.araras -> Estadio Abel Alves Figueiredo
-	//babados.puro.cruzou -> Parque Dona Maria II
-	//volta.percebo.desenhei -> Mosteiro de Sao Bento
-	//vermos.censo.quem -> Escola Secundária de Tomaz Pelayo
-	//órgão.unha.suprir -> Pavilhao Desportivo Municipal
-	//árvore.queres.frota -> Biblioteca Municipal de Santo Tirso
-	//chamem.senão.pavoa -> Parque do Matadouro
+	adicionarAresta(grafo, 1,2,45);
+	adicionarAresta(grafo, 1,3,1000);
+	adicionarAresta(grafo, 1,8,1900);
+	adicionarAresta(grafo, 2,8,1900);
+	adicionarAresta(grafo, 2,5,2000);
+	adicionarAresta(grafo, 2,4,950);
+	adicionarAresta(grafo, 2,10,2500);
+	adicionarAresta(grafo, 3,1,1000);
+	adicionarAresta(grafo, 3,4,93);
+	adicionarAresta(grafo, 3,5,1000);
+	adicionarAresta(grafo, 3,7,650);
+	adicionarAresta(grafo, 4,2,950);
+	adicionarAresta(grafo, 4,3,93);
+	adicionarAresta(grafo, 5,2,2000);
+	adicionarAresta(grafo, 5,3,1000);
+	adicionarAresta(grafo, 5,6,1300);
+	guardarArestas(grafo);
 
-grafo = adicionarVertice(grafo,1,"alvo.queimar.amenos", "Parque de Geao");
-grafo = adicionarVertice(grafo,2,"ligar.chuvosos.moleza", "Skate Park Santo Tirso");
-grafo = adicionarVertice(grafo,3,"puxe.ficou.esvaziamento", "Unidade Hospitalar de Santo Tirso");
-grafo = adicionarVertice(grafo,4,"popa.lucros.araras", "Estadio Abel Alves Figueiredo");
-grafo = adicionarVertice(grafo,5,"babados.puro.cruzou","Parque Dona Maria II");
-grafo = adicionarVertice(grafo,6,"volta.percebo.desenhei","Mosteiro de Sao Bento");
-grafo = adicionarVertice(grafo,7,"vermos.censo.quem","Escola Secundária de Tomaz Pelayo");
-grafo = adicionarVertice(grafo,8,"órgão.unha.suprir","Pavilhao Desportivo Municipal");
-grafo = adicionarVertice(grafo,9,"árvore.queres.frota","Biblioteca Municipal de Santo Tirso");
-grafo = adicionarVertice(grafo,10,"chamem.senão.pavoa","Parque do Matadouro");
-guardarVertices(grafo);
-adicionarAresta(grafo, 1,2,45);
-adicionarAresta(grafo, 1,3,1000);
-adicionarAresta(grafo, 1,8,1900);
-adicionarAresta(grafo, 2,8,1900);
-adicionarAresta(grafo, 2,5,2000);
-adicionarAresta(grafo, 2,4,950);
-adicionarAresta(grafo, 2,10,2500);
-adicionarAresta(grafo, 3,1,1000);
-adicionarAresta(grafo, 3,4,93);
-adicionarAresta(grafo, 3,5,1000);
-adicionarAresta(grafo, 3,7,650);
-adicionarAresta(grafo, 4,2,950);
-adicionarAresta(grafo, 4,3,93);
-adicionarAresta(grafo, 5,2,2000);
-adicionarAresta(grafo, 5,3,1000);
-adicionarAresta(grafo, 5,6,1300);
 
 	do {
 		menu_principal();
@@ -106,24 +89,15 @@ adicionarAresta(grafo, 5,6,1300);
 
 				}else{
 					printf("Este nickname, ja se encontra registado\n");
-				}
-			
-				
-				
+				}	
 			}
 			else {
 				clear();
 				printf("Utilizador ja se encontra registado\n");
 				
 			}
-				
-				
-			
-
 		}
-
 		else if (opcao == 2) {
-			
 			clear();
 			menu_login();
 			printf("OPCAO:\n");
@@ -213,16 +187,20 @@ adicionarAresta(grafo, 5,6,1300);
 									scanf("%*c");
 									printf("Localizacao:\n");
 									gets(localizacao);
-									printf("Custo:\n");
-									scanf("%d", &custo);
-									scanf("%*c");
-									printf("Tipo:\n");
-									gets(tipo);
-									veiculos = inserir_veiculos(veiculos, codigo, bateria, localizacao, custo, tipo, reserva, NIF_reserva, 0);
-									GuardarVeiculos_Binario(veiculos);
-									GuardarVeiculos(veiculos);
-									clear();
-									printf("Registo efetuado com sucesso!\n");		
+									if(existeLocalizacao(grafo, localizacao)){
+										printf("Custo:\n");
+										scanf("%d", &custo);
+										scanf("%*c");
+										printf("Tipo:\n");
+										gets(tipo);
+										veiculos = inserir_veiculos(veiculos, codigo, bateria, localizacao, custo, tipo, reserva, NIF_reserva, 0);
+										GuardarVeiculos_Binario(veiculos);
+										GuardarVeiculos(veiculos);
+										clear();
+										printf("Registo efetuado com sucesso!\n");		
+									}else{
+										printf("Localizacao invalida\n");
+									}
 								}
 								else {
 									clear();
@@ -231,7 +209,8 @@ adicionarAresta(grafo, 5,6,1300);
 							}
 							else if (opcao2 == 5) {
 								clear();
-								//veiculos = imprimir_veiculos(veiculos);
+								ordenacao_veiculos(veiculos);
+								imprimir_veiculos(veiculos);
 								printf("Codigo do veiculo a remover do sistema\n");
 								scanf("%d", &code);
 								if (verificar_registo_veiculos(veiculos, code)) {
@@ -339,6 +318,46 @@ adicionarAresta(grafo, 5,6,1300);
 							else if (opcao2 == 8) {
 								imprimirHistorico(historico);
 							}
+							else if(opcao2 == 9){
+								int id = numVertices(grafo);
+								char geocode[50], local[50];
+								scanf("%*c");
+								printf("Digite o geocode do vertice a inserir\n");
+								gets(geocode);
+								printf("Digite o local do vertice a inserir\n");
+								gets(local);
+								if(!existeLocalizacao(grafo, local)){
+									grafo = adicionarVertice(grafo, id, geocode, local);
+									guardarVertices(grafo);
+									guardarVerticesBin(grafo);
+								}
+							}else if(opcao2 == 10){
+
+								char origem[50], destino[50];
+								int peso;
+								scanf("%*c");
+								printf("Digite a localizacao de origem\n");
+								gets(origem);
+								if(existeLocalizacao(grafo, origem)){
+									printf("Digite a localizacao de destino\n");
+									gets(destino);
+									if(existeLocalizacao(grafo, destino)){
+										printf("Digite a distancia entre ambos\n");
+										scanf("%d", &peso);
+										int idOrigem = corresponderLocalizacaoaID(grafo, origem);
+										int idDestino = corresponderLocalizacaoaID(grafo, destino);
+										adicionarAresta(grafo, idOrigem, idDestino, peso);
+										guardarArestas(grafo);
+									}else{
+										printf("Localizacao nao registada\n");
+									}
+
+								}else{
+									printf("Localizacao nao registada\n");
+								}
+								
+								
+							}
 						} while (opcao2 != 0);
 					}
 					
@@ -394,9 +413,6 @@ adicionarAresta(grafo, 5,6,1300);
 											clear();
 											printf("Digite a distancia em que deseja encontrar um veiculo\n");
 											scanf("%d", &dist);
-											printf("Deseja reservar algum veiculo em especifico? (1-Sim/2-Nao)\n");
-											scanf("%d", &escolha);
-											if(escolha == 1){
 												scanf("%*c");
 												printf("Que tipo de veiculo pretende reservar?\n");
 												gets(tipo);
@@ -409,12 +425,6 @@ adicionarAresta(grafo, 5,6,1300);
 													encontrarCaminhoMaisCurto(grafo, veiculos, 10, idVertice, i, dist, tipo);
 											
 												}
-										
-											}else if(escolha == 2){
-
-											}else{
-												printf("Digite uma opcao valida\n");
-											}
 											}else{
 												printf("Ficou registado no nosso sistema a seguinte localizacao: %s\n", loca);
 												printf("Corresponde a sua localizacao atual?\n");
@@ -535,7 +545,7 @@ adicionarAresta(grafo, 5,6,1300);
 									}
 									
 									}else{
-										printf("Deu errado carita\n");
+										printf("Atingiu o numero máximo de reservas\n");
 									}
 								
 								
@@ -545,7 +555,7 @@ adicionarAresta(grafo, 5,6,1300);
 							else if (opcao3 == 2) {
 								char locaAtual[50];
 								clear();
-								if(imprimir_reservas(veiculos, NIF));
+								imprimirReservasAtivas(veiculos, NIF);
 								printf("Qual o codigo do veiculo\n");
    							 	scanf("%d", &code);
 								scanf("%*c");
@@ -609,9 +619,8 @@ adicionarAresta(grafo, 5,6,1300);
 								
 							}
 							else if (opcao3 == 5) {
-								if(imprimir_reservas(veiculos, NIF)){
-									printf("%d %d %s %d %s\n", veiculos->codigo, veiculos->bateria, veiculos->localizacao, veiculos->custo, veiculos->tipo);
-								};
+								imprimir_reservas(veiculos, NIF);
+								
 
 
 							}else if(opcao3 == 6){

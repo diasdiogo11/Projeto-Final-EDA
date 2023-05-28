@@ -51,12 +51,12 @@ typedef struct historico{
     struct historico *proximoHis;
 }Historico;
 
-typedef struct Adjacente
+typedef struct Adjacentes
 {
     int vertice;
     int peso;
 	char geocode[50];
-    struct Adjacente* proximoAdja;
+    struct Adjacentes* proximoAdja;
 }Adjacente;
 
 typedef struct Vertices{
@@ -128,7 +128,7 @@ void imprimirHistoricoCliente(Historico* inicio,int NIF);
 int gerarCode(Veiculos* inicio);
 void listarCaminhosAuxLimite(Veiculos* vi,Vertice *v, int origem, int destino, int sequencia[], int posicao, int pesoTotal, int limite, char tipo[]);
 void listarCaminhosLimite(Veiculos* vi,Vertice *v, int origem, int destino, int limite, char tipo[]);
-void teste(Veiculos* i, char loca[], char tipos[]);
+void listarVeiculosRaio(Veiculos* i, char loca[], char tipos[]);
 int obterMenorDistancia(int distancias[], int visitado[], int numVertices);
 void imprimirCaminho(Vertice* listaVertices, int caminho[], int verticeAtual);
 void imprimirCaminhoMaisCurto(Vertice* listaVertices,int caminho[], int distancias[], int inicio, int fim);
@@ -138,3 +138,10 @@ int retiraBateria(Veiculos* inicio, double tempoReserva, int code);
 Historico* inserirHis(Historico* inicio, int idc, int idm, double custof, double tempoReserva, int bateria, char tipo[]);
 char* verTipo(Veiculos* inicio, int code);
 int atualizaLocalizacao(Veiculos* inicio,int code,char novaLocalizacao[]);
+Vertice* lerVertices();
+void guardarVerticesBin(Vertice* inicio);
+Vertice* lerVerticesBin();
+Vertice* encontrarVertice(Vertice* head, int id);
+void lerArestas(Vertice* v);
+int existeLocalizacao(Vertice* inicio, char loca[]);
+int imprimirReservasAtivas(Veiculos* inicio, int NIF);

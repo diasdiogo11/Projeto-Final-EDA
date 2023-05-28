@@ -7,17 +7,30 @@
 #include "structs.h"
 #include "help.h"
 
-//! @brief Função que cria uma lista ligada para os veiculos
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
-//! @param codigo_ Codigo do meio a ser inserido
-//! @param bateria_ Bateria do meio a ser inserido
-//! @param localizacao_ 
-//! @param custo_ Custo por Km do meio a ser inserido
-//! @param tipo_ Tipo do meio a ser inserido
-//! @param reserva_ 1 se tiver reservado ou 0 se nao tiver
-//! @param NIF_reserva_ 0 se nao tiver reservado ou NIF do cliente que a reservou
-//! @return 
 
+/**
+ * This function inserts a new vehicle into a linked list of vehicles.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Veiculos (vehicles)
+ * @param codigo_ an integer representing the code of the vehicle being inserted
+ * @param bateria_ an integer representing the battery level of the vehicle
+ * @param localizacao_ a string that represents the location of the vehicle
+ * @param custo_ The parameter "custo_" represents the cost of renting the vehicle.
+ * @param tipo_ The parameter "tipo_" is a character array that represents the type of the vehicle
+ * being inserted.
+ * @param reserva_ The parameter "reserva_" is an integer that represents whether the vehicle is
+ * currently reserved or not. If the value is 1, it means the vehicle is reserved, and if the value is
+ * 0, it means the vehicle is available for rent.
+ * @param NIF_reserva_ NIF_reserva_ is an integer variable that represents the NIF (Número de
+ * Identificação Fiscal) of the person who made the reservation for the vehicle.
+ * @param horario_reserva The parameter "horario_reserva" is a variable of type "time_t" that
+ * represents the date and time when a vehicle is reserved.
+ * 
+ * @return a pointer to the beginning of the linked list of Veiculos. If a new node was successfully
+ * created and added to the list, the function returns a pointer to the new node. If the allocation of
+ * memory for the new node failed, the function returns the original pointer to the beginning of the
+ * list.
+ */
 Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char localizacao_[], int custo_, char tipo_[], int reserva_,int NIF_reserva_, time_t horario_reserva) { 
 	Veiculos* Novo = malloc(sizeof(struct registo_veiculos));
 
@@ -39,9 +52,12 @@ Veiculos* inserir_veiculos(Veiculos* inicio, int codigo_, int bateria_, char loc
 	}
 }
 
-//! @brief Função que imprime os dados inseridos na lista ligada para os veiculos anteriormente criada
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
-//! @return 
+
+/**
+ * The function prints the information of all vehicles in a linked list.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Veiculos (vehicles) structure.
+ */
 Veiculos* imprimir_veiculos(Veiculos* inicio) { 
 	while (inicio != NULL) {
 		
@@ -49,10 +65,17 @@ Veiculos* imprimir_veiculos(Veiculos* inicio) {
 		inicio = inicio->proximo_veiculo;
 	}
 }
-//! @brief Dado uma lista ligada, esta função permite remover um determinado elemento da lista, dado o seu código
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
-//! @param code Codigo do veiculo a remover
-//! @return 
+
+/**
+ * The function removes a vehicle from a linked list of vehicles based on its code.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Veiculos (vehicles)
+ * @param code an integer representing the code of the vehicle to be removed from the linked list of
+ * vehicles.
+ * 
+ * @return a pointer to the beginning of the linked list of vehicles after removing the vehicle with
+ * the specified code.
+ */
 Veiculos* remover_veiculos(Veiculos* inicio, int code) { 
 
 	Veiculos* anterior = inicio, * atual = inicio, * aux;
@@ -85,8 +108,13 @@ Veiculos* remover_veiculos(Veiculos* inicio, int code) {
 
 }
 
-//! @brief Função que ordena os veiculos inseridos na lista ligada veiculos por ordem decrescente da sua bateria
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+
+/**
+ * This function sorts a linked list of vehicles by battery level, and if two vehicles have the same
+ * battery level, it sorts them by their code, cost, location, and type.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Veiculos (vehicles) structures.
+ */
 void ordenacao_veiculos(Veiculos* inicio) { 
 
 	Veiculos* pi = inicio;
@@ -120,8 +148,12 @@ void ordenacao_veiculos(Veiculos* inicio) {
 	}
 }
 
-//! @brief sta função guarda os dados presentes na lista ligada num ficheiro de texto, com o nome "Veiculos"
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+
+/**
+ * The function saves information about vehicles to a file named "Veiculos.txt".
+ * 
+ * @param inicio a pointer to the first node of a linked list of Veiculos (vehicles) structures.
+ */
 void GuardarVeiculos(Veiculos* inicio) 
 {
 	FILE* fp;
@@ -139,8 +171,12 @@ void GuardarVeiculos(Veiculos* inicio)
 	}
 
 }
-//! @brief Posteriormente, esta função lê os dados inseridos no ficheiro de texto "Veiculos", inserindo-os na lista ligada novamente
-//! @return 
+ 
+/**
+ * The function reads vehicle information from a file and returns a linked list of vehicles.
+ * 
+ * @return The function `LerVeiculos` returns a pointer to a linked list of `Veiculos` structures.
+ */
 Veiculos* LerVeiculos() { 
 	FILE* fp;
 	int code,cust, reserva, NIF_reserva;
@@ -161,8 +197,12 @@ Veiculos* LerVeiculos() {
 	return(aux);
 }
 
-//! @brief Esta função guarda os dados presentes na lista ligada num ficheiro binário, com o nome "Veiculos"
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
+
+/**
+ * This function saves a linked list of vehicles to a binary file.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Veiculos (vehicles) structures.
+ */
 void GuardarVeiculos_Binario(Veiculos* inicio) 
 {
 	FILE* fp;
@@ -179,8 +219,12 @@ void GuardarVeiculos_Binario(Veiculos* inicio)
 	}
 }
 
-//! @brief Posteriormente, esta função lê os dados inseridos no ficheiro binário "Veiculos", inserindo-os na lista ligada novamente
-//! @return 
+ 
+/**
+ * This function reads binary data from a file and creates a linked list of Veiculos structures.
+ * 
+ * @return a pointer to a linked list of Veiculos (vehicles) that were read from a binary file.
+ */
 Veiculos* LerVeiculos_Binario() 
 {
 	FILE* fp;
@@ -200,10 +244,16 @@ Veiculos* LerVeiculos_Binario()
 
 }
 
-//! @brief Esta função percorre a lista ligada veiculos e verifica se o codigo do veiculo já se encontra lá
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
-//! @param codigo Codigo a verificar se existe no sistema
-//! @return 
+/**
+ * The function checks if a given vehicle code exists in a linked list of vehicles.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Veiculos (vehicles)
+ * @param codigo The parameter "codigo" is an integer variable representing the code of a vehicle that
+ * needs to be checked for existence in a linked list of vehicles.
+ * 
+ * @return an integer value. If the given "codigo" is found in the linked list of "Veiculos" pointed by
+ * "inicio", the function returns 1. Otherwise, it returns 0.
+ */
 int verificar_registo_veiculos(Veiculos* inicio, int codigo){ 
 
 
@@ -219,9 +269,16 @@ int verificar_registo_veiculos(Veiculos* inicio, int codigo){
 	return 0;
 }
 
-//! @brief Função que percorre a lista ligada veiculos e verifica o parametro localização, se o parametro contiver o mesmo conteudo do que o utilizador pediu, mostra somente essa localização
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
-//! @return 
+
+/**
+ * The function "LocalizarVeiculos" searches for available vehicles with a specific location and prints
+ * their information.
+ * 
+ * @param inicio a pointer to the first node of a linked list of vehicles
+ * @param localizacao_pretendida It is a string variable that represents the desired location to search
+ * for vehicles. The function searches for vehicles in the linked list that have the same location as
+ * the one provided in this parameter.
+ */
 Veiculos* LocalizarVeiculos(Veiculos* inicio, char localizacao_pretendida[]) {
 
 	
@@ -236,6 +293,16 @@ Veiculos* LocalizarVeiculos(Veiculos* inicio, char localizacao_pretendida[]) {
 }
 }
 
+/**
+ * The function "verLocalizacao" returns the location of a vehicle with a given code from a linked list
+ * of vehicles.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Veiculos (vehicles)
+ * @param code an integer representing the code of the vehicle whose location is to be retrieved.
+ * 
+ * @return a pointer to a character array (string) that represents the location of a vehicle with the
+ * given code. If the vehicle is not found, it returns a null pointer (0).
+ */
 char* verLocalizacao(Veiculos* inicio, int code){
 	Veiculos* aux= inicio;
 
@@ -247,6 +314,16 @@ char* verLocalizacao(Veiculos* inicio, int code){
 	return 0;
 }
 
+/**
+ * The function "gerarCode" returns the number of nodes in a linked list of vehicles.
+ * 
+ * @param inicio The parameter "inicio" is a pointer to the first node of a linked list of "Veiculos"
+ * (vehicles) data type.
+ * 
+ * @return The function `gerarCode` is returning an integer value, which is the count of the number of
+ * nodes in the linked list of `Veiculos`. This count represents the code that will be assigned to the
+ * next `Veiculo` added to the list.
+ */
 int gerarCode(Veiculos* inicio){
 
 	Veiculos* aux = inicio;
@@ -260,6 +337,17 @@ int gerarCode(Veiculos* inicio){
 }
 
 
+/**
+ * The function "retiraBateria" removes a certain amount of battery from a vehicle based on the
+ * reservation time and updates its battery level.
+ * 
+ * @param inicio a pointer to the first node of a linked list of vehicles
+ * @param tempoReserva The amount of time the vehicle is reserved for, in hours.
+ * @param code an integer representing the code of the vehicle whose battery needs to be removed.
+ * 
+ * @return the updated value of the battery of the vehicle with the given code after removing the
+ * amount of battery used during the given reservation time.
+ */
 int retiraBateria(Veiculos* inicio, double tempoReserva, int code){
 
 	Veiculos* aux = inicio;
@@ -274,6 +362,14 @@ int retiraBateria(Veiculos* inicio, double tempoReserva, int code){
 	}
 }
 
+/**
+ * The function "verTipo" returns the type of a vehicle based on its code.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Veiculos (vehicles)
+ * @param code an integer representing the code of a vehicle
+ * 
+ * @return a pointer to a character (char*) which represents the type of a vehicle with a given code.
+ */
 char* verTipo(Veiculos* inicio, int code){
 
 	Veiculos* aux = inicio;
@@ -286,6 +382,16 @@ char* verTipo(Veiculos* inicio, int code){
 }
 
 
+/**
+ * The function updates the location of a vehicle with a given code in a linked list of vehicles.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Veiculos (vehicles)
+ * @param code an integer representing the code of the vehicle whose location needs to be updated
+ * @param novaLocalizacao a string representing the new location to be updated for a vehicle
+ * 
+ * @return an integer value. It returns 1 if it successfully updates the location of the vehicle with
+ * the given code, and returns 0 if it fails to find the vehicle with the given code.
+ */
 int atualizaLocalizacao(Veiculos* inicio,int code,char novaLocalizacao[]){
 
 	Veiculos* aux = inicio;

@@ -1,2 +1,2 @@
-1234;Diogo Dias;19;Rua das Mos;Santo Tirso;diogo;diogo;-12;Pavilhao Desportivo Municipal
-123;Francisca Ribeiro;19;Rua da Serra;Famalicao;kika;kika;0;
+1;Joao Alves;26;Rua das Mos;Porto;joao;joao;-48;Parque de Geao
+1234;Diogo Dias;19;Rua das Mos;Santo Tirso;aushh;lesi;0;

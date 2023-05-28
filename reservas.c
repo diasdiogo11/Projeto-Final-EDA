@@ -6,11 +6,18 @@
 #include <time.h>
 #include "structs.h"
 #include "help.h"
-
-//! @brief Função que dado um NIF, imprime as reservas atuais de um utilizador
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
-//! @param NIF NIF do cliente que desejamos ver as reservas ativas
-//! @return 
+ 
+/**
+ * The function checks if a given NIF has any reservations in a linked list of vehicles.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Veiculos (vehicles)
+ * @param NIF NIF stands for "Número de Identificação Fiscal" which is a unique identification number
+ * assigned to individuals and companies in Portugal for tax purposes. In this function, it is used as
+ * a parameter to search for reservations made by a specific individual or company.
+ * 
+ * @return an integer value. If there is at least one vehicle reserved by the NIF provided as an
+ * argument, the function returns 1. Otherwise, it returns 0.
+ */
 int imprimir_reservas(Veiculos* inicio, int NIF) { 
 
 	Veiculos* current = inicio;
@@ -23,6 +30,19 @@ int imprimir_reservas(Veiculos* inicio, int NIF) {
 	return 0;
 }
 
+/**
+ * The function updates the balance of a client with a given NIF by subtracting a given value.
+ * 
+ * @param inicio a pointer to the first node of a linked list of clients
+ * @param NIF_procurado The NIF (Número de Identificação Fiscal) of the client whose balance needs to
+ * be updated. It is used to search for the client in the linked list of clients.
+ * @param valor The value of the purchase made by the customer.
+ * 
+ * @return an integer value, either 1 or 0. If the NIF_procurado (tax identification number) is found
+ * in the linked list of clients (represented by the pointer "inicio"), the function subtracts the
+ * "valor" (value) from the client's "saldo" (balance) and returns 1. If the NIF_procurado is not found
+ * in the
+ */
 int PrecoFinal(Clientes* inicio, int NIF_procurado, int valor){ 
 
 
@@ -40,11 +60,23 @@ int PrecoFinal(Clientes* inicio, int NIF_procurado, int valor){
 
 }
 
-//! @brief Esta função foi feita para a reserva de veiculos, a função percorre a lista ligada veiculos e verifica se nos parametros "reserva" e "NIF_reserva" os valores estão a zero, se sim, permite ao utilizador reservar esse veiculos, alterando esses parametros para 1 e o NIF do utilizador, respetivamente
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
-//! @param NIF_reserva NIF do utilizador que vai reservar o veiculo
-//! @param code Codigo do veiculo a reservar
-//! @return 
+
+/**
+ * This function reserves a vehicle by setting its reservation status, NIF, and reservation time if it
+ * meets certain conditions.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Veiculos (vehicles)
+ * @param NIF_reserva The NIF (Número de Identificação Fiscal) is a unique identification number
+ * assigned to individuals and companies in Portugal. In this context, it is likely being used as a way
+ * to identify the person who is reserving the vehicle.
+ * @param code The code parameter is an integer that represents the unique code of the vehicle that the
+ * user wants to reserve.
+ * 
+ * @return an integer value, either 1 or 0. The value 1 is returned if a vehicle with the given code is
+ * found and is available for reservation (not already reserved, not out of battery), and the
+ * reservation is successfully made. The value 0 is returned if no suitable vehicle is found or if the
+ * reservation cannot be made for some reason.
+ */
 int Reservar_Veiculo(Veiculos* inicio,int NIF_reserva, int code) { 
     Veiculos* current = inicio;
     for (current; current != NULL; current = current->proximo_veiculo) {
@@ -60,11 +92,22 @@ int Reservar_Veiculo(Veiculos* inicio,int NIF_reserva, int code) {
 }
 
 
-//! @brief Dado um codigo do veiculo, esta função percorre a lista e verifica se no parametro "NIF_reserva" o valor é o do NIF do utilizador, se sim ele cancela a reserva alterando os dados para 0
-//! @param inicio Apontador para a variavel que guarda a cabeça da lista ligada dos Veiculos
-//! @param inicioo Apontador para a variavel que guarda a cabeça da lista ligada dos Clientes
-//! @param NIF_reserva NIF do utilizador que reservou o veiculo e deseja cancelar a reserva
-//! @return 
+ 
+/**
+ * The function cancels a reservation made by a client for a specific vehicle and calculates the final
+ * cost based on the time elapsed and the vehicle's rental cost.
+ * 
+ * @param inicio a pointer to the beginning of a linked list of vehicles
+ * @param inicio1 The pointer to the start of the linked list of historical records.
+ * @param inicio2 The parameter "inicio2" is a pointer to the start of a linked list of type
+ * "Clientes", which contains information about the clients who have made reservations for the
+ * vehicles.
+ * @param NIF_reserva The NIF (Número de Identificação Fiscal) of the client who made the reservation.
+ * @param code The code parameter is an integer that represents the unique code of the vehicle that the
+ * reservation is associated with.
+ * 
+ * @return an integer value, either 1 or 0.
+ */
 int Cancelar_Reserva(Veiculos* inicio, Historico* inicio1, Clientes* inicio2, int NIF_reserva, int code) { 
     Veiculos* current = inicio;
     for (current; current != NULL; current = current->proximo_veiculo) {
@@ -89,6 +132,18 @@ int Cancelar_Reserva(Veiculos* inicio, Historico* inicio1, Clientes* inicio2, in
     return 0;
 }
 
+/**
+ * The function checks the number of reservations made by a specific NIF and returns a value based on
+ * the count.
+ * 
+ * @param inicio a pointer to the first node of a linked list of Veiculos (vehicles)
+ * @param NIF The NIF (Número de Identificação Fiscal) is a unique identification number assigned to
+ * individuals and companies in Portugal. In this function, it is used to check how many reservations a
+ * specific person (identified by their NIF) has made for vehicles.
+ * 
+ * @return an integer value. If the count of reservations made by a certain NIF is less than or equal
+ * to 1, the function returns 2. Otherwise, it returns 0.
+ */
 int VerificarNumReservas(Veiculos* inicio, int NIF){
 	int count=1;
 
@@ -110,3 +165,17 @@ int VerificarNumReservas(Veiculos* inicio, int NIF){
 
 
 }
+
+int imprimirReservasAtivas(Veiculos* inicio, int NIF){
+
+	Veiculos* current = inicio;
+
+	for(current; current != NULL; current = current->proximo_veiculo) {
+		if (current->NIF_reserva == NIF && current->reserva == 1) {
+			printf("%d %d %s %d %s\n", current->codigo, current->bateria, current->localizacao, current->custo, current->tipo);
+			return 1;
+		}
+	}
+	return 0;
+}
+
