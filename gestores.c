@@ -330,10 +330,10 @@ void cabecalho_cliente() {
  * The function "menuReservas" displays a menu with two options for searching vehicles by location.
  */
 void menuReservas(){
-	printf("*---------------- DEFINICOES ----------------*\n");
-	printf("| 1.Pesquisar Veiculos Por Localizacao        |\n");
-	printf("| 2.Pesquisar Veiculos Num Raio               |\n");
-	printf("*--------------------------------------------*\n");
+	printf("*---------------- DEFINICOES -------------------*\n");
+	printf("| 1.Pesquisar Veiculos Por Localizacao          |\n");
+	printf("| 2.Pesquisar Veiculos Num Raio                 |\n");
+	printf("*-----------------------------------------------*\n");
 
 }
 

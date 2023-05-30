@@ -397,11 +397,41 @@ void main() {
 									printf("OPCAO:\n");
 									scanf("%d", &escolha);
 									if(escolha == 1){
-										scanf("%*c");
-										printf("Onde deseja reservar Veiculos?\n");
-										gets(localizacao);
-										LocalizarVeiculos(veiculos,localizacao);
+										char* loca = verlocaAtual(clientes, NIF);
+										if(strcmp(loca, "") == 0){
+											scanf("%*c");
+											printf("Insira a sua localizacao atual\n");
+											gets(atual);
+											int idVertice = corresponderLocalizacaoaID(grafo, atual);
+											int numvertices = numVertices(grafo);
+											printf("Onde deseja reservar Veiculos?\n");
+											gets(localizacao);
+											int idLoca = corresponderLocalizacaoaID(grafo,localizacao);
+											listarCaminhos(grafo,veiculos, idVertice,idLoca);
+										}else{
+											char* loca = verlocaAtual(clientes, NIF);
+											printf("Ficou registado no nosso sistema a seguinte localizacao: %s\n", loca);
+											printf("Corresponde a sua localizacao atual?\n");
+											scanf("%d", &teste);
+											if(teste == 1){
+												int idVertice = corresponderLocalizacaoaID(grafo, loca);
+												scanf("%*c");
+												printf("Onde deseja reservar Veiculos?\n");
+												gets(localizacao);
+												int idLoca = corresponderLocalizacaoaID(grafo,localizacao);
+												listarCaminhos(grafo,veiculos, idVertice,idLoca);
 
+											}else if(teste == 2){
+												scanf("%*c");
+												printf("Insira a sua localizacao atual\n");
+												gets(atual);
+												int idVertice = corresponderLocalizacaoaID(grafo, atual);
+												printf("Onde deseja reservar Veiculos?\n");
+												gets(localizacao);
+												int idLoca = corresponderLocalizacaoaID(grafo,localizacao);
+												listarCaminhos(grafo,veiculos, idVertice, idLoca);
+											}
+										}
 									}else if(escolha == 2){
 										char* loca = verlocaAtual(clientes, NIF);
 										if(strcmp(loca, "") == 0){
@@ -507,6 +537,9 @@ void main() {
 
 											}
 										
+									}else{
+										printf("Digite uma opcao valida\n");
+										break;
 									}
 									printf("--------------------------------------------------------------------------------------------------------------------------\n");
 									printf("Deseja reservar algum veiculo?\n");

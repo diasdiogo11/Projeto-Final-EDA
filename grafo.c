@@ -373,7 +373,7 @@ int visitado(int sequencia[],int pos, int id){
  * @param pesoTotal The total weight or cost of the path from the starting vertex to the current
  * vertex.
  */
-void listarCaminhosAux(Vertice *v, int origem, int destino, int sequencia[], int posicao, int pesoTotal){
+void listarCaminhosAux(Vertice *v, Veiculos* vi, int origem, int destino, int sequencia[], int posicao, int pesoTotal){
     int i;
     Vertice *head = v;
     Adjacente *aux;  \
@@ -388,7 +388,7 @@ void listarCaminhosAux(Vertice *v, int origem, int destino, int sequencia[], int
         aux = v->adj; 
         while (aux != NULL){
         if (!visitado(sequencia,posicao,aux->vertice)) 
-            listarCaminhosAux(head,aux->vertice,destino,sequencia,posicao+1,
+            listarCaminhosAux(head,vi,aux->vertice,destino,sequencia,posicao+1,
             pesoTotal+aux->peso);
 
         aux = aux->proximoAdja;
@@ -407,9 +407,11 @@ void listarCaminhosAux(Vertice *v, int origem, int destino, int sequencia[], int
  * function "listarCaminhos" is used to list all possible paths from the source vertex to the
  * destination vertex
  */
-void listarCaminhos(Vertice *v, int origem, int destino){
-  int sequencia[numVertices(v)];
-  listarCaminhosAux(v,origem,destino,sequencia,0,0);
+void listarCaminhos(Vertice *v,Veiculos* vi, int origem, int destino){
+    char* loca = corresponderIDaLocalizacao(v, destino);
+    int sequencia[numVertices(v)];
+    listarCaminhosAux(v,vi,origem,destino,sequencia,0,0);
+    listarVeiculos(vi, loca);
 
 
 }
@@ -520,6 +522,34 @@ void listarVeiculosRaio(Veiculos* i, char loca[], char tipo[]) {
         }
     } else {
         printf("Localizacao dentro do raio pretendido, porem, nao existe nenhum/a %s em %s\n", tipo, loca);
+    }
+
+    printf("-------------------------------------------------------------------------------------------------------------------------------\n");
+}
+
+void listarVeiculos(Veiculos* i, char loca[]) {
+    int encontrado = 0;
+
+    while (i != NULL) {
+        if (strcmp(i->localizacao, loca) == 0) {
+            encontrado = 1;
+            break;
+        }
+        i = i->proximo_veiculo;
+    }
+
+    if (encontrado) {
+        printf("-------------------------------------------------------------------------------------------------------------------------------\n");
+        printf(" CODIGO                      BATERIA                     LOCALIZACAO                     CUSTO P/MIN                 TIPO      \n");
+        printf("-------------------------------------------------------------------------------------------------------------------------------\n");
+
+        for (i; i != NULL; i = i->proximo_veiculo) {
+            if (strcmp(i->localizacao, loca) == 0) {
+                printf("   %d                          %d %%                   %s                     %d                   %s\n", i->codigo,i->bateria, i->localizacao, i->custo, i->tipo);
+            }
+        }
+    } else {
+        printf("Localizacao dentro do raio pretendido, porem, nao existe nenh %s\n", loca);
     }
 
     printf("-------------------------------------------------------------------------------------------------------------------------------\n");
