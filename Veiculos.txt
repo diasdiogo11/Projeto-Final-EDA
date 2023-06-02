@@ -1,10 +1,22 @@
-9;45;Porto;5;Bicicleta;0;0;0
-8;55;Parque Dona Maria II;2;Board;0;0;0
-7;11;Escola Secund�ria de Tomaz Pelayo;5;Bicicleta;0;0;0
-6;74;Parque Dona Maria II;4;Trotinete;0;0;0
-5;38;Parque de Geao;6;Trotinete;0;0;0
-4;19;Parque do Matadouro;7;Bicicleta;0;0;0
-3;80;Pavilhao Desportivo Municipal;2;Board;0;0;0
+19;87;Skate Park Santo Tirso;4;Trotinete;0;0;0
+21;84;Pavilhao Desportivo Municipal;4;Bicicleta;0;0;0
 2;82;Skate Park Santo Tirso;4;Trotinete;0;0;0
-1;34;Pavilhao Desportivo Municipal;5;Bicicleta;0;0;0
+3;79;Pavilhao Desportivo Municipal;2;Board;0;0;0
+16;78;Parque Dona Maria II;3;Bicicleta;0;0;0
+12;75;Biblioteca Municipal de Santo Tirso;4;Bicicleta;0;0;0
+6;72;Parque Dona Maria II;4;Trotinete;0;0;0
+20;69;Parque de Geao;4;Bicicleta;0;0;0
+13;67;Pavilhao Desportivo Municipal;5;Bicicleta;0;0;0
+15;55;Mosteiro de Sao Bento;4;Trotinete;0;0;0
+8;54;Parque Dona Maria II;2;Board;0;0;0
 10;50;Parque do Matadouro;4;Trotinete;0;0;0
+9;45;Porto;5;Bicicleta;0;0;0
+11;45;Parque do Matadouro;3;Bicicleta;0;0;0
+22;42;Estadio Abel Alves Figueiredo;5;Bicicleta;0;0;0
+5;38;Parque de Geao;6;Trotinete;0;0;0
+1;34;Pavilhao Desportivo Municipal;5;Bicicleta;0;0;0
+17;23;Estadio Abel Alves Figueiredo;4;Trotinete;0;0;0
+4;19;Parque do Matadouro;7;Bicicleta;0;0;0
+14;16;Escola Secundaria de Tomaz Pelayo;4;Trotinete;0;0;0
+18;14;Unidade Hospitalar de Santo Tirso;6;Bicicleta;0;0;0
+7;68;Unidade Hospitalar de Santo Tirso;4;Trotinete;0;0;0

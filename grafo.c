@@ -695,5 +695,12 @@ if (distancias[fim] <= limite) {
 
 }
 
+void todasLocalizacoes(Vertice* inicio){
+    for(inicio; inicio != NULL; inicio = inicio->proximoVert){
+        printf("%s\n", inicio->local);
+    }
+}
+
+
 
 

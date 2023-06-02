@@ -32,7 +32,6 @@ void main() {
 	gestores = LerGestores_Binario();
 	historico = LerHistorico();
 	grafo = lerVertices();
-	grafo = lerVerticesBin();
 	gestores = inserir_gestores(gestores, "diogo1234", "lesi");
 
 	adicionarAresta(grafo, 1,2,45);
@@ -51,6 +50,21 @@ void main() {
 	adicionarAresta(grafo, 5,2,2000);
 	adicionarAresta(grafo, 5,3,1000);
 	adicionarAresta(grafo, 5,6,1300);
+	adicionarAresta(grafo, 6,2,877);
+	adicionarAresta(grafo, 6,5,683);
+	adicionarAresta(grafo, 6,10,1081);
+	adicionarAresta(grafo, 7,9,1910);
+	adicionarAresta(grafo, 7,4,1810);
+	adicionarAresta(grafo, 7,1,1675);
+	adicionarAresta(grafo, 7,10,618);
+	adicionarAresta(grafo, 8,2,1069);
+	adicionarAresta(grafo, 8,6,1980);
+	adicionarAresta(grafo, 8,9,610);
+	adicionarAresta(grafo, 9,1,770);
+	adicionarAresta(grafo, 9,4,324);
+	adicionarAresta(grafo, 10,9,83);
+	adicionarAresta(grafo, 10,3,1736);
+	adicionarAresta(grafo, 10,2,719);
 	guardarArestas(grafo);
 
 
@@ -399,62 +413,85 @@ void main() {
 									if(escolha == 1){
 										char* loca = verlocaAtual(clientes, NIF);
 										if(strcmp(loca, "") == 0){
+											todasLocalizacoes(grafo);
 											scanf("%*c");
 											printf("Insira a sua localizacao atual\n");
 											gets(atual);
-											int idVertice = corresponderLocalizacaoaID(grafo, atual);
-											int numvertices = numVertices(grafo);
-											printf("Onde deseja reservar Veiculos?\n");
-											gets(localizacao);
-											int idLoca = corresponderLocalizacaoaID(grafo,localizacao);
-											listarCaminhos(grafo,veiculos, idVertice,idLoca);
+											if(existeLocalizacao(grafo, atual)){
+												int idVertice = corresponderLocalizacaoaID(grafo, atual);
+												int numvertices = numVertices(grafo);
+												printf("Onde deseja reservar Veiculos?\n");
+												gets(localizacao);
+												int idLoca = corresponderLocalizacaoaID(grafo,localizacao);
+												clear();
+												listarCaminhos(grafo,veiculos, idVertice,idLoca);
+											}else{
+												printf("Localizacao invalida\n");
+												break;
+											}
 										}else{
 											char* loca = verlocaAtual(clientes, NIF);
 											printf("Ficou registado no nosso sistema a seguinte localizacao: %s\n", loca);
 											printf("Corresponde a sua localizacao atual?\n");
 											scanf("%d", &teste);
 											if(teste == 1){
+												todasLocalizacoes(grafo);
 												int idVertice = corresponderLocalizacaoaID(grafo, loca);
 												scanf("%*c");
 												printf("Onde deseja reservar Veiculos?\n");
 												gets(localizacao);
 												int idLoca = corresponderLocalizacaoaID(grafo,localizacao);
+												clear();
 												listarCaminhos(grafo,veiculos, idVertice,idLoca);
 
 											}else if(teste == 2){
+												todasLocalizacoes(grafo);
 												scanf("%*c");
 												printf("Insira a sua localizacao atual\n");
 												gets(atual);
-												int idVertice = corresponderLocalizacaoaID(grafo, atual);
-												printf("Onde deseja reservar Veiculos?\n");
-												gets(localizacao);
-												int idLoca = corresponderLocalizacaoaID(grafo,localizacao);
-												listarCaminhos(grafo,veiculos, idVertice, idLoca);
+												if(existeLocalizacao(grafo, atual)){
+													int idVertice = corresponderLocalizacaoaID(grafo, atual);
+													printf("Onde deseja reservar Veiculos?\n");
+													gets(localizacao);
+													int idLoca = corresponderLocalizacaoaID(grafo,localizacao);
+													listarCaminhos(grafo,veiculos, idVertice, idLoca);
+												}else{
+													printf("Localizacao invalida\n");
+													break;
+												}
+												
 											}
 										}
 									}else if(escolha == 2){
 										char* loca = verlocaAtual(clientes, NIF);
 										if(strcmp(loca, "") == 0){
+											todasLocalizacoes(grafo);
 											scanf("%*c");
 											printf("Insira a sua localizacao atual\n");
 											gets(atual);
-											int idVertice = corresponderLocalizacaoaID(grafo, atual);
-											int numvertices = numVertices(grafo);
-											clear();
-											printf("Digite a distancia em que deseja encontrar um veiculo\n");
-											scanf("%d", &dist);
-												scanf("%*c");
-												printf("Que tipo de veiculo pretende reservar?\n");
-												gets(tipo);
+											if(existeLocalizacao(grafo, atual)){
+												int idVertice = corresponderLocalizacaoaID(grafo, atual);
+												int numvertices = numVertices(grafo);
 												clear();
-												printf("******************************************************\n");
-												printf("Voce encontra-se aqui -> %d %s\n", idVertice, atual);
-												printf("******************************************************\n");
-												int i = 1;
-												for(i;i < numvertices;i++){
-													encontrarCaminhoMaisCurto(grafo, veiculos, 10, idVertice, i, dist, tipo);
+												printf("Digite a distancia em que deseja encontrar um veiculo\n");
+												scanf("%d", &dist);
+													scanf("%*c");
+													printf("Que tipo de veiculo pretende reservar?\n");
+													gets(tipo);
+													clear();
+													printf("******************************************************\n");
+													printf("Voce encontra-se aqui -> %d %s\n", idVertice, atual);
+													printf("******************************************************\n");
+													int i = 1;
+													for(i;i < numvertices;i++){
+														encontrarCaminhoMaisCurto(grafo, veiculos, 10, idVertice, i, dist, tipo);
 											
-												}
+													}
+											}else{
+												printf("Localizacao invalida\n");
+												break;
+											}
+											
 											}else{
 												printf("Ficou registado no nosso sistema a seguinte localizacao: %s\n", loca);
 												printf("Corresponde a sua localizacao atual?\n");
@@ -482,8 +519,15 @@ void main() {
 														}
 										
 													}else{
-														printf("Insira a sua localizacao atual\n");
-														gets(atual);
+														printf("teste");
+													}
+												
+												}else{
+													todasLocalizacoes(grafo);
+													scanf("%*c");
+													printf("Insira a sua localizacao atual\n");
+													gets(atual);
+													if(existeLocalizacao(grafo, atual)){
 														int idVertice = corresponderLocalizacaoaID(grafo, atual);
 														int numvertices = numVertices(grafo);
 														clear();
@@ -505,34 +549,13 @@ void main() {
 											
 															}
 										
-														}
 													}
-												}else{
-													scanf("%*c");
-													printf("Insira a sua localizacao atual\n");
-													gets(atual);
-													int idVertice = corresponderLocalizacaoaID(grafo, atual);
-													int numvertices = numVertices(grafo);
-													clear();
-													printf("Digite a distancia em que deseja encontrar um veiculo\n");
-													scanf("%d", &dist);
-													printf("Deseja reservar algum veiculo em especifico? (1-Sim/2-Nao)\n");
-													scanf("%d", &escolha);
-													if(escolha == 1){
-														scanf("%*c");
-														printf("Que tipo de veiculo pretende reservar?\n");
-														gets(tipo);
-														clear();
-														printf("******************************************************\n");
-														printf("Voce encontra-se aqui -> %d %s\n", idVertice, atual);
-														printf("******************************************************\n");
-														int i = 1;
-														for(i;i < numvertices;i++){
-															encontrarCaminhoMaisCurto(grafo, veiculos, 10, idVertice, i, dist, tipo);
-											
-														}
-										
+
+													}else{
+														printf("Localizacao invalida\n");
+														break;
 													}
+												
 												}
 
 											}
@@ -594,28 +617,31 @@ void main() {
 								scanf("%*c");
 								printf("Qual a sua localizacao atual?\n");
 								gets(locaAtual);
-								char* geocode = verLocalizacao(veiculos, code);
+								if(existeLocalizacao(grafo, locaAtual)){
+									char* geocode = verLocalizacao(veiculos, code);
 
-								if (Cancelar_Reserva(veiculos,historico,clientes,NIF,code)) {
-									atualizaLocalizacao(veiculos,code,locaAtual);
-									atualizaMorada(clientes,NIF,geocode);
-									GuardarVeiculos_Binario(veiculos);
-									GuardarVeiculos(veiculos);
-									GuardarClientes(clientes);
-									GuardarClientes_Binario(clientes);
-									printf("*--------------------------------------------*\n");
-									printf("|              DADOS ATUALIZADOS             |\n");
-									printf("|                 FACA LOGIN!                |\n");
-									printf("*--------------------------------------------*\n");
+									if (Cancelar_Reserva(veiculos,historico,clientes,NIF,code)) {
+										atualizaLocalizacao(veiculos,code,locaAtual);
+										atualizaMorada(clientes,NIF,geocode);
+										GuardarVeiculos_Binario(veiculos);
+										GuardarVeiculos(veiculos);
+										GuardarClientes(clientes);
+										GuardarClientes_Binario(clientes);
+										printf("*--------------------------------------------*\n");
+										printf("|              DADOS ATUALIZADOS             |\n");
+										printf("|                 FACA LOGIN!                |\n");
+										printf("*--------------------------------------------*\n");
+										break;
+									}
+									else {
+										printf("*---------------------------------------------*\n");
+										printf("|   ESTE VEICULO JA SE ENCONTRA DISPONIVEL    |\n");
+										printf("*---------------------------------------------*\n");
+									}
+								}else{
+									printf("Localizacao invalida\n");
 									break;
 								}
-								else {
-									printf("*---------------------------------------------*\n");
-									printf("|   ESTE VEICULO JA SE ENCONTRA DISPONIVEL    |\n");
-									printf("*---------------------------------------------*\n");
-								}
-								
-								
 								
 							}
 							else if (opcao3 == 3) {

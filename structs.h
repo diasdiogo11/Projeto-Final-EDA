@@ -146,3 +146,4 @@ void lerArestas(Vertice* v);
 int existeLocalizacao(Vertice* inicio, char loca[]);
 int imprimirReservasAtivas(Veiculos* inicio, int NIF);
 void listarVeiculos(Veiculos* i, char loca[]);
+void todasLocalizacoes(Vertice* inicio);
