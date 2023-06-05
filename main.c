@@ -501,27 +501,19 @@ void main() {
 													int numvertices = numVertices(grafo);
 													clear();
 													printf("Digite a distancia em que deseja encontrar um veiculo\n");
-													scanf("%d", &dist);
-													printf("Deseja reservar algum veiculo em especifico? (1-Sim/2-Nao)\n");
-													scanf("%d", &escolha);
-													if(escolha == 1){	
-														scanf("%*c");
-														printf("Que tipo de veiculo pretende reservar?\n");
-														gets(tipo);
-														clear();
-														printf("******************************************************\n");
-														printf("Voce encontra-se aqui -> %d %s\n", idVertice, loca);
-														printf("******************************************************\n");
-														int i = 1;
-														for(i;i < numvertices;i++){
-															encontrarCaminhoMaisCurto(grafo, veiculos, 10, idVertice, i, dist, tipo);
+													scanf("%d", &dist);	
+													scanf("%*c");
+													printf("Que tipo de veiculo pretende reservar?\n");
+													gets(tipo);
+													clear();
+													printf("******************************************************\n");
+													printf("Voce encontra-se aqui -> %d %s\n", idVertice, loca);
+													printf("******************************************************\n");
+													int i = 1;
+													for(i;i < numvertices;i++){
+														encontrarCaminhoMaisCurto(grafo, veiculos, 10, idVertice, i, dist, tipo);
 											
-														}
-										
-													}else{
-														printf("teste");
 													}
-												
 												}else{
 													todasLocalizacoes(grafo);
 													scanf("%*c");
@@ -533,23 +525,18 @@ void main() {
 														clear();
 														printf("Digite a distancia em que deseja encontrar um veiculo\n");
 														scanf("%d", &dist);
-														printf("Deseja reservar algum veiculo em especifico? (1-Sim/2-Nao)\n");
-														scanf("%d", &escolha);
-														if(escolha == 1){
-															scanf("%*c");
-															printf("Que tipo de veiculo pretende reservar?\n");
-															gets(tipo);
-															clear();
-															printf("******************************************************\n");
-															printf("Voce encontra-se aqui -> %d %s\n", idVertice, atual);
-															printf("******************************************************\n");
-															int i = 1;
-															for(i;i < numvertices;i++){
-																encontrarCaminhoMaisCurto(grafo, veiculos, 10, idVertice, i, dist, tipo);
+														scanf("%*c");
+														printf("Que tipo de veiculo pretende reservar?\n");
+														gets(tipo);
+														clear();
+														printf("******************************************************\n");
+														printf("Voce encontra-se aqui -> %d %s\n", idVertice, atual);
+														printf("******************************************************\n");
+														int i = 1;
+														for(i;i < numvertices;i++){
+															encontrarCaminhoMaisCurto(grafo, veiculos, 10, idVertice, i, dist, tipo);
 											
-															}
-										
-													}
+														}
 
 													}else{
 														printf("Localizacao invalida\n");
@@ -601,12 +588,8 @@ void main() {
 									}
 									
 									}else{
-										printf("Atingiu o numero máximo de reservas\n");
+										printf("Atingiu o numero maximo de reservas\n");
 									}
-								
-								
-								
-
 							}
 							else if (opcao3 == 2) {
 								char locaAtual[50];

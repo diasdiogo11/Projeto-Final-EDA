@@ -410,7 +410,7 @@ void listarCaminhosAux(Vertice *v, Veiculos* vi, int origem, int destino, int se
 void listarCaminhos(Vertice *v,Veiculos* vi, int origem, int destino){
     char* loca = corresponderIDaLocalizacao(v, destino);
     int sequencia[numVertices(v)];
-    listarCaminhosAux(v,vi,origem,destino,sequencia,0,0);
+    //listarCaminhosAux(v,vi,origem,destino,sequencia,0,0);
     listarVeiculos(vi, loca);
 
 
@@ -549,7 +549,7 @@ void listarVeiculos(Veiculos* i, char loca[]) {
             }
         }
     } else {
-        printf("Localizacao dentro do raio pretendido, porem, nao existe nenh %s\n", loca);
+        printf("Localizacao dentro do raio pretendido, porem,  %s\n", loca);
     }
 
     printf("-------------------------------------------------------------------------------------------------------------------------------\n");
@@ -673,8 +673,7 @@ void encontrarCaminhoMaisCurto(Vertice* listaVertices, Veiculos* teste15, int nu
                     int verticeAdjacente = adj->vertice;
                     int pesoAresta = adj->peso;
 
-                    if (!visitado[verticeAdjacente] && distancias[verticeAtual] != INFINITO &&
-                        distancias[verticeAtual] + pesoAresta < distancias[verticeAdjacente]) {
+                    if (!visitado[verticeAdjacente] && distancias[verticeAtual] != INFINITO && distancias[verticeAtual] + pesoAresta < distancias[verticeAdjacente]) {
                         distancias[verticeAdjacente] = distancias[verticeAtual] + pesoAresta;
                         caminho[verticeAdjacente] = verticeAtual;
                     }

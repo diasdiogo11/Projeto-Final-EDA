@@ -6,8 +6,8 @@
 12;75;Biblioteca Municipal de Santo Tirso;4;Bicicleta;0;0;0
 6;72;Parque Dona Maria II;4;Trotinete;0;0;0
 20;69;Parque de Geao;4;Bicicleta;0;0;0
-13;67;Pavilhao Desportivo Municipal;5;Bicicleta;0;0;0
-15;55;Mosteiro de Sao Bento;4;Trotinete;0;0;0
+13;66;Pavilhao Desportivo Municipal;5;Bicicleta;0;0;0
+15;54;Escola Secundaria de Tomaz Pelayo;4;Trotinete;0;0;0
 8;54;Parque Dona Maria II;2;Board;0;0;0
 10;50;Parque do Matadouro;4;Trotinete;0;0;0
 9;45;Porto;5;Bicicleta;0;0;0

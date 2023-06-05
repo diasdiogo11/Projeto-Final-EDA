@@ -1,3 +1,2 @@
-1;Joao Alves;26;Rua das Mos;Porto;joao;joao;30;Pavilhao Desportivo Municipal
-1234;Diogo Dias;19;Rua das Mos;Santo Tirso;aushh;lesi;0;
-2;Diogo Goncalves;20;Rua da Foda;Porto;diogo;1234;-13;Parque de Geao
+7779;Joao Ferreira;20;Rua dos Longos;Guimaraes;lxstmind;pass;25;
+1234;Diogo Dias;19;Rua das M¢s;Santo Tirso;diogo;diogo;23;Escola Secundaria de Tomaz Pelayo

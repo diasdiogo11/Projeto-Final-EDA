@@ -1,3 +1,4 @@
+1234 15 2.53 0.63 54 Trotinete
 1 3 0.37 0.18 79 Board
 1 6 0.93 0.23 72 Trotinete
 254246516 6 1.33 0.33 73 Trotinete
@@ -13,3 +14,4 @@
 1 4 4.43 0.63 19 Bicicleta
 1 8 0.50 0.25 54 Board
 1 21 1.53 0.38 84 Bicicleta
+1234 13 2.92 0.58 66 Bicicleta
